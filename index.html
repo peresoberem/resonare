@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peresoberem</title>
+    <title>resonare.art</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background-color: black;
             color: white;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
             flex-direction: column;
-            font-family: 'Futura', sans-serif;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Futura',sans-serif;
+            text-align: center;
         }
-        h1 {
+        .container {
+            max-width: 90%;
+        }
+        .title {
             font-size: 4rem;
             margin-bottom: 20px;
             background: linear-gradient(to right, #8c8c8c, #ddd, #8c8c8c);
@@ -24,7 +32,11 @@
             -webkit-text-fill-color: transparent;
             text-align: center;
         }
-        h2 {
+        .eye-img {
+            width: 250px;
+            margin: 20px 0;
+        }
+        .subtitle {
             font-size: 2rem;
             margin-bottom: 5px;
             background: linear-gradient(to right, #8c8c8c, #ddd, #8c8c8c);
@@ -32,51 +44,37 @@
             -webkit-text-fill-color: transparent;
             text-align: center;
         }
-        img {
-            max-width: 100%;
-            height: auto;
+        footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
         }
-        .sections {
-            width: 80%;
-            text-align: center;
-            margin-top: 50px;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .section h3 {
-            font-size: 1.5rem;
-            color: #ddd;
-            margin-bottom: 10px;
-        }
-        .section p {
+        footer a {
+            color: white;
+            text-decoration: none;
             font-size: 1rem;
-            color: #aaa;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <h1>peresoberem</h1>
-    <img src="eye.png" alt="Eye">
-    <h2>(проект Анны Павленко)</h2>
-    
-    <div class="sections">
-        <div class="section">
-            <h3>О ПРОЕКТЕ</h3>
-            <p>описание сути проекта</p>
-        </div>
-        <div class="section">
-            <h3>ОБО МНЕ</h3>
-            <p>кто я, философия работы</p>
-        </div>
-        <div class="section">
-            <h3>ФОРМАТЫ РАБОТЫ</h3>
-            <p>индивидуальные консультации, групповые форматы</p>
-        </div>
-        <div class="section">
-            <h3>КОНТАКТЫ И ЦЕНЫ</h3>
-            <p>еmail, соцсети, цены и как записаться</p>
-        </div>
+    <div class="container">
+        <div class="title">resonare</div>
+        <img class="eye-img" src="eye.png" alt="Eye">
+        <div class="subtitle">(проект Анны Павленко)</div>
     </div>
+    <footer>
+        <a href="about.html">О ПРОЕКТЕ</a>
+        <a href="aboutme.html">ОБО МНЕ</a>
+        <a href="formats.html">ФОРМАТЫ РАБОТЫ</a>
+        <a href="contacts.html">КОНТАКТЫ И ЦЕНЫ</a>
+    </footer>
 </body>
 </html>
