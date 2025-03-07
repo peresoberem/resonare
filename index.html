@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>resonare.art</title>
     <style>
+        @font-face {
+            font-family: 'Futura';
+            src: local('Futura'), url('Futura.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +24,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-family: 'Futura',sans-serif;
+            font-family: 'Futura', sans-serif;
             text-align: center;
         }
         .container {
@@ -31,6 +37,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
+            font-family: 'Futura', sans-serif;
         }
         .eye-img {
             width: 250px;
@@ -43,6 +50,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
+            font-family: 'Futura', sans-serif;
         }
         footer {
             position: fixed;
@@ -58,17 +66,34 @@
             font-size: 1rem;
             font-weight: bold;
             transition: color 0.3s;
+            font-family: 'Futura', sans-serif;
         }
         footer a:hover {
             color: #888;
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: white;
+            color: black;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: 'Futura', sans-serif;
+        }
+        .back-button:hover {
+            background-color: #888;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="h1">resonare</div>
+        <h1>resonare</h1>
         <img class="eye-img" src="eye.png" alt="Eye">
-        <div class="h2">(проект Анны Павленко)</div>
+        <h2>(проект Анны Павленко)</h2>
     </div>
     <footer>
         <a href="about.html">О ПРОЕКТЕ</a>
