@@ -26,15 +26,14 @@ body {
 
 /* Разные толщины для разных элементов */
 h1 {
-    display: flex;
-    justify-content: center; /* Центрируем текст */
-    align-items: center;
-    width: 100%; /* Гарантируем, что h1 занимает всю ширину */
-    text-align: center; /* Центрируем текст внутри */
+    display: block;
+    width: fit-content; /* Ширина только под текст, без лишнего */
+    max-width: 100%; /* Гарантируем, что не выходит за границы */
+    margin: 0 auto; /* Автоцентрирование */
     font-size: 7rem;
-    margin: 0 auto;
-    overflow: visible; /* Убираем обрезку букв */
-    white-space: nowrap; /* Запрещаем перенос слов */
+    text-align: center; /* Текст точно по центру */
+    overflow: visible; /* Обрезку убираем */
+    white-space: nowrap; /* Запрещаем перенос строки */
 }
 
 
