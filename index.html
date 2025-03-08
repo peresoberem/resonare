@@ -33,16 +33,18 @@
             max-width: 90%;
         }
         h1 {
-            font-size: 8rem;
-            margin-bottom: 80px;
-            margin-top: -110px;
-            background: none !important;
-            -webkit-background-clip: unset !important;
-            -webkit-text-fill-color: white !important;
-            color: white !important;
+            font-size: clamp(3rem, 12vw, 8rem); /* автоматически адаптируется к ширине экрана */
+            margin: 0 auto;
+            padding: 0;
             text-align: center;
-            font-family: 'InterTight', sans-serif;
+            color: white;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: white;
+            overflow: visible;
+            white-space: nowrap;
         }
+
 
         .eye-img {
             width: 250px;
