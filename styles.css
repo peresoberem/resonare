@@ -27,15 +27,14 @@ body {
 /* Разные толщины для разных элементов */
 h1 {
     display: flex;
-    justify-content: center; /* Гарантирует центрирование текста */
+    justify-content: center; /* Центрируем текст */
     align-items: center;
-    width: 100%; /* Убедимся, что заголовок занимает всю ширину */
-    text-align: center; /* Текст внутри h1 точно по центру */
+    width: 100%; /* Гарантируем, что h1 занимает всю ширину */
+    text-align: center; /* Центрируем текст внутри */
     font-size: 7rem;
-    margin: 0 auto; /* Автоматическое центрирование */
-    background: none;
-    -webkit-background-clip: unset;
-    -webkit-text-fill-color: white;
+    margin: 0 auto;
+    overflow: visible; /* Убираем обрезку букв */
+    white-space: nowrap; /* Запрещаем перенос слов */
 }
 
 
@@ -70,8 +69,13 @@ body {
 }
 @media (max-width: 768px) {
     h1 {
-        font-size: 4rem; /* Делаем заголовок меньше */
+        font-size: 4rem; /* Уменьшаем размер заголовка, чтобы не было проблем */
+        text-align: center;
+        width: 100%;
+        overflow: visible;
     }
+}
+
 
     h2 {
         font-size: 1.5rem; /* Уменьшаем подзаголовок */
@@ -89,4 +93,4 @@ body {
     footer a {
         font-size: 0.9rem;
     }
-}
+
