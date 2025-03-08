@@ -74,47 +74,75 @@ body {
 /* Медиа-запрос для мобильных устройств */
 /* Добавьте только этот один блок в конец вашего существующего styles.css */
 
+/* Добавьте в конец вашего CSS файла */
+
 @media (max-width: 768px) {
-    /* Сброс предыдущих стилей */
+    /* Фиксируем высоту для мобильных устройств */
     body {
-        display: block;
-        height: auto;
-        padding: 0;
-        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh; /* Сохраняем 100vh */
         position: relative;
+        overflow: hidden; /* Предотвращаем прокрутку */
     }
     
+    /* Размещаем контейнер в верхней части экрана */
     .container {
-        position: relative;
-        padding-top: 100px; /* Фиксированный отступ сверху */
-        padding-bottom: 150px; /* Место для футера */
-    }
-    
-    h1 {
-        font-size: 4rem;
-        position: relative;
-        top: -50px; /* Просто поднимаем заголовок */
-        margin-top: 0;
-        margin-bottom: 30px;
-        width: 100%;
-    }
-    
-    .eye-img {
-        width: 180px;
-        margin: 0 0 30px 0;
-    }
-    
-    h2 {
-        font-size: 1.5rem;
-        margin-top: 0;
-    }
-    
-    footer {
         position: absolute;
-        bottom: 20px;
+        top: 0;
         left: 0;
         right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        padding-top: 10vh; /* Отступ сверху */
+    }
+    
+    /* Настраиваем заголовок */
+    h1 {
+        font-size: 4rem;
+        margin-top: 0; /* Убираем отрицательный margin */
+        margin-bottom: 10vh; /* Используем vh для отступа */
+        position: relative;
+    }
+    
+    /* Настраиваем изображение глаза */
+    .eye-img {
+        width: 180px;
+        margin: 0;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Настраиваем подзаголовок */
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 4vh;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Настраиваем футер */
+    footer {
+        position: absolute;
+        bottom: 5vh;
+        width: 100%;
         flex-direction: column;
         gap: 10px;
+        z-index: 3;
+    }
+}
+
+/* Специфическое исправление для iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    @media (max-width: 768px) {
+        body {
+            height: -webkit-fill-available; /* iOS Safari fix */
+        }
+        
+        h1 {
+            margin-top: -5vh; /* Дополнительный отрицательный margin для iOS */
+        }
     }
 }
