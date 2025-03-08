@@ -54,15 +54,20 @@ footer a {
         padding: 0 10px; /* небольшой отступ, чтобы текст не прижимался к краям */
     }
 
+    @media (max-width: 768px) {
     h1 {
-        font-size: 5rem;
-        white-space: normal;
-        word-break: break-word;
-        overflow: visible;
+        font-size: 3rem !important;
+        white-space: normal !important; /* разрешаем перенос, это самое важное */
+        word-wrap: break-word;
         width: 100%;
-        margin-left: 0;
-        margin-right: 0;
+        text-align: center;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        }
     }
+    
 
     h2 {
         font-size: 1.5rem;
