@@ -108,3 +108,13 @@
     </footer>
 </body>
 </html>
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверка на iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    
+    if (isIOS && window.innerWidth <= 768) {
+        document.querySelector('h1').style.marginTop = '0';
+        document.querySelector('h1').style.position = 'relative';
+        document.querySelector('h1').style.top = '-50px';
+    }
+});
