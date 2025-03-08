@@ -1,44 +1,47 @@
 body {
     background-color: black;
     color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    position: relative;
+    min-height: 100vh;
     font-family: 'InterTight', sans-serif;
     text-align: center;
     overflow-x: hidden;
-    position: relative; /* Добавляем для более предсказуемого позиционирования */
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 90%;
-    padding-bottom: 60px; /* Добавляем отступ внизу для футера */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
 }
 
 h1 {
     font-size: 8rem;
-    margin-bottom: 30px;
-    /* Убираем отрицательные отступы */
-    margin-top: 0;
+    position: relative;
+    top: -60px; /* Смещение заголовка вверх */
+    margin: 0 0 30px 0;
     text-align: center;
     font-family: 'InterTight', sans-serif;
     width: 100%;
-}
-
-/* Добавляем верхнее позиционирование для h1 */
-.container > h1:first-child {
-    margin-top: -60px; /* Более умеренное значение для смещения вверх */
+    color: white !important;
+    -webkit-text-fill-color: white !important;
 }
 
 .eye-img {
     width: 250px;
     margin: 0 0 30px 0;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 0;
+    text-align: center;
+    font-family: 'InterTight', sans-serif;
 }
 
 footer {
@@ -53,18 +56,14 @@ footer {
 @media (max-width: 768px) {
     h1 {
         font-size: 4rem;
-    }
-    
-    /* Регулируем отступ на мобильных устройствах */
-    .container > h1:first-child {
-        margin-top: -30px; /* Меньшее значение для мобильных */
+        top: -40px; /* Меньшее смещение для мобильных */
     }
 
     .eye-img {
         width: 150px;
+        margin: 0 0 20px 0;
     }
-    
-    /* Сохраняем футер зафиксированным внизу */
+
     footer {
         flex-direction: column;
         gap: 10px;
