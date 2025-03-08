@@ -49,12 +49,17 @@ footer a {
 }
 
 @media (max-width: 768px) {
+    .container {
+        max-width: 100%; /* добавь вот эту строку */
+        padding: 0 10px; /* небольшой отступ, чтобы текст не прижимался к краям */
+    }
+
     h1 {
-        font-size: 3rem; /* комфортный размер для iPhone 15 Pro Max */
-        white-space: normal; /* обязательно разреши перенос строки */
-        word-break: break-word; /* чтобы текст переносился корректно */
+        font-size: 5rem;
+        white-space: normal;
+        word-break: break-word;
         overflow: visible;
-        width: 100%; /* ровно на ширину экрана */
+        width: 100%;
         margin-left: 0;
         margin-right: 0;
     }
