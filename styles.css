@@ -26,18 +26,7 @@ body {
 
 /* Разные толщины для разных элементов */
 h1 {
-    font-size: 8rem;
-    margin-bottom: 80px;
-    margin-top: -110px;
-    background: none !important;
-    -webkit-background-clip: unset !important;
-    -webkit-text-fill-color: white !important;
-    color: white !important;
-    text-align: center;
-    font-family: 'InterTight', sans-serif;
-    width: 100%;
-    overflow: visible;
-    white-space: nowrap;
+    font-weight: 600; /* SemiBold */
 }
 
 h2 {
@@ -45,52 +34,8 @@ h2 {
 }
 
 footer a {
-    font-weight: 400; /* Regular /
+    font-weight: 400; /* Regular */
 }
 .back-button {
-    font-weight: 400; / Regular /
-}
-body {
-    background-color: black;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; / Центрируем текст /
-    width: 100vw; / Делаем ширину 100% экрана /
-    height: 100vh;
-    font-family: 'InterTight', sans-serif;
-    overflow-x: hidden; / Чтобы не было прокрутки вправо */
-}
-
-.container {
-    width: 100%; 
-    padding: 20px;
-}
-@media (max-width: 768px) {
-    h1 {
-        font-size: 4rem;
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-        white-space: normal;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .eye-img {
-        width: 200px;
-    }
-
-    footer {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    footer a {
-        font-size: 0.9rem;
-    }
+    font-weight: 400; /* Regular */
 }
