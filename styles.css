@@ -56,7 +56,7 @@ footer a {
 
     @media (max-width: 768px) {
     h1 {
-        font-size: 5rem !important;
+        font-size: 4,5rem !important;
         white-space: normal !important; /* разрешаем перенос, это самое важное */
         word-wrap: break-word;
         width: 100%;
