@@ -1,20 +1,20 @@
 @font-face {
     font-family: 'InterTight';
-    src: url('fonts/intertight-regular.ttf') format('truetype');
+    src: url('fonts/InterTight-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'InterTight';
-    src: url('fonts/intertight-medium.ttf') format('truetype');
+    src: url('fonts/InterTight-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'InterTight';
-    src: url('fonts/intertight-semibold.ttf') format('truetype');
+    src: url('fonts/InterTight-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
 }
