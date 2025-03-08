@@ -1,71 +1,122 @@
+@font-face {
+    font-family: 'InterTight';
+    src: url('fonts/InterTight-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'InterTight';
+    src: url('fonts/InterTight-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'InterTight';
+    src: url('fonts/InterTight-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* Применяем шрифт ко всему сайту */
+body {
+    font-family: 'InterTight', sans-serif;
+}
+
+/* Разные толщины для разных элементов */
+h1 {
+    font-size: 8rem;
+    margin-bottom: 80px;
+    margin-top: -110px;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    color: white !important;
+    text-align: center;
+    font-family: 'InterTight', sans-serif;
+    width: 100%;
+    overflow: visible;
+    white-space: nowrap;
+}
+
+
+h2 {
+    font-weight: 500; /* Medium */
+}
+
+footer a {
+    font-weight: 400; /* Regular */
+}
+.back-button {
+    font-weight: 400; /* Regular */
+}
 body {
     background-color: black;
     color: white;
-    position: relative;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Центрируем текст */
+    width: 100vw; /* Делаем ширину 100% экрана */
+    height: 100vh;
     font-family: 'InterTight', sans-serif;
-    text-align: center;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+    overflow-x: hidden; /* Чтобы не было прокрутки вправо */
 }
 
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 600px;
-    padding: 0 20px;
+    width: 100%; /* Контейнер на всю ширину */
+    max-width: 600px; /* Ограничиваем максимальную ширину */
+    padding: 20px;
 }
 
-h1 {
-    font-size: 8rem;
-    position: relative;
-    top: -60px; /* Смещение заголовка вверх */
-    margin: 0 0 30px 0;
-    text-align: center;
-    font-family: 'InterTight', sans-serif;
-    width: 100%;
-    color: white !important;
-    -webkit-text-fill-color: white !important;
-}
-
-.eye-img {
-    width: 250px;
-    margin: 0 0 30px 0;
-}
-
-h2 {
-    font-size: 2rem;
-    margin: 0;
-    text-align: center;
-    font-family: 'InterTight', sans-serif;
-}
-
-footer {
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
+/* Медиа-запрос для мобильных устройств */
 @media (max-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 15vh; /* Добавляем отступ сверху примерно 15% высоты экрана */
+    }
+    
     h1 {
         font-size: 4rem;
-        top: -40px; /* Меньшее смещение для мобильных */
+        margin-top: 0; /* Убираем отрицательный отступ */
+        margin-bottom: 40px;
+        white-space: normal;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 0;
     }
 
     .eye-img {
-        width: 150px;
-        margin: 0 0 20px 0;
+        width: 200px;
+        margin: 0 0 30px 0;
     }
 
     footer {
         flex-direction: column;
         gap: 10px;
+    }
+
+    footer a {
+        font-size: 0.9rem;
+    }
+}
+
+/* Дополнительные исправления для Safari на iOS */
+@supports (-webkit-touch-callout: none) {
+    @media (max-width: 768px) {
+        .container {
+            padding-top: 20vh; /* Немного больше отступ для Safari */
+        }
     }
 }
