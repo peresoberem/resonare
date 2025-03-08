@@ -39,3 +39,44 @@ footer a {
 .back-button {
     font-weight: 400; /* Regular */
 }
+body {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Центрируем текст */
+    width: 100vw; /* Делаем ширину 100% экрана */
+    height: 100vh;
+    font-family: 'InterTight', sans-serif;
+    overflow-x: hidden; /* Чтобы не было прокрутки вправо */
+}
+
+.container {
+    width: 100%; /* Контейнер на всю ширину */
+    max-width: 600px; /* Ограничиваем максимальную ширину */
+    padding: 20px;
+}
+@media (max-width: 768px) {
+    h1 {
+        font-size: 4rem; /* Делаем заголовок меньше */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* Уменьшаем подзаголовок */
+    }
+
+    .eye-img {
+        width: 200px; /* Уменьшаем картинку */
+    }
+
+    footer {
+        flex-direction: column; /* Размещаем ссылки в столбик на маленьких экранах */
+        gap: 10px;
+    }
+
+    footer a {
+        font-size: 0.9rem;
+    }
+}
