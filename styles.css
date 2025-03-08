@@ -26,8 +26,18 @@ body {
 
 /* Разные толщины для разных элементов */
 h1 {
-    font-weight: 600; /* SemiBold */
+    display: flex;
+    justify-content: center; /* Гарантирует центрирование текста */
+    align-items: center;
+    width: 100%; /* Убедимся, что заголовок занимает всю ширину */
+    text-align: center; /* Текст внутри h1 точно по центру */
+    font-size: 7rem;
+    margin: 0 auto; /* Автоматическое центрирование */
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: white;
 }
+
 
 h2 {
     font-weight: 500; /* Medium */
