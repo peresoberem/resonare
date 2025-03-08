@@ -39,3 +39,35 @@ footer a {
 .back-button {
     font-weight: 400; /* Regular */
 }
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin-top: 0; /* регулируй высоту тут, если надо выше — уменьши значение, например до 30px */
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 5.5rem; /* оптимальный размер, не слишком маленький */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* оптимально */
+    }
+
+    .eye-img {
+        width: 180px; /* чуть меньше, но без ущерба */
+    }
+
+    footer {
+        flex-direction: row; /* чтобы ссылки были горизонтально и на телефоне тоже */
+        gap: 15px;
+        flex-wrap: wrap; /* разрешаем перенос, если потребуется */
+    }
+
+    footer a {
+        font-size: 0.9rem;
+    }
+}
