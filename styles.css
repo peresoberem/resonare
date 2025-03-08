@@ -50,9 +50,13 @@ footer a {
 
 @media (max-width: 768px) {
     h1 {
-        font-size: 3rem; /* уменьшаем ровно настолько, чтобы ничего не резалось */
-        white-space: nowrap; /* запрещаем перенос */
-        overflow: visible; /* предотвращаем обрезку букв */
+        font-size: 3rem; /* комфортный размер для iPhone 15 Pro Max */
+        white-space: normal; /* обязательно разреши перенос строки */
+        word-break: break-word; /* чтобы текст переносился корректно */
+        overflow: visible;
+        width: 100%; /* ровно на ширину экрана */
+        margin-left: 0;
+        margin-right: 0;
     }
 
     h2 {
@@ -60,12 +64,12 @@ footer a {
     }
 
     .eye-img {
-        width: 180px;
+        width: 200px;
     }
 
     footer {
         flex-direction: row;
-        gap: 15px;
+        gap: 10px;
         flex-wrap: wrap;
     }
 
