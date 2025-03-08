@@ -26,14 +26,18 @@ body {
 
 /* Разные толщины для разных элементов */
 h1 {
-    display: block;
-    width: fit-content; /* Ширина только под текст, без лишнего */
-    max-width: 100%; /* Гарантируем, что не выходит за границы */
-    margin: 0 auto; /* Автоцентрирование */
-    font-size: 7rem;
-    text-align: center; /* Текст точно по центру */
-    overflow: visible; /* Обрезку убираем */
-    white-space: nowrap; /* Запрещаем перенос строки */
+    font-size: 8rem;
+    margin-bottom: 80px;
+    margin-top: -110px;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    color: white !important;
+    text-align: center;
+    font-family: 'InterTight', sans-serif;
+    width: 100%;
+    overflow: visible;
+    white-space: nowrap;
 }
 
 
@@ -68,28 +72,27 @@ body {
 }
 @media (max-width: 768px) {
     h1 {
-        font-size: 4rem; /* Уменьшаем размер заголовка, чтобы не было проблем */
-        text-align: center;
+        font-size: 4rem;
         width: 100%;
-        overflow: visible;
+        margin-left: 0;
+        margin-right: 0;
+        white-space: normal;
     }
-}
-
 
     h2 {
-        font-size: 1.5rem; /* Уменьшаем подзаголовок */
+        font-size: 1.5rem;
     }
 
     .eye-img {
-        width: 200px; /* Уменьшаем картинку */
+        width: 200px;
     }
 
     footer {
-        flex-direction: column; /* Размещаем ссылки в столбик на маленьких экранах */
+        flex-direction: column;
         gap: 10px;
     }
 
     footer a {
         font-size: 0.9rem;
     }
-
+}/* <--- убедись, что эта скобка есть */
