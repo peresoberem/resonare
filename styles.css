@@ -50,21 +50,23 @@ footer a {
 
 @media (max-width: 768px) {
     h1 {
-        font-size: 5.5rem; /* оптимальный размер, не слишком маленький */
+        font-size: 3rem; /* уменьшаем ровно настолько, чтобы ничего не резалось */
+        white-space: nowrap; /* запрещаем перенос */
+        overflow: visible; /* предотвращаем обрезку букв */
     }
 
     h2 {
-        font-size: 1.5rem; /* оптимально */
+        font-size: 1.5rem;
     }
 
     .eye-img {
-        width: 180px; /* чуть меньше, но без ущерба */
+        width: 180px;
     }
 
     footer {
-        flex-direction: row; /* чтобы ссылки были горизонтально и на телефоне тоже */
+        flex-direction: row;
         gap: 15px;
-        flex-wrap: wrap; /* разрешаем перенос, если потребуется */
+        flex-wrap: wrap;
     }
 
     footer a {
