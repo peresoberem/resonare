@@ -1,56 +1,3 @@
-@font-face {
-    font-family: 'InterTight';
-    src: url('fonts/InterTight-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'InterTight';
-    src: url('fonts/InterTight-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'InterTight';
-    src: url('fonts/InterTight-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-}
-
-/* Применяем шрифт ко всему сайту */
-body {
-    font-family: 'InterTight', sans-serif;
-}
-
-/* Разные толщины для разных элементов */
-h1 {
-    font-size: 8rem;
-    margin-bottom: 80px;
-    margin-top: -110px;
-    background: none !important;
-    -webkit-background-clip: unset !important;
-    -webkit-text-fill-color: white !important;
-    color: white !important;
-    text-align: center;
-    font-family: 'InterTight', sans-serif;
-    width: 100%;
-    overflow: visible;
-    white-space: nowrap;
-}
-
-
-h2 {
-    font-weight: 500; /* Medium */
-}
-
-footer a {
-    font-weight: 400; /* Regular */
-}
-.back-button {
-    font-weight: 400; /* Regular */
-}
 body {
     background-color: black;
     color: white;
@@ -58,41 +5,50 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center; /* Центрируем текст */
-    width: 100vw; /* Делаем ширину 100% экрана */
-    height: 100vh;
+    min-height: 100vh; /* используем min-height вместо height */
+    text-align: center;
     font-family: 'InterTight', sans-serif;
-    overflow-x: hidden; /* Чтобы не было прокрутки вправо */
+    overflow-x: hidden;
+    padding: 20px 0; /* добавляем отступы сверху и снизу */
 }
 
 .container {
-    width: 100%; /* Контейнер на всю ширину */
-    max-width: 600px; /* Ограничиваем максимальную ширину */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
     padding: 20px;
 }
+
+h1 {
+    font-size: 8rem;
+    margin-bottom: 30px; /* уменьшаем отступ снизу */
+    margin-top: 0; /* убираем отрицательный отступ */
+    text-align: center;
+    font-family: 'InterTight', sans-serif;
+    width: 100%;
+}
+
+.eye-img {
+    width: 250px;
+    margin: 0 0 30px 0; /* изменяем отступы */
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 4rem;
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-        white-space: normal;
-    }
-
-    h2 {
-        font-size: 1.5rem;
+        margin-bottom: 20px;
     }
 
     .eye-img {
-        width: 200px;
+        width: 150px;
+        margin: 0 0 20px 0;
     }
 
     footer {
-        flex-direction: column;
-        gap: 10px;
+        position: relative; /* вместо fixed */
+        margin-top: 20px;
     }
-
-    footer a {
-        font-size: 0.9rem;
-    }
-}/* <--- убедись, что эта скобка есть */
+}
