@@ -100,6 +100,31 @@
       margin: 0;
       text-align: center;
     }
+    .photo-collage {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      max-width: 900px;
+      margin: 20px auto;
+      justify-items: center;
+    }
+
+    .photo-collage img {
+      border-radius: 8px;
+      object-fit: cover;
+      width: 100%;
+      height: auto;
+      max-height: 180px;
+    }
+
+    .photo-collage img.vertical {
+      aspect-ratio: 3 / 4;
+    }
+
+    .photo-collage img.horizontal {
+      aspect-ratio: 4 / 3;
+    }
+
   </style>
 </head>
 <body>
@@ -150,7 +175,17 @@
         </ul>
       </div>
     </div>
-
+    <div class="photo-collage">
+        <img src="photo1.jpg" alt="photo1" class="vertical" />
+        <img src="photo2.jpg" alt="photo2" class="vertical" />
+        <img src="photo3.jpg" alt="photo3" class="vertical" />
+        <img src="photo4.jpg" alt="photo4" class="vertical" />
+        <img src="photo5.jpg" alt="photo5" class="horizontal" />
+        <img src="photo6.jpg" alt="photo6" class="horizontal" />
+        <img src="photo7.jpg" alt="photo7" class="horizontal" />
+        <img src="photo8.jpg" alt="photo8" class="horizontal" />
+        <img src="photo9.jpg" alt="photo9" class="horizontal" />
+      </div>
     <div class="subtitle">
       <h3><strong>Моя философия и подход</strong></h3>
 
