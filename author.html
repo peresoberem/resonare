@@ -34,22 +34,53 @@
         .profile-pic {
             width: 220px;
             height: auto;
-            border-radius: 12px;
             margin-bottom: 30px;
         }
         .about-text {
             max-width: 800px;
-            line-height: 1.7;
-            font-size: 1.2rem;
+            line-height: 1.6;
+            font-size: 1rem;
+            font-weight: normal;
         }
         .about-text p {
             margin-bottom: 1.5em;
         }
+        .contact-button {
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'InterTight', sans-serif;
+        }
+        .contact-options {
+            display: none;
+            margin-top: 20px;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .contact-options a {
+            color: white;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .contact-options a:hover {
+            color: #888;
+        }
     </style>
+    <script>
+        function toggleContacts() {
+            const options = document.getElementById('contact-options');
+            options.style.display = options.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
 </head>
 <body>
     <a href="index.html">← Назад</a>
-    <img src="moi.jpg" alt="Анна Павленко" class="profile-pic">
+    <img src="photo2.jpg" alt="Анна Павленко" class="profile-pic">
     <div class="about-text">
         <p>Привет, я Анна Павленко, психолог и автор проекта <strong>Resonare</strong>. Я работаю в мультимодальном подходе, сочетая экзистенциальную терапию, работу с телом, звуком и арт-практики. Предпочитаю научно доказанные и проверенные методы, основанные на принципах нейробиологии.</p>
 
@@ -60,6 +91,12 @@
         <p>Сегодня я сопровождаю своих клиентов не только как профессионал, но и как человек, который на личном опыте знает, насколько важны бережность, глубина и уважение к индивидуальному пути каждого.</p>
 
         <p>Если вы хотите лучше понять себя, найти внутренние опоры или пройти через сложные жизненные моменты с поддержкой – я буду рада встретиться с вами.</p>
+
+        <button class="contact-button" onclick="toggleContacts()">Связаться со мной</button>
+        <div id="contact-options" class="contact-options">
+            <a href="https://t.me/resonareart" target="_blank">Telegram</a>
+            <a href="mailto:anyapavlenk@gmail.com">Email</a>
+        </div>
     </div>
 </body>
 </html>
