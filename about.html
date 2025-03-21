@@ -51,7 +51,6 @@
       width: 100%;
       height: auto;
       object-fit: contain;
-      border-radius: 0;
     }
 
     .title {
@@ -100,30 +99,35 @@
       margin: 0;
       text-align: center;
     }
+
     .photo-collage {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-areas:
+        "v1 h1 h1"
+        "v2 h2 h3"
+        "v3 h4 h5"
+        "v4 .  . ";
       gap: 10px;
-      max-width: 900px;
-      margin: 20px auto;
-      justify-items: center;
+      max-width: 600px;
+      margin: 30px auto;
+      justify-content: center;
     }
 
     .photo-collage img {
-      border-radius: 8px;
-      object-fit: cover;
       width: 100%;
       height: auto;
-      max-height: 180px;
+      object-fit: cover;
     }
 
-    .photo-collage img.vertical {
-      aspect-ratio: 3 / 4;
-    }
-
-    .photo-collage img.horizontal {
-      aspect-ratio: 4 / 3;
-    }
+    .photo-collage img:nth-child(1) { grid-area: v1; height: 240px; }
+    .photo-collage img:nth-child(2) { grid-area: v2; height: 240px; }
+    .photo-collage img:nth-child(3) { grid-area: v3; height: 240px; }
+    .photo-collage img:nth-child(4) { grid-area: v4; height: 240px; }
+    .photo-collage img:nth-child(5) { grid-area: h1; height: 120px; }
+    .photo-collage img:nth-child(6) { grid-area: h2; height: 120px; }
+    .photo-collage img:nth-child(7) { grid-area: h3; height: 120px; }
+    .photo-collage img:nth-child(8) { grid-area: h4; height: 120px; }
+    .photo-collage img:nth-child(9) { grid-area: h5; height: 120px; }
 
   </style>
 </head>
@@ -175,17 +179,7 @@
         </ul>
       </div>
     </div>
-    <div class="photo-collage">
-        <img src="photo1.jpg" alt="photo1" class="vertical" />
-        <img src="photo2.jpg" alt="photo2" class="vertical" />
-        <img src="photo3.jpg" alt="photo3" class="vertical" />
-        <img src="photo4.jpg" alt="photo4" class="vertical" />
-        <img src="photo5.jpg" alt="photo5" class="horizontal" />
-        <img src="photo6.jpg" alt="photo6" class="horizontal" />
-        <img src="photo7.jpg" alt="photo7" class="horizontal" />
-        <img src="photo8.jpg" alt="photo8" class="horizontal" />
-        <img src="photo9.jpg" alt="photo9" class="horizontal" />
-      </div>
+
     <div class="subtitle">
       <h3><strong>Моя философия и подход</strong></h3>
 
@@ -202,6 +196,18 @@
         <li><strong>EMDR и музыкальные техники (билатеральное воздействие)</strong> — научно обоснованные методы работы с тревогой, страхами, стрессом и травматическим опытом, помогающие мягко стабилизировать психику.</li>
         <li><strong>Нейропсихологические и нейробиологические основы</strong> — понимание того, как наш мозг и тело реагируют на эмоции, звуки, образы и движения, позволяет подходить к решению ваших задач глубже и эффективнее.</li>
       </ul>
+
+      <div class="photo-collage">
+        <img src="photo1.jpg" alt="photo1" />
+        <img src="photo2.jpg" alt="photo2" />
+        <img src="photo3.jpg" alt="photo3" />
+        <img src="photo4.jpg" alt="photo4" />
+        <img src="photo5.jpg" alt="photo5" />
+        <img src="photo6.jpg" alt="photo6" />
+        <img src="photo7.jpg" alt="photo7" />
+        <img src="photo8.jpg" alt="photo8" />
+        <img src="photo9.jpg" alt="photo9" />
+      </div>
 
       <h3><strong>Как проходит работа?</strong></h3>
 
