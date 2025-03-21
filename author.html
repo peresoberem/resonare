@@ -58,29 +58,46 @@
         .contact-options {
             display: none;
             margin-top: 20px;
-            flex-direction: column;
-            gap: 10px;
+            flex-direction: row;
+            justify-content: center;
+            gap: 30px;
+            animation: fadeIn 0.3s ease-in-out;
         }
-        .contact-options a {
-            color: white;
-            font-weight: normal;
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 4px;
             text-decoration: none;
             font-size: 1rem;
+            font-weight: normal;
         }
-        .contact-options a:hover {
-            color: #888;
+        .contact-icon:hover {
+            background-color: #ccc;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
     <script>
         function toggleContacts() {
             const options = document.getElementById('contact-options');
-            options.style.display = options.style.display === 'flex' ? 'none' : 'flex';
+            if (options.style.display === 'flex') {
+                options.style.display = 'none';
+            } else {
+                options.style.display = 'flex';
+            }
         }
     </script>
 </head>
 <body>
     <a href="index.html">← Назад</a>
-    <img src="photo2.jpg" alt="Анна Павленко" class="profile-pic">
+    <img src="moi.jpg" alt="Anna Pavlenko" class="profile-pic">
     <div class="about-text">
         <p>Привет, я Анна Павленко, психолог и автор проекта <strong>Resonare</strong>. Я работаю в мультимодальном подходе, сочетая экзистенциальную терапию, работу с телом, звуком и арт-практики. Предпочитаю научно доказанные и проверенные методы, основанные на принципах нейробиологии.</p>
 
@@ -94,8 +111,8 @@
 
         <button class="contact-button" onclick="toggleContacts()">Связаться со мной</button>
         <div id="contact-options" class="contact-options">
-            <a href="https://t.me/resonareart" target="_blank">Telegram</a>
-            <a href="mailto:anyapavlenk@gmail.com">Email</a>
+            <a href="https://t.me/resonareart" target="_blank" class="contact-icon">Telegram</a>
+            <a href="mailto:anyapavlenk@gmail.com" class="contact-icon">Email</a>
         </div>
     </div>
 </body>
