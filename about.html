@@ -102,33 +102,31 @@
 
     .photo-collage {
       display: grid;
-      grid-template-areas:
-        "v1 h1 h1"
-        "v2 h2 h3"
-        "v3 h4 h5"
-        "v4 .  . ";
-      gap: 10px;
-      max-width: 600px;
-      margin: 30px auto;
+      grid-template-columns: repeat(6, auto);
+      grid-template-rows: auto auto auto;
+      gap: 8px;
       justify-content: center;
+      max-width: 620px;
+      margin: 30px auto;
     }
 
     .photo-collage img {
-      width: 100%;
+      width: auto;
       height: auto;
-      object-fit: cover;
+      max-height: 180px;
+      max-width: 100%;
+      object-fit: contain;
     }
 
-    .photo-collage img:nth-child(1) { grid-area: v1; height: 240px; }
-    .photo-collage img:nth-child(2) { grid-area: v2; height: 240px; }
-    .photo-collage img:nth-child(3) { grid-area: v3; height: 240px; }
-    .photo-collage img:nth-child(4) { grid-area: v4; height: 240px; }
-    .photo-collage img:nth-child(5) { grid-area: h1; height: 120px; }
-    .photo-collage img:nth-child(6) { grid-area: h2; height: 120px; }
-    .photo-collage img:nth-child(7) { grid-area: h3; height: 120px; }
-    .photo-collage img:nth-child(8) { grid-area: h4; height: 120px; }
-    .photo-collage img:nth-child(9) { grid-area: h5; height: 120px; }
-
+    .photo-collage img:nth-child(1) { grid-column: 1 / span 2; }
+    .photo-collage img:nth-child(2) { grid-column: 3 / span 2; }
+    .photo-collage img:nth-child(3) { grid-column: 5 / span 2; }
+    .photo-collage img:nth-child(4) { grid-column: 2 / span 2; }
+    .photo-collage img:nth-child(5) { grid-column: 4 / span 2; }
+    .photo-collage img:nth-child(6) { grid-column: 1 / span 3; }
+    .photo-collage img:nth-child(7) { grid-column: 4 / span 3; }
+    .photo-collage img:nth-child(8) { grid-column: 2 / span 2; }
+    .photo-collage img:nth-child(9) { grid-column: 5 / span 2; }
   </style>
 </head>
 <body>
@@ -200,13 +198,13 @@
       <div class="photo-collage">
         <img src="photo1.jpg" alt="photo1" />
         <img src="photo2.jpg" alt="photo2" />
-        <img src="photo3.jpg" alt="photo3" />
-        <img src="photo4.jpg" alt="photo4" />
         <img src="photo5.jpg" alt="photo5" />
+        <img src="photo3.jpg" alt="photo3" />
         <img src="photo6.jpg" alt="photo6" />
+        <img src="photo4.jpg" alt="photo4" />
         <img src="photo7.jpg" alt="photo7" />
-        <img src="photo8.jpg" alt="photo8" />
         <img src="photo9.jpg" alt="photo9" />
+        <img src="photo8.jpg" alt="photo8" />
       </div>
 
       <h3><strong>Как проходит работа?</strong></h3>
