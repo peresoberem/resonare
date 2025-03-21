@@ -10,11 +10,15 @@
             background-color: black;
             color: white;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             font-family: 'InterTight', sans-serif;
+            text-align: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
         }
         a {
             color: white;
@@ -28,9 +32,33 @@
         a:hover {
             color: #888;
         }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+        .text-block {
+            max-width: 600px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
     <a href="index.html">← Назад</a>
+
+    <img src="room.jpg" alt="room">
+
+    <div class="text-block">
+        <p>я работаю онлайн и очно в Тбилиси (Ваке)</p>
+        <p>конкретный подход определяем на консультации<br>в зависимости от ситуации и пожеланий</p>
+        <br>
+        <p>индивидуальная сессия 55 минут — 50$<br>
+        парная сессия 80 минут<br>
+        групповая сессия 120 минут — 20$<br>
+        встречи киноклуба 100–150 минут — donation based (любая купюра)</p>
+    </div>
 </body>
 </html>
