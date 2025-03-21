@@ -18,6 +18,7 @@
             padding: 60px 20px;
             font-family: 'InterTight', sans-serif;
             text-align: center;
+            position: relative;
         }
         a {
             color: white;
@@ -54,56 +55,52 @@
             cursor: pointer;
             font-size: 1rem;
             font-family: 'InterTight', sans-serif;
+            position: relative;
+            z-index: 2;
         }
         .contact-options {
             display: none;
-            margin-top: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 105px;
             flex-direction: row;
-            justify-content: center;
-            gap: 30px;
-            animation: fadeIn 0.3s ease-in-out;
+            gap: 20px;
+            background-color: black;
+            padding: 10px 20px;
+            z-index: 1;
         }
         .contact-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: white;
-            color: black;
-            padding: 10px 15px;
-            border-radius: 4px;
+            color: white;
             text-decoration: none;
             font-size: 1rem;
-            font-weight: normal;
+            padding: 10px 15px;
+            background-color: white;
+            color: black;
+            border: 1px solid white;
+            font-family: 'InterTight', sans-serif;
+            transition: background-color 0.3s;
         }
         .contact-icon:hover {
             background-color: #ccc;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
     <script>
         function toggleContacts() {
             const options = document.getElementById('contact-options');
-            if (options.style.display === 'flex') {
-                options.style.display = 'none';
-            } else {
-                options.style.display = 'flex';
-            }
+            options.style.display = options.style.display === 'flex' ? 'none' : 'flex';
         }
     </script>
 </head>
 <body>
     <a href="index.html">← Назад</a>
-    <img src="moi.jpg" alt="Anna Pavlenko" class="profile-pic">
+    <img src="your-photo.jpg" alt="Анна Павленко" class="profile-pic">
     <div class="about-text">
         <p>Привет, я Анна Павленко, психолог и автор проекта <strong>Resonare</strong>. Я работаю в мультимодальном подходе, сочетая экзистенциальную терапию, работу с телом, звуком и арт-практики. Предпочитаю научно доказанные и проверенные методы, основанные на принципах нейробиологии.</p>
 
         <p>Мой путь в психологию начался задолго до того, как я получила профессиональное образование в этой сфере. В юности я сталкивалась с вопросами самоопределения, переживала сложные периоды, связанные с трудностями в семье, в социализации и с расстройством пищевого поведения. Это подтолкнуло меня к изучению принципов работы мозга и нервной системы, а также глубокому личному исследованию, которое привело в терапию, продлившуюся больше одиннадцати лет.</p>
 
-        <p>Параллельно с терапией я изучала холистический подход, принципы связи психики и тела, а также влияние музыки и искусства на внутреннее состояние. Практиковала массаж, нейромассаж и терапию звуком, функциональный тренинг и реабилитацию после травм. Позже мое увлечение психологией стало профессиональным путём: я прошла обучение семейной терапии, сексологии, экзистенциальной психологии, арт-терапии и телесным практикам, превратив собственный опыт в методику работы с людьми.</p>
+        <p>Параллельно с терапией я изучала холистический подход, принципы связи психики и тела, а также влияние музыки и искусства на внутреннее состояние. Практиковала массаж, нейромассаж и терапию звуком, функциональный тренинг и реабилитацию после травм. Позже мое увлечение психологией стало профессиональным путём: я прошла обучение в Международной школе Арт-терапии, Национальной академии психологического образования, Московском институте психоанализа. Обучалась семейной терапии, сексологии, экзистенциальной психологии, арт-терапии и телесным практикам, превратив собственный опыт в методику работы с людьми.</p>
 
         <p>Сегодня я сопровождаю своих клиентов не только как профессионал, но и как человек, который на личном опыте знает, насколько важны бережность, глубина и уважение к индивидуальному пути каждого.</p>
 
