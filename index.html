@@ -92,29 +92,81 @@
             position: absolute;
             top: 50%;
             left: 110%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) translateX(10px);
             display: flex;
             gap: 10px;
-            background-color: black;
-            padding: 10px;
-            border: 1px solid white;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            background-color: transparent;
+            padding: 0;
+            border: none;
         }
         .contact-icons.show {
-            opacity: 1;
+            animation: fly-in 0.6s ease forwards;
             pointer-events: auto;
-            transform: translateY(-50%) translateX(0);
+        }
+        .contact-icons.hide {
+            animation: fly-out 0.4s ease forwards;
+            pointer-events: none;
         }
         .contact-icons img {
             width: 24px;
             height: 24px;
             cursor: pointer;
+            opacity: 0;
+            transform: translateX(10px);
+            animation: none;
+        }
+        .contact-icons.show img:nth-child(1) {
+            animation: icon-in 0.3s ease forwards 0.15s;
+        }
+        .contact-icons.show img:nth-child(2) {
+            animation: icon-in 0.3s ease forwards 0.3s;
+        }
+
+        @keyframes icon-in {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fly-in {
+            from {
+                opacity: 0;
+                transform: translateY(-50%) translateX(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
+        }
+
+        @keyframes fly-out {
+            from {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-50%) translateX(10px);
+            }
         }
     </style>
     <script>
+        let contactVisible = false;
         function toggleContacts() {
             const icons = document.getElementById('contact-icons');
-            icons.classList.toggle('show');
+            if (contactVisible) {
+                icons.classList.remove('show');
+                icons.classList.add('hide');
+            } else {
+                icons.classList.remove('hide');
+                icons.classList.add('show');
+            }
+            contactVisible = !contactVisible;
         }
     </script>
 </head>
@@ -125,14 +177,14 @@
         <h2>Психологический проект Анны Павленко</h2>
         <p class="subtext">экзистенциальный подход, арт-терапия, телесные практики и музыкальные техники в рамках EMDR — на основе принципов нейробиологии</p>
     </div>
-    
+
     <footer>
         <a href="about.html">О ПРОЕКТЕ</a>
         <a href="author.html">ОБО МНЕ</a>
         <a href="price.html">ЦЕНЫ</a>
         <div class="footer-contact">
             <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
-            <div id="contact-icons" class="contact-icons">
+            <div id="contact-icons" class="contact-icons hide">
                 <a href="https://t.me/resonareart" target="_blank">
                     <img src="telegram.png" alt="Telegram">
                 </a>
