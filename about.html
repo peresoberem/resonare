@@ -52,7 +52,7 @@
     }
 
     .image-row img {
-      height: 375px; /* Увеличено на 25px с изначальных 350px */
+      height: 380px; /* Увеличено еще на 5px с 375px */
       object-fit: cover;
     }
 
@@ -116,16 +116,20 @@
       text-align: center;
     }
 
+    /* Новый стиль для философского подхода - более широкий */
+    .philosophy-approach {
+      font-weight: 200; /* Light шрифт */
+      max-width: 900px; /* Шире чем обычный контент */
+      margin: 0 auto; /* Центрирование */
+    }
+
+    /* Обновленный коллаж с асимметричной версткой */
     .photo-collage {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-areas:
-        "photo1 photo2 photo5"
-        "photo3 photo9 photo6"
-        "photo4 photo7 photo8";
-      gap: 4px;
-      justify-content: center;
-      max-width: 450px;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, auto);
+      gap: 6px;
+      max-width: 700px;
       margin: 30px auto;
     }
 
@@ -135,22 +139,45 @@
       object-fit: cover;
     }
 
-    .photo-collage img:nth-child(1) { grid-area: photo1; }
-    .photo-collage img:nth-child(2) { grid-area: photo2; }
-    .photo-collage img:nth-child(3) { grid-area: photo5; }
-    .photo-collage img:nth-child(4) { grid-area: photo3; }
+    /* Расположение фотографий в асимметричном коллаже */
+    .photo-collage img:nth-child(1) { 
+      grid-column: 1 / 2; 
+      grid-row: 1 / 2; 
+    }
+    .photo-collage img:nth-child(2) { 
+      grid-column: 2 / 3; 
+      grid-row: 1 / 2; 
+    }
+    .photo-collage img:nth-child(3) { 
+      grid-column: 3 / 5; 
+      grid-row: 1 / 3; 
+    }
+    .photo-collage img:nth-child(4) { 
+      grid-column: 1 / 2; 
+      grid-row: 2 / 4; 
+    }
     .photo-collage img:nth-child(5) { 
-      grid-area: photo9; 
-      transform: scale(1.1); 
+      grid-column: 2 / 3; 
+      grid-row: 2 / 4; 
+      transform: scale(1.05); 
       z-index: 2; 
     }
-    .photo-collage img:nth-child(6) { grid-area: photo4; }
-    .photo-collage img:nth-child(7) { 
-      grid-area: photo7; 
-      transform: scale(0.95);
+    .photo-collage img:nth-child(6) { 
+      grid-column: 3 / 4; 
+      grid-row: 3 / 4; 
     }
-    .photo-collage img:nth-child(8) { grid-area: photo8; }
-    .photo-collage img:nth-child(9) { grid-area: photo6; }
+    .photo-collage img:nth-child(7) { 
+      grid-column: 4 / 5; 
+      grid-row: 3 / 5; 
+    }
+    .photo-collage img:nth-child(8) { 
+      grid-column: 1 / 3; 
+      grid-row: 4 / 5; 
+    }
+    .photo-collage img:nth-child(9) { 
+      grid-column: 3 / 4; 
+      grid-row: 4 / 5; 
+    }
 
     .overlay {
         display: none;
@@ -362,13 +389,52 @@
         text-align: left;
       }
       
+      /* Адаптивный асимметричный коллаж для мобильной версии */
       .photo-collage {
-        grid-template-areas:
-          "photo1 photo2 photo5"
-          "photo3 photo9 photo6"
-          "photo4 photo7 photo8";
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, auto);
+        gap: 4px;
         max-width: 100%;
-        gap: 3px;
+      }
+      
+      /* Расположение фотографий в мобильном асимметричном коллаже */
+      .photo-collage img:nth-child(1) { 
+        grid-column: 1 / 2; 
+        grid-row: 1 / 2; 
+      }
+      .photo-collage img:nth-child(2) { 
+        grid-column: 2 / 3; 
+        grid-row: 1 / 2; 
+      }
+      .photo-collage img:nth-child(3) { 
+        grid-column: 3 / 4; 
+        grid-row: 1 / 3; 
+      }
+      .photo-collage img:nth-child(4) { 
+        grid-column: 1 / 2; 
+        grid-row: 2 / 4; 
+      }
+      .photo-collage img:nth-child(5) { 
+        grid-column: 2 / 3; 
+        grid-row: 2 / 3; 
+        transform: scale(1.05); 
+        z-index: 2; 
+      }
+      .photo-collage img:nth-child(6) { 
+        grid-column: 2 / 3; 
+        grid-row: 3 / 4; 
+      }
+      .photo-collage img:nth-child(7) { 
+        grid-column: 3 / 4; 
+        grid-row: 3 / 5; 
+      }
+      .photo-collage img:nth-child(8) { 
+        grid-column: 1 / 3; 
+        grid-row: 4 / 5; 
+      }
+      .photo-collage img:nth-child(9) { 
+        grid-column: 1 / 4; 
+        grid-row: 5 / 6; 
       }
     }
   </style>
@@ -445,8 +511,10 @@
     <div class="subtitle">
       <h3><strong>Моя философия и подход</strong></h3>
 
-      <p>Мой подход мультимодален и основан на бережном сочетании различных методов психотерапии и нейробиологических принципов работы мозга и тела. Однако же основой моей практики является экзистенциальный подход — направление, помогающее увидеть себя, свою жизнь и выборы более осознанно. В первую очередь я адепт британской школы (Роберг Лэйнг, Эрнесто Спинелли, Эмми Ван Дорцен) и экзистенциально-феноменологической – Эдмунд Гуссерль, Мартин Хайдеггер. Но также активно практикую экзистенциальный анализ Альфрида Лэнгле, Dasein анализ (Людвиг Бинсвангер, Мерард Босс), американский и гуманистический подходы (Джеймс Бьюдженталь, Ролло Мэй, Ирвин Ялом, Карл Роджерс) и логотерапию Виктора Франкла.</p>
-      <p>Я не стремлюсь директивно направлять вас к конкретным ответам, а создаю пространство для глубокого самоисследования. Терапия для меня — это не лечение, а тонкая и бережная настройка внутренних процессов, помогающая вам услышать себя.</p>
+      <div class="philosophy-approach">
+        <p>Мой подход мультимодален и основан на бережном сочетании различных методов психотерапии и нейробиологических принципов работы мозга и тела. Однако же основой моей практики является экзистенциальный подход — направление, помогающее увидеть себя, свою жизнь и выборы более осознанно. В первую очередь я адепт британской школы (Роберг Лэйнг, Эрнесто Спинелли, Эмми Ван Дорцен) и экзистенциально-феноменологической – Эдмунд Гуссерль, Мартин Хайдеггер. Но также активно практикую экзистенциальный анализ Альфрида Лэнгле, Dasein анализ (Людвиг Бинсвангер, Мерард Босс), американский и гуманистический подходы (Джеймс Бьюдженталь, Ролло Мэй, Ирвин Ялом, Карл Роджерс) и логотерапию Виктора Франкла.</p>
+        <p>Я не стремлюсь директивно направлять вас к конкретным ответам, а создаю пространство для глубокого самоисследования. Терапия для меня — это не лечение, а тонкая и бережная настройка внутренних процессов, помогающая вам услышать себя.</p>
+      </div>
 
       <p style="text-align: center;"><strong>В своей работе я объединяю:</strong></p>
 
