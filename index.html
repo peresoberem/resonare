@@ -87,16 +87,23 @@
             position: relative;
         }
         .contact-icons {
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 50%;
+            left: 110%;
+            transform: translateY(-50%);
             display: flex;
             gap: 10px;
             background-color: black;
             padding: 10px;
             border: 1px solid white;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .contact-icons.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(-50%) translateX(0);
         }
         .contact-icons img {
             width: 24px;
@@ -107,7 +114,7 @@
     <script>
         function toggleContacts() {
             const icons = document.getElementById('contact-icons');
-            icons.style.display = icons.style.display === 'flex' ? 'none' : 'flex';
+            icons.classList.toggle('show');
         }
     </script>
 </head>
