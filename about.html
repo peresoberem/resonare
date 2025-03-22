@@ -52,7 +52,7 @@
     }
 
     .image-row img {
-      height: 350px; /* Уменьшено с 400px */
+      height: 375px; /* Увеличено на 25px с изначальных 350px */
       object-fit: cover;
     }
 
@@ -81,12 +81,14 @@
       color: black;
       width: 100vw;
       padding: 60px 20px;
-      margin-left: calc(-50vw + 50%);
+      margin: 0;
+      left: 0;
+      right: 0;
       position: relative;
     }
 
     .wide-section.white-section h3 {
-      margin-bottom: 20px; /* Уменьшено с 30px */
+      margin-bottom: 20px;
     }
 
     .wide-section {
@@ -106,7 +108,7 @@
 
     .two-columns ul {
       margin: 0;
-      padding-left: 20px; /* Добавлено */
+      padding-left: 20px;
     }
 
     h2, h3 {
@@ -116,31 +118,31 @@
 
     .photo-collage {
       display: grid;
-      grid-template-columns: repeat(6, auto);
-      grid-template-rows: auto auto auto;
-      gap: 2px;
+      grid-template-areas:
+        "photo1 photo2 photo5"
+        "photo3 photo9 photo6"
+        "photo4 photo7 photo8";
+      gap: 4px;
       justify-content: center;
-      max-width: 420px;
+      max-width: 450px;
       margin: 30px auto;
     }
 
     .photo-collage img {
-      width: auto;
-      height: auto;
-      max-height: 180px;
-      max-width: 100%;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .photo-collage img:nth-child(1) { grid-column: 1 / span 2; }
-    .photo-collage img:nth-child(2) { grid-column: 3 / span 2; }
-    .photo-collage img:nth-child(3) { grid-column: 5 / span 2; }
-    .photo-collage img:nth-child(4) { grid-column: 2 / span 2; }
-    .photo-collage img:nth-child(5) { grid-column: 4 / span 2; }
-    .photo-collage img:nth-child(6) { grid-column: 1 / span 3; }
-    .photo-collage img:nth-child(7) { grid-column: 4 / span 3; transform: scale(0.85); }
-    .photo-collage img:nth-child(8) { grid-column: 2 / span 2; }
-    .photo-collage img:nth-child(9) { grid-column: 5 / span 2; }
+    .photo-collage img:nth-child(1) { grid-area: photo1; }
+    .photo-collage img:nth-child(2) { grid-area: photo2; }
+    .photo-collage img:nth-child(3) { grid-area: photo5; }
+    .photo-collage img:nth-child(4) { grid-area: photo3; }
+    .photo-collage img:nth-child(5) { grid-area: photo6; }
+    .photo-collage img:nth-child(6) { grid-area: photo4; }
+    .photo-collage img:nth-child(7) { grid-area: photo7; }
+    .photo-collage img:nth-child(8) { grid-area: photo8; }
+    .photo-collage img:nth-child(9) { grid-area: photo9; transform: scale(1.05); z-index: 1; }
 
     .overlay {
         display: none;
@@ -225,10 +227,11 @@
       animation: icon-in 0.3s ease forwards 0.3s;
     }
 
-    /* Исправленный список */
-    .subtitle ul {
-      padding-left: 20px;
-      text-align: left;
+    /* Центрирование списка "В своей работе я объединяю" */
+    .work-approach-list {
+      text-align: center;
+      padding-left: 0;
+      list-style-position: inside;
     }
 
     /* Увеличение отступа после последнего раздела */
@@ -318,15 +321,16 @@
       
       /* Исправления для мобильной версии */
       .image-row {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
       }
       
       .image-row img {
-        width: 100%;
-        height: auto;
-        max-width: 300px;
-        margin-bottom: 15px;
+        width: 30%;
+        height: 180px;
+        object-fit: cover;
       }
       
       .two-columns {
@@ -341,16 +345,26 @@
       
       .wide-section.white-section {
         padding: 40px 20px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      
+      .wide-section.white-section ul {
+        display: inline-block;
+        text-align: left;
       }
       
       .photo-collage {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas:
+          "photo1 photo2 photo5"
+          "photo3 photo9 photo6"
+          "photo4 photo7 photo8";
         max-width: 100%;
       }
       
-      .photo-collage img {
-        grid-column: auto !important;
-        max-height: 120px;
+      .photo-collage img:nth-child(9) {
+        transform: scale(1.05);
+        z-index: 1;
       }
     }
   </style>
@@ -430,9 +444,9 @@
       <p>Мой подход мультимодален и основан на бережном сочетании различных методов психотерапии и нейробиологических принципов работы мозга и тела. Однако же основой моей практики является экзистенциальный подход — направление, помогающее увидеть себя, свою жизнь и выборы более осознанно. В первую очередь я адепт британской школы (Роберг Лэйнг, Эрнесто Спинелли, Эмми Ван Дорцен) и экзистенциально-феноменологической – Эдмунд Гуссерль, Мартин Хайдеггер. Но также активно практикую экзистенциальный анализ Альфрида Лэнгле, Dasein анализ (Людвиг Бинсвангер, Мерард Босс), американский и гуманистический подходы (Джеймс Бьюдженталь, Ролло Мэй, Ирвин Ялом, Карл Роджерс) и логотерапию Виктора Франкла.</p>
       <p>Я не стремлюсь директивно направлять вас к конкретным ответам, а создаю пространство для глубокого самоисследования. Терапия для меня — это не лечение, а тонкая и бережная настройка внутренних процессов, помогающая вам услышать себя.</p>
 
-      <p><strong>В своей работе я объединяю:</strong></p>
+      <p style="text-align: center;"><strong>В своей работе я объединяю:</strong></p>
 
-      <ul>
+      <ul class="work-approach-list">
         <li><strong>Экзистенциальный подход</strong> — глубокий диалог о жизни, смерти, свободе, ответственности, личных значениях.</li>
         <li><strong>Телесную терапию</strong> — для восстановления связи с телом, снятия напряжения и стресса.</li>
         <li><strong>Арт-терапию</strong> — творчество как инструмент понимания эмоций и переживаний, которые сложно выразить словами.</li>
@@ -445,11 +459,11 @@
         <img src="photo2.jpg" alt="photo2" />
         <img src="photo5.jpg" alt="photo5" />
         <img src="photo3.jpg" alt="photo3" />
-        <img src="photo6.jpg" alt="photo6" />
+        <img src="photo9.jpg" alt="photo9" />
         <img src="photo4.jpg" alt="photo4" />
         <img src="photo7.jpg" alt="photo7" />
-        <img src="photo9.jpg" alt="photo9" />
         <img src="photo8.jpg" alt="photo8" />
+        <img src="photo6.jpg" alt="photo6" />
       </div>
 
       <h3><strong>Как проходит работа?</strong></h3>
