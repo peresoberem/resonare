@@ -118,6 +118,7 @@
 
     .photo-collage {
       display: grid;
+      grid-template-columns: repeat(3, 1fr);
       grid-template-areas:
         "photo1 photo2 photo5"
         "photo3 photo9 photo6"
@@ -138,11 +139,18 @@
     .photo-collage img:nth-child(2) { grid-area: photo2; }
     .photo-collage img:nth-child(3) { grid-area: photo5; }
     .photo-collage img:nth-child(4) { grid-area: photo3; }
-    .photo-collage img:nth-child(5) { grid-area: photo6; }
+    .photo-collage img:nth-child(5) { 
+      grid-area: photo9; 
+      transform: scale(1.1); 
+      z-index: 2; 
+    }
     .photo-collage img:nth-child(6) { grid-area: photo4; }
-    .photo-collage img:nth-child(7) { grid-area: photo7; }
+    .photo-collage img:nth-child(7) { 
+      grid-area: photo7; 
+      transform: scale(0.95);
+    }
     .photo-collage img:nth-child(8) { grid-area: photo8; }
-    .photo-collage img:nth-child(9) { grid-area: photo9; transform: scale(1.05); z-index: 1; }
+    .photo-collage img:nth-child(9) { grid-area: photo6; }
 
     .overlay {
         display: none;
@@ -234,9 +242,9 @@
       list-style-position: inside;
     }
 
-    /* Увеличение отступа после последнего раздела */
+    /* Уменьшение отступа после последнего раздела */
     .subtitle:last-of-type {
-      margin-bottom: 100px;
+      margin-bottom: 40px;
     }
 
     /* Увеличение отступа после белого блока */
@@ -329,7 +337,7 @@
       
       .image-row img {
         width: 30%;
-        height: 180px;
+        height: 207px; /* Увеличено на 15% с изначальных 180px */
         object-fit: cover;
       }
       
@@ -360,11 +368,7 @@
           "photo3 photo9 photo6"
           "photo4 photo7 photo8";
         max-width: 100%;
-      }
-      
-      .photo-collage img:nth-child(9) {
-        transform: scale(1.05);
-        z-index: 1;
+        gap: 3px;
       }
     }
   </style>
