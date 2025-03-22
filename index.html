@@ -176,6 +176,43 @@
                 position: relative;
             }
             .contact-icons {
+                position: fixed;
+                bottom: 90px;
+                left: auto;
+                right: 20px;
+                transform: none;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .contact-icons.show img:nth-child(1) {
+                animation: icon-in-vertical 0.3s ease forwards 0.15s;
+            }
+            .contact-icons.show img:nth-child(2) {
+                animation: icon-in-vertical 0.3s ease forwards 0.3s;
+            }
+            @keyframes icon-in-vertical {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+            .container {
+                margin-top: 0;
+            }
+            h1 {
+                font-size: 3.8rem;
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
+            .footer-contact {
+                position: relative;
+            }
+            .contact-icons {
                 flex-direction: column;
                 gap: 10px;
                 bottom: 100%;
