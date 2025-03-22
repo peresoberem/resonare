@@ -74,16 +74,19 @@
 
 
         .contact-icon {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
+            display: block; /* 👈 Делает каждую ссылку блочным элементом, они встают друг под другом */
+            min-width: 120px; /* 👈 Достаточная ширина для читаемости */
             padding: 10px 15px;
             background-color: white;
             color: black;
+            text-decoration: none;
+            font-size: 1rem;
             border: 1px solid white;
             font-family: 'InterTight', sans-serif;
             transition: background-color 0.3s;
-        }
+            text-align: center;
+}
+
         .contact-icon:hover {
             background-color: #ccc;
         }
