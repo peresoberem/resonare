@@ -125,58 +125,38 @@
 
     /* Обновленный коллаж с асимметричной версткой */
     .photo-collage {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(4, auto);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
       gap: 6px;
-      max-width: 700px;
-      margin: 30px auto;
+      max-width: 1000px;
+      margin: 40px auto;
     }
 
     .photo-collage img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      max-width: 100%;
+      object-fit: unset; /* важно! не кадрировать */
     }
 
-    /* Расположение фотографий в асимметричном коллаже */
-    .photo-collage img:nth-child(1) { 
-      grid-column: 1 / 2; 
-      grid-row: 1 / 2; 
+    .photo-collage img:nth-child(9) {
+      width: 360px; /* центр, крупнее всех */
+      z-index: 2;
     }
-    .photo-collage img:nth-child(2) { 
-      grid-column: 2 / 3; 
-      grid-row: 1 / 2; 
+
+    .photo-collage img:nth-child(7) {
+      width: 180px; /* самая маленькая */
     }
-    .photo-collage img:nth-child(3) { 
-      grid-column: 3 / 5; 
-      grid-row: 1 / 3; 
-    }
-    .photo-collage img:nth-child(4) { 
-      grid-column: 1 / 2; 
-      grid-row: 2 / 4; 
-    }
-    .photo-collage img:nth-child(5) { 
-      grid-column: 2 / 3; 
-      grid-row: 2 / 4; 
-      transform: scale(1.05); 
-      z-index: 2; 
-    }
-    .photo-collage img:nth-child(6) { 
-      grid-column: 3 / 4; 
-      grid-row: 3 / 4; 
-    }
-    .photo-collage img:nth-child(7) { 
-      grid-column: 4 / 5; 
-      grid-row: 3 / 5; 
-    }
-    .photo-collage img:nth-child(8) { 
-      grid-column: 1 / 3; 
-      grid-row: 4 / 5; 
-    }
-    .photo-collage img:nth-child(9) { 
-      grid-column: 3 / 4; 
-      grid-row: 4 / 5; 
+
+    .photo-collage img:nth-child(1),
+    .photo-collage img:nth-child(2),
+    .photo-collage img:nth-child(3),
+    .photo-collage img:nth-child(4),
+    .photo-collage img:nth-child(5),
+    .photo-collage img:nth-child(6),
+    .photo-collage img:nth-child(8) {
+      width: 220px; /* остальные — средний размер */
     }
 
     .overlay {
@@ -391,50 +371,36 @@
       
       /* Адаптивный асимметричный коллаж для мобильной версии */
       .photo-collage {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(5, auto);
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 4px;
         max-width: 100%;
       }
-      
-      /* Расположение фотографий в мобильном асимметричном коллаже */
-      .photo-collage img:nth-child(1) { 
-        grid-column: 1 / 2; 
-        grid-row: 1 / 2; 
+
+      .photo-collage img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        object-fit: unset; /* оригинальные пропорции */
       }
-      .photo-collage img:nth-child(2) { 
-        grid-column: 2 / 3; 
-        grid-row: 1 / 2; 
+
+      .photo-collage img:nth-child(9) {
+        width: 90%; /* крупная, центр экрана */
+        z-index: 2;
       }
-      .photo-collage img:nth-child(3) { 
-        grid-column: 3 / 4; 
-        grid-row: 1 / 3; 
+
+      .photo-collage img:nth-child(7) {
+       width: 35%; /* маленькая */
       }
-      .photo-collage img:nth-child(4) { 
-        grid-column: 1 / 2; 
-        grid-row: 2 / 4; 
-      }
-      .photo-collage img:nth-child(5) { 
-        grid-column: 2 / 3; 
-        grid-row: 2 / 3; 
-        transform: scale(1.05); 
-        z-index: 2; 
-      }
-      .photo-collage img:nth-child(6) { 
-        grid-column: 2 / 3; 
-        grid-row: 3 / 4; 
-      }
-      .photo-collage img:nth-child(7) { 
-        grid-column: 3 / 4; 
-        grid-row: 3 / 5; 
-      }
-      .photo-collage img:nth-child(8) { 
-        grid-column: 1 / 3; 
-        grid-row: 4 / 5; 
-      }
-      .photo-collage img:nth-child(9) { 
-        grid-column: 1 / 4; 
-        grid-row: 5 / 6; 
+
+     .photo-collage img:nth-child(1),
+      .photo-collage img:nth-child(2),
+      .photo-collage img:nth-child(3),
+      .photo-collage img:nth-child(4),
+      .photo-collage img:nth-child(5),
+      .photo-collage img:nth-child(6),
+      .photo-collage img:nth-child(8) {
+        width: 48%;
       }
     }
   </style>
