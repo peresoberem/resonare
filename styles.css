@@ -19,6 +19,40 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'InterTight';
+    src: url('fonts/InterTight-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'InterTight';
+    src: url('fonts/InterTight-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'InterTight';
+    src: url('fonts/InterTight-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'InterTight';
+    src: url('fonts/InterTight-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'InterTight';
+    src: url('fonts/InterTight-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
 /* Применяем шрифт ко всему сайту */
 body {
     font-family: 'InterTight', sans-serif;
@@ -31,6 +65,10 @@ h1 {
 
 h2 {
     font-weight: 500; /* Medium */
+}
+
+ul li {
+    font-weight: 200; /* ExtraLight */
 }
 
 footer a {
@@ -54,7 +92,7 @@ footer a {
         padding: 0 10px; /* небольшой отступ, чтобы текст не прижимался к краям */
     }
 
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
     h1 {
         font-size: 5rem !important;
         white-space: normal !important; /* разрешаем перенос, это самое важное */
