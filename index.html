@@ -158,30 +158,20 @@
         }
 
         @media (max-width: 768px) {
-            html, body {
-                height: 100dvh;
-                overflow-y: hidden;
-                justify-content: flex-start;
-                padding-top: 0;
-            }
-            .container {
-                margin-top: 0;
-            }
-            h1 {
-                font-size: 3.8rem;
-                margin-top: 10px;
-                margin-bottom: 30px;
-            }
             .footer-contact {
                 position: relative;
             }
             .contact-icons {
-                position: fixed;          /* фиксируем относительно экрана, не футера */
-                bottom: 90px;             /* чётко над словом КОНТАКТЫ */
-                left: 50%;                /* по центру экрана */
-                transform: translateX(120px); /* двигаем вправо над КОНТАКТАМИ */
+                position: absolute;          /* фиксируем относительно экрана, не футера */
+                bottom: 100%;             /* чётко над словом КОНТАКТЫ */
+                right: 0;                /* по центру экрана */
+                transform: translateY(-10px); /* двигаем вправо над КОНТАКТАМИ */
                 flex-direction: column;   /* одна иконка над другой */
-                gap: 10px;
+                gap: 8px;
+            }
+            .contact-icons img {
+                width: 36px;
+                height: 36px;
             }
             .contact-icons.show img:nth-child(1) {
                 animation: icon-in-vertical 0.3s ease forwards 0.15s;
