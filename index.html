@@ -109,12 +109,13 @@
         .contact-icons {
             opacity: 0;
             pointer-events: none;
-            position: absolute;
-            left: calc(100% + 20px);
-            top: 50%;
-            transform: translateY(-50%) translateX(10px);
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            gap: 10px;
             background-color: transparent;
             padding: 0;
             border: none;
@@ -124,26 +125,35 @@
         .contact-icons.show {
             opacity: 1;
             pointer-events: auto;
-            transform: translateY(-50%) translateX(0);
         }
         .contact-icons.hide {
             opacity: 0;
             pointer-events: none;
-            transform: translateY(-50%) translateX(10px);
         }
         .contact-icons img {
             width: 36px;
             height: 36px;
             cursor: pointer;
             opacity: 0;
-            transform: translateX(10px);
+            transform: translateY(10px);
             animation: none;
         }
         .contact-icons.show img:nth-child(1) {
-            animation: icon-in 0.4s ease forwards 0.15s;
+            animation: icon-in-vertical 0.3s ease forwards 0.15s;
         }
         .contact-icons.show img:nth-child(2) {
-            animation: icon-in 0.4s ease forwards 0.3s;
+            animation: icon-in-vertical 0.3s ease forwards 0.3s;
+        }
+
+        @keyframes icon-in-vertical {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes icon-in {
@@ -157,47 +167,20 @@
             }
         }
 
-        @media (max-width: 768px) {
-            html, body {
-                height: 100dvh;
-                overflow-y: hidden;
-                justify-content: flex-start;
-                padding-top: 0;
-            }
-            .container {
-                margin-top: 0;
-            }
-            h1 {
-                font-size: 3.8rem;
-                margin-top: 10px;
-                margin-bottom: 30px;
-            }
-            .footer-contact {
-                position: relative;
-            }
+        @media (min-width: 769px) {
             .contact-icons {
-                flex-direction: column;
-                gap: 10px;
-                bottom: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                margin-bottom: 55px;
+                position: absolute;
+                left: calc(100% + 20px);
+                top: 50%;
+                transform: translateY(-50%) translateX(10px);
+                flex-direction: row;
+                gap: 20px;
             }
-            .contact-icons.show img:nth-child(1) {
-                animation: icon-in-vertical 0.3s ease forwards 0.15s;
+            .contact-icons.show {
+                transform: translateY(-50%) translateX(0);
             }
-            .contact-icons.show img:nth-child(2) {
-                animation: icon-in-vertical 0.3s ease forwards 0.3s;
-            }
-            @keyframes icon-in-vertical {
-                from {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            .contact-icons.hide {
+                transform: translateY(-50%) translateX(10px);
             }
         }
     </style>
@@ -254,15 +237,16 @@
         <a href="price.html">ЦЕНЫ</a>
         <div class="footer-contact">
             <a href="#" onclick="toggleContacts(event)">КОНТАКТЫ</a>
-            <div id="contact-icons" class="contact-icons hide">
-                <a href="https://t.me/resonareart" target="_blank">
-                    <img src="telegram.png" alt="Telegram">
-                </a>
-                <a href="mailto:anyapavlenk@gmail.com">
-                    <img src="gmail.png" alt="Gmail">
-                </a>
-            </div>
         </div>
     </footer>
+
+    <div id="contact-icons" class="contact-icons hide">
+        <a href="https://t.me/resonareart" target="_blank">
+            <img src="telegram.png" alt="Telegram">
+        </a>
+        <a href="mailto:anyapavlenk@gmail.com">
+            <img src="gmail.png" alt="Gmail">
+        </a>
+    </div>
 </body>
 </html>
