@@ -109,13 +109,13 @@
         .contact-icons {
             opacity: 0;
             pointer-events: none;
-            position: fixed;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: absolute;
+            top: 50%;
+            left: calc(100% + 20px);
+            transform: translateY(-50%) translateX(10px);
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex-direction: row;
+            gap: 20px;
             background-color: transparent;
             padding: 0;
             border: none;
@@ -125,35 +125,26 @@
         .contact-icons.show {
             opacity: 1;
             pointer-events: auto;
+            transform: translateY(-50%) translateX(0);
         }
         .contact-icons.hide {
             opacity: 0;
             pointer-events: none;
+            transform: translateY(-50%) translateX(10px);
         }
         .contact-icons img {
             width: 36px;
             height: 36px;
             cursor: pointer;
             opacity: 0;
-            transform: translateY(10px);
+            transform: translateX(10px);
             animation: none;
         }
         .contact-icons.show img:nth-child(1) {
-            animation: icon-in-vertical 0.3s ease forwards 0.15s;
+            animation: icon-in 0.4s ease forwards 0.15s;
         }
         .contact-icons.show img:nth-child(2) {
-            animation: icon-in-vertical 0.3s ease forwards 0.3s;
-        }
-
-        @keyframes icon-in-vertical {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            animation: icon-in 0.4s ease forwards 0.3s;
         }
 
         @keyframes icon-in {
@@ -167,20 +158,30 @@
             }
         }
 
-        @media (min-width: 769px) {
+        @media (max-width: 768px) {
             .contact-icons {
-                position: absolute;
-                left: calc(100% + 20px);
-                top: 50%;
-                transform: translateY(-50%) translateX(10px);
-                flex-direction: row;
-                gap: 20px;
+                position: fixed;
+                bottom: 90px;
+                left: 82%;
+                transform: translateX(-50%);
+                flex-direction: column;
+                gap: 10px;
             }
-            .contact-icons.show {
-                transform: translateY(-50%) translateX(0);
+            .contact-icons.show img:nth-child(1) {
+                animation: icon-in-vertical 0.3s ease forwards 0.15s;
             }
-            .contact-icons.hide {
-                transform: translateY(-50%) translateX(10px);
+            .contact-icons.show img:nth-child(2) {
+                animation: icon-in-vertical 0.3s ease forwards 0.3s;
+            }
+            @keyframes icon-in-vertical {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
         }
     </style>
@@ -237,16 +238,15 @@
         <a href="price.html">ЦЕНЫ</a>
         <div class="footer-contact">
             <a href="#" onclick="toggleContacts(event)">КОНТАКТЫ</a>
+            <div id="contact-icons" class="contact-icons hide">
+                <a href="https://t.me/resonareart" target="_blank">
+                    <img src="telegram.png" alt="Telegram">
+                </a>
+                <a href="mailto:anyapavlenk@gmail.com">
+                    <img src="gmail.png" alt="Gmail">
+                </a>
+            </div>
         </div>
     </footer>
-
-    <div id="contact-icons" class="contact-icons hide">
-        <a href="https://t.me/resonareart" target="_blank">
-            <img src="telegram.png" alt="Telegram">
-        </a>
-        <a href="mailto:anyapavlenk@gmail.com">
-            <img src="gmail.png" alt="Gmail">
-        </a>
-    </div>
 </body>
 </html>
