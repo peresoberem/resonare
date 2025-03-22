@@ -110,11 +110,10 @@
             opacity: 0;
             pointer-events: none;
             position: absolute;
-            top: 50%;
             left: calc(100% + 20px);
+            top: 50%;
             transform: translateY(-50%) translateX(10px);
             display: flex;
-            flex-direction: row;
             gap: 20px;
             background-color: transparent;
             padding: 0;
@@ -159,13 +158,30 @@
         }
 
         @media (max-width: 768px) {
+            html, body {
+                height: 100dvh;
+                overflow-y: hidden;
+                justify-content: flex-start;
+                padding-top: 0;
+            }
+            .container {
+                margin-top: 0;
+            }
+            h1 {
+                font-size: 3.8rem;
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
+            .footer-contact {
+                position: relative;
+            }
             .contact-icons {
-                position: fixed;
-                bottom: 90px;
-                left: 82%;
-                transform: translateX(-50%);
                 flex-direction: column;
                 gap: 10px;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-bottom: 55px;
             }
             .contact-icons.show img:nth-child(1) {
                 animation: icon-in-vertical 0.3s ease forwards 0.15s;
