@@ -57,51 +57,46 @@
             font-family: 'InterTight', sans-serif;
         }
         .contact-wrapper {
-    position: relative;
-    display: inline-block;
-}
-
-.contact-options {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    margin-left: 20px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    z-index: 10;
-}
-
-.contact-icon {
-    display: inline-block;
-    width: 100px;
-    padding: 6px 10px;
-    background-color: white;
-    color: black;
-    text-decoration: none;
-    font-size: 0.9rem;
-    border: 1px solid white;
-    font-family: 'InterTight', sans-serif;
-    text-align: center;
-    white-space: nowrap;
-}
-
-
-
+            position: relative;
+            display: inline-block;
+        }
+        .contact-options {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            z-index: 10;
+        }
+        .contact-icon {
+            display: inline-block;
+            width: 100px;
+            padding: 6px 10px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid white;
+            font-family: 'InterTight', sans-serif;
+            text-align: center;
+            white-space: nowrap;
+        }
         .contact-icon:hover {
             background-color: #ccc;
         }
     </style>
     <script>
         function toggleContacts() {
-    const options = document.getElementById('contact-options');
-    if (options.style.display === 'flex') {
-        options.style.display = 'none';
-    } else {
-        options.style.display = 'flex';
-    }
-}
+            const options = document.getElementById('contact-options');
+            if (options.style.display === 'flex') {
+                options.style.display = 'none';
+            } else {
+                options.style.display = 'flex';
+            }
+        }
     </script>
 </head>
 <body>
