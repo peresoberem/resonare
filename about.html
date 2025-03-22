@@ -136,27 +136,35 @@
 
     .photo-collage img {
       height: auto;
-      max-width: 100%;
-      object-fit: unset; /* важно! не кадрировать */
+      object-fit: unset;
     }
 
+/* Центральное фото (№9) — самое крупное */
     .photo-collage img:nth-child(9) {
-      width: 360px; /* центр, крупнее всех */
-      z-index: 2;
+      width: 340px;
+      z-index: 3;
+      margin: 12px;
     }
 
+/* Самая маленькая (№7) */
     .photo-collage img:nth-child(7) {
-      width: 180px; /* самая маленькая */
+      width: 180px;
+      z-index: 1;
     }
 
+/* Вертикальные фото (1–4) — чуть уже, не громоздкие */
     .photo-collage img:nth-child(1),
     .photo-collage img:nth-child(2),
     .photo-collage img:nth-child(3),
-    .photo-collage img:nth-child(4),
+    .photo-collage img:nth-child(4) {
+      width: 200px;
+    }
+
+/* Горизонтальные — околоцентровые, нейтральные */
     .photo-collage img:nth-child(5),
     .photo-collage img:nth-child(6),
     .photo-collage img:nth-child(8) {
-      width: 220px; /* остальные — средний размер */
+      width: 240px;
     }
 
     .overlay {
@@ -371,36 +379,36 @@
       
       /* Адаптивный асимметричный коллаж для мобильной версии */
       .photo-collage {
-        flex-wrap: wrap;
-        justify-content: center;
+       display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
         gap: 4px;
         max-width: 100%;
       }
 
       .photo-collage img {
-        width: auto;
-        max-width: 100%;
+        width: 100%;
         height: auto;
-        object-fit: unset; /* оригинальные пропорции */
+        object-fit: unset;
       }
 
       .photo-collage img:nth-child(9) {
-        width: 90%; /* крупная, центр экрана */
-        z-index: 2;
+        grid-column: span 2;
+       width: 100%;
+       max-width: 100%;
+        z-index: 3;
       }
 
       .photo-collage img:nth-child(7) {
-       width: 35%; /* маленькая */
+        width: 90%;
       }
 
-     .photo-collage img:nth-child(1),
+  /* Вертикалки чуть ужаты по ширине, чтобы не казались громоздкими */
+      .photo-collage img:nth-child(1),
       .photo-collage img:nth-child(2),
       .photo-collage img:nth-child(3),
-      .photo-collage img:nth-child(4),
-      .photo-collage img:nth-child(5),
-      .photo-collage img:nth-child(6),
-      .photo-collage img:nth-child(8) {
-        width: 48%;
+      .photo-collage img:nth-child(4) {
+        max-width: 80%;
       }
     }
   </style>
