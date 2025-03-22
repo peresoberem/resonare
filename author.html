@@ -74,18 +74,19 @@
 
 
         .contact-icon {
-            display: block; /* 👈 Делает каждую ссылку блочным элементом, они встают друг под другом */
-            min-width: 120px; /* 👈 Достаточная ширина для читаемости */
-            padding: 10px 15px;
+            display: block;
+            width: 120px; /* 👈 Сделаем кнопки меньше, чем основная */
+            padding: 6px 10px;
             background-color: white;
             color: black;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
             border: 1px solid white;
             font-family: 'InterTight', sans-serif;
             transition: background-color 0.3s;
             text-align: center;
-}
+        }
+
 
         .contact-icon:hover {
             background-color: #ccc;
@@ -115,9 +116,9 @@
         <div class="contact-wrapper">
             <button class="contact-button" onclick="toggleContacts()">Связаться со мной</button>
             <div id="contact-options" class="contact-options">
-              <a href="https://t.me/resonareart" target="_blank" class="contact-icon">Telegram</a>
-              <a href="mailto:anyapavlenk@gmail.com" class="contact-icon">Email</a>
-            </div>
+                <a href="https://t.me/resonareart" target="_blank" class="contact-icon">Telegram</a>
+                <a href="mailto:anyapavlenk@gmail.com" class="contact-icon">Email</a>
+              </div>              
           </div>          
     </div>
 </body>
