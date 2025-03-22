@@ -46,6 +46,19 @@
         .about-text p {
             margin-bottom: 1.5em;
         }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 3;
+        }
+        .overlay.active {
+            display: block;
+        }
         footer {
             position: fixed;
             bottom: 20px;
@@ -62,6 +75,7 @@
             font-weight: bold;
             transition: color 0.3s;
             font-family: 'InterTight', sans-serif;
+            position: static;
         }
         footer a:hover {
             color: #888;
@@ -209,6 +223,7 @@
     </script>
 </head>
 <body>
+    <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
     <a href="index.html">← Назад</a>
     <img src="moi.jpg" alt="Анна Павленко" class="profile-pic">
     <div class="about-text">
@@ -221,23 +236,22 @@
         <p>Сегодня я дипломированный психолог-сексолог, прошедший также программу профессиональной подготовки по направлению "Экзистенциальный подход в психотерапии". Продолжаю регулярно повышать свою квалификацию и прохожу супервизии у высококвалифицированных врачей-психотерапевтов. Я сопровождаю своих клиентов не только как профессионал, но и как человек, который на личном опыте знает, насколько важны бережность и уважение к индивидуальному пути каждого.</p>
 
         <p>Мои ключевые ценности это искренность, ответственность, глубина и уязвимость. Если вы хотите лучше понять себя, найти внутренние опоры или пройти через сложные жизненные моменты с поддержкой – я буду рада встретиться с вами.</p>
-          </div>
-          <footer>
-            <a href="about.html">О ПРОЕКТЕ</a>
-            <a href="author.html">ОБО МНЕ</a>
-            <a href="price.html">ЦЕНЫ</a>
-            <div class="footer-contact">
-              <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
-              <div id="contact-icons" class="contact-icons hide">
+    </div>
+    <footer>
+        <a href="about.html">О ПРОЕКТЕ</a>
+        <a href="author.html">ОБО МНЕ</a>
+        <a href="price.html">ЦЕНЫ</a>
+        <div class="footer-contact">
+            <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
+            <div id="contact-icons" class="contact-icons hide">
                 <a href="https://t.me/resonareart" target="_blank">
-                  <img src="telegram.png" alt="Telegram">
+                    <img src="telegram.png" alt="Telegram">
                 </a>
                 <a href="mailto:anyapavlenk@gmail.com">
-                  <img src="gmail.png" alt="Gmail">
+                    <img src="gmail.png" alt="Gmail">
                 </a>
-              </div>
             </div>
-          </footer>
-        </body>
-        </html>
-                            
+        </div>
+    </footer>
+</body>
+</html>
