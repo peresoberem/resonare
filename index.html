@@ -31,9 +31,7 @@
             overflow-x: hidden;
         }
         .overlay {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -43,8 +41,7 @@
             z-index: 3;
         }
         .overlay.active {
-            opacity: 1;
-            pointer-events: auto;
+            display: block;
         }
         .container {
             max-width: 90%;
@@ -110,26 +107,19 @@
             opacity: 0;
             pointer-events: none;
             position: absolute;
-            left: calc(100% + 20px);
-            top: 50%;
-            transform: translateY(-50%) translateX(10px);
             display: flex;
-            gap: 20px;
             background-color: transparent;
             padding: 0;
             border: none;
             z-index: 6;
-            transition: opacity 0.6s ease, transform 0.6s ease;
         }
         .contact-icons.show {
-            opacity: 1;
+            animation: fly-in 0.6s ease forwards;
             pointer-events: auto;
-            transform: translateY(-50%) translateX(0);
         }
         .contact-icons.hide {
-            opacity: 0;
+            animation: fly-out 0.4s ease forwards;
             pointer-events: none;
-            transform: translateY(-50%) translateX(10px);
         }
         .contact-icons img {
             width: 36px;
@@ -140,10 +130,10 @@
             animation: none;
         }
         .contact-icons.show img:nth-child(1) {
-            animation: icon-in 0.4s ease forwards 0.15s;
+            animation: icon-in 0.3s ease forwards 0.15s;
         }
         .contact-icons.show img:nth-child(2) {
-            animation: icon-in 0.4s ease forwards 0.3s;
+            animation: icon-in 0.3s ease forwards 0.3s;
         }
 
         @keyframes icon-in {
@@ -154,6 +144,28 @@
             to {
                 opacity: 1;
                 transform: translateX(0);
+            }
+        }
+
+        @keyframes fly-in {
+            from {
+                opacity: 0;
+                transform: translateY(-50%) translateX(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
+        }
+
+        @keyframes fly-out {
+            from {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-50%) translateX(10px);
             }
         }
 
@@ -203,8 +215,7 @@
     </style>
     <script>
         let contactVisible = false;
-        function toggleContacts(event) {
-            event.stopPropagation();
+        function toggleContacts() {
             const icons = document.getElementById('contact-icons');
             const overlay = document.getElementById('overlay');
             if (contactVisible) {
@@ -218,25 +229,9 @@
             }
             contactVisible = !contactVisible;
         }
-
         function closeOverlay() {
-            if (contactVisible) {
-                const icons = document.getElementById('contact-icons');
-                const overlay = document.getElementById('overlay');
-                icons.classList.remove('show');
-                icons.classList.add('hide');
-                overlay.classList.remove('active');
-                contactVisible = false;
-            }
+            if (contactVisible) toggleContacts();
         }
-
-        document.addEventListener('click', function (event) {
-            const icons = document.getElementById('contact-icons');
-            const footerContact = document.querySelector('.footer-contact');
-            if (contactVisible && !footerContact.contains(event.target)) {
-                closeOverlay();
-            }
-        });
     </script>
 </head>
 <body>
@@ -253,7 +248,7 @@
         <a href="author.html">ОБО МНЕ</a>
         <a href="price.html">ЦЕНЫ</a>
         <div class="footer-contact">
-            <a href="#" onclick="toggleContacts(event)">КОНТАКТЫ</a>
+            <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
             <div id="contact-icons" class="contact-icons hide">
                 <a href="https://t.me/resonareart" target="_blank">
                     <img src="telegram.png" alt="Telegram">
