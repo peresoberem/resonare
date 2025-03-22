@@ -60,11 +60,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
         .contact-options {
             display: none;
-            margin-top: 10px;
+            position: absolute;
+            top: -110px;
             flex-direction: column;
+            align-items: center;
             gap: 10px;
         }
         .contact-icon {
@@ -85,17 +88,13 @@
     <script>
         function toggleContacts() {
             const options = document.getElementById('contact-options');
-            if (options.style.display === 'none' || options.style.display === '') {
-                options.style.display = 'flex';
-            } else {
-                options.style.display = 'none';
-            }
+            options.style.display = options.style.display === 'flex' ? 'none' : 'flex';
         }
     </script>
 </head>
 <body>
     <a href="index.html">← Назад</a>
-    <img src="your-photo.jpg" alt="Анна Павленко" class="profile-pic">
+    <img src="moi.jpg" alt="Анна Павленко" class="profile-pic">
     <div class="about-text">
         <p>Привет, я Анна Павленко, психолог и автор проекта <strong>Resonare</strong>. Я работаю в мультимодальном подходе, сочетая экзистенциальную терапию, работу с телом, звуком и арт-практики. Предпочитаю научно доказанные и проверенные методы, основанные на принципах нейробиологии.</p>
 
