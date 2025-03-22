@@ -56,14 +56,17 @@
             font-size: 1rem;
             font-family: 'InterTight', sans-serif;
         }
-        .contact-options {
-            display: none;
-            margin-top: 15px;
+        .contact-wrapper {
+            display: flex;
             flex-direction: column;
             align-items: center;
+        }
+        .contact-options {
+            display: none;
+            margin-top: 10px;
+            flex-direction: column;
             gap: 10px;
         }
-
         .contact-icon {
             color: white;
             text-decoration: none;
@@ -81,18 +84,18 @@
     </style>
     <script>
         function toggleContacts() {
-        const options = document.getElementById('contact-options');
-    if (options.style.display === 'flex') {
-        options.style.display = 'none';
-    } else {
-        options.style.display = 'flex';
+            const options = document.getElementById('contact-options');
+            if (options.style.display === 'none' || options.style.display === '') {
+                options.style.display = 'flex';
+            } else {
+                options.style.display = 'none';
             }
         }
     </script>
 </head>
 <body>
     <a href="index.html">← Назад</a>
-    <img src="moi.jpg" alt="Анна Павленко" class="profile-pic">
+    <img src="your-photo.jpg" alt="Анна Павленко" class="profile-pic">
     <div class="about-text">
         <p>Привет, я Анна Павленко, психолог и автор проекта <strong>Resonare</strong>. Я работаю в мультимодальном подходе, сочетая экзистенциальную терапию, работу с телом, звуком и арт-практики. Предпочитаю научно доказанные и проверенные методы, основанные на принципах нейробиологии.</p>
 
@@ -104,10 +107,12 @@
 
         <p>Если вы хотите лучше понять себя, найти внутренние опоры или пройти через сложные жизненные моменты с поддержкой – я буду рада встретиться с вами.</p>
 
-        <button class="contact-button" onclick="toggleContacts()">Связаться со мной</button>
-        <div id="contact-options" class="contact-options">
-            <a href="https://t.me/resonareart" target="_blank" class="contact-icon">Telegram</a>
-            <a href="mailto:anyapavlenk@gmail.com" class="contact-icon">Email</a>
+        <div class="contact-wrapper">
+            <button class="contact-button" onclick="toggleContacts()">Связаться со мной</button>
+            <div id="contact-options" class="contact-options">
+                <a href="https://t.me/resonareart" target="_blank" class="contact-icon">Telegram</a>
+                <a href="mailto:anyapavlenk@gmail.com" class="contact-icon">Email</a>
+            </div>
         </div>
     </div>
 </body>
