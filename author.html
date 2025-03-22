@@ -57,22 +57,19 @@
             font-family: 'InterTight', sans-serif;
         }
         .contact-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             position: relative;
+            display: inline-block;
         }
+
         .contact-options {
             display: none;
             position: absolute;
-            top: 100%;
-            left: 0;
-            margin-left: 120px;
-            margin-top: -10px;
+            top: 0;
+            left: 100%;
+            margin-left: 20px;
             flex-direction: column;
-            align-items: flex-start;
             gap: 10px;
-            z-index: 1000;
+            z-index: 10;
         }
 
 
@@ -115,10 +112,10 @@
         <div class="contact-wrapper">
             <button class="contact-button" onclick="toggleContacts()">Связаться со мной</button>
             <div id="contact-options" class="contact-options">
-                <a href="https://t.me/resonareart" target="_blank" class="contact-icon">Telegram</a>
-                <a href="mailto:anyapavlenk@gmail.com" class="contact-icon">Email</a>
+              <a href="https://t.me/resonareart" target="_blank" class="contact-icon">Telegram</a>
+              <a href="mailto:anyapavlenk@gmail.com" class="contact-icon">Email</a>
             </div>
-        </div>
+          </div>          
     </div>
 </body>
 </html>
