@@ -49,7 +49,7 @@
         }
         h1 {
             font-size: 8rem;
-            margin-bottom: 40px;
+            margin-bottom: 40px; 
             padding: 0;
             background: none;
             color: white;
@@ -60,12 +60,12 @@
 
         .eye-img {
             width: 250px;
-            margin-bottom: 65px;
+            margin-bottom: 65px; 
         }
 
         h2 {
             font-size: 2rem;
-            margin-bottom: 60px;
+            margin-bottom: 60px; 
             color: white;
             background: none;
             text-align: center;
@@ -168,7 +168,6 @@
                 transform: translateY(-50%) translateX(10px);
             }
         }
-
         @media (min-width: 769px) {
             .contact-icons {
                 gap: 15px; /* Уменьшаем расстояние между иконками */
@@ -177,7 +176,7 @@
                 transform: translateY(-50%) translateX(15px); /* немного правее от контактов */
             }
         }
-
+        
         @media (max-width: 768px) {
             html, body {
                 height: 100dvh;
@@ -244,6 +243,29 @@
     </script>
 </head>
 <body>
-   <!-- HTML без изменений -->
+    <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
+    <div class="container">
+        <h1>resonare</h1>
+        <img class="eye-img" src="eye.png" alt="Eye">
+        <h2>Психологический проект Анны Павленко</h2>
+        <p class="subtext">экзистенциальный подход, арт-терапия, телесные практики и музыкальные техники в рамках EMDR — на основе принципов нейробиологии</p>
+    </div>
+
+    <footer>
+        <a href="about.html">О ПРОЕКТЕ</a>
+        <a href="author.html">ОБО МНЕ</a>
+        <a href="price.html">ЦЕНЫ</a>
+        <div class="footer-contact">
+            <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
+            <div id="contact-icons" class="contact-icons hide">
+                <a href="https://t.me/resonareart" target="_blank">
+                    <img src="telegram.png" alt="Telegram">
+                </a>
+                <a href="mailto:anyapavlenk@gmail.com">
+                    <img src="gmail.png" alt="Gmail">
+                </a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
