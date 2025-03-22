@@ -154,6 +154,45 @@
                 transform: translateY(-50%) translateX(10px);
             }
         }
+
+        @media (max-width: 768px) {
+            body {
+                justify-content: flex-start;
+                padding-top: 20px;
+            }
+            .container {
+                margin-top: 0;
+            }
+            h1 {
+                font-size: 4rem;
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
+            .contact-icons {
+                top: auto;
+                bottom: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: column;
+                gap: 8px;
+            }
+            .contact-icons.show img:nth-child(1) {
+                animation: icon-in-vertical 0.3s ease forwards 0.15s;
+            }
+            .contact-icons.show img:nth-child(2) {
+                animation: icon-in-vertical 0.3s ease forwards 0.3s;
+            }
+            @keyframes icon-in-vertical {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
     </style>
     <script>
         let contactVisible = false;
