@@ -125,28 +125,78 @@
 
     /* Обновленный коллаж с асимметричной версткой */
     .photo-collage {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: repeat(6, auto);
+      grid-template-rows: repeat(5, auto);
       gap: 6px;
-      max-width: 1000px;
+      justify-content: center;
       margin: 40px auto;
     }
 
+/* Универсально: не кадрировать, сохранить пропорции */
     .photo-collage img {
+      width: auto;
       height: auto;
       max-width: 100%;
-      object-fit: unset; /* важно! не кадрировать */
+      object-fit: unset;
     }
 
+/* Центр коллажа — фото 9 */
     .photo-collage img:nth-child(9) {
-      width: 360px; /* центр, крупнее всех */
-      z-index: 2;
+      grid-column: 3 / span 2;
+      grid-row: 2 / span 2;
+      z-index: 3;
+      width: 320px;
+    }
+
+/* Вокруг центра: остальные фото */
+    .photo-collage img:nth-child(1) {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+      width: 200px;
+    }
+
+    .photo-collage img:nth-child(2) {
+      grid-column: 4 / 5;
+      grid-row: 1 / 2;
+      width: 200px;
+    }
+
+    .photo-collage img:nth-child(3) {
+      grid-column: 5 / 6;
+      grid-row: 2 / 3;
+      width: 220px;
+    }
+
+    .photo-collage img:nth-child(4) {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+      width: 200px;
+    }
+
+    .photo-collage img:nth-child(5) {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+      width: 220px;
+    }
+
+    .photo-collage img:nth-child(6) {
+      grid-column: 5 / 6;
+      grid-row: 3 / 4;
+      width: 220px;
     }
 
     .photo-collage img:nth-child(7) {
-      width: 180px; /* самая маленькая */
+      grid-column: 3 / 4;
+      grid-row: 4 / 5;
+      width: 160px;
+      z-index: 1;
+    }
+
+    .photo-collage img:nth-child(8) {
+     grid-column: 4 / 5;
+      grid-row: 4 / 5;
+      width: 200px;
     }
 
     .photo-collage img:nth-child(1),
@@ -368,41 +418,54 @@
         display: inline-block;
         text-align: left;
       }
-      
-      /* Адаптивный асимметричный коллаж для мобильной версии */
+
       .photo-collage {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 4px;
-        max-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+       gap: 4px;
+        justify-items: center;
+        margin: 30px auto;
       }
 
       .photo-collage img {
-        width: auto;
-        max-width: 100%;
+        width: 100%;
         height: auto;
-        object-fit: unset; /* оригинальные пропорции */
-      }
+        object-fit: unset;
+     }
 
+  /* Центральное фото (№9) – в верхней части, во всю ширину (2 колонки) */
       .photo-collage img:nth-child(9) {
-        width: 90%; /* крупная, центр экрана */
+        grid-column: 1 / 4;
+        width: 100%;
         z-index: 2;
       }
 
-      .photo-collage img:nth-child(7) {
-       width: 35%; /* маленькая */
+      .photo-collage img:nth-child(5) {
+        grid-column: 1 / 2;
+        width: 100%;
       }
 
-     .photo-collage img:nth-child(1),
+      .photo-collage img:nth-child(7) {
+        grid-column: 1 / 2;
+        width: 100%;
+      }
+
+      .photo-collage img:nth-child(3) {
+        grid-column: 3 / 4;
+        grid-row: 2 / span 2;
+        width: 100%;
+      }
+
+  /* Остальные фото — ниже, равномерно */
+      .photo-collage img:nth-child(1),
       .photo-collage img:nth-child(2),
-      .photo-collage img:nth-child(3),
       .photo-collage img:nth-child(4),
-      .photo-collage img:nth-child(5),
       .photo-collage img:nth-child(6),
       .photo-collage img:nth-child(8) {
-        width: 48%;
+        width: 100%;
       }
     }
+
   </style>
   <script>
     let contactVisible = false;
