@@ -419,9 +419,16 @@
       
       /* Адаптивный асимметричный коллаж для мобильной версии */
       .photo-collage {
-        grid-template-columns: repeat(3, auto);
-        gap: 4px;
-      }
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* по 3 в ряд */
+    gap: 4px;
+  }
+
+  .photo-collage img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
     }
   </style>
   <script>
@@ -513,16 +520,22 @@
       </ul>
 
       <div class="photo-collage">
-        <img src="photo1.jpg" alt="photo1" />
-        <img src="photo2.jpg" alt="photo2" />
-        <img src="photo3.jpg" alt="photo3" />
-        <img src="photo9.jpg" alt="photo9" />
-        <img src="photo4.jpg" alt="photo4" />
-        <img src="photo7.jpg" alt="photo7" />
-        <img src="photo8.jpg" alt="photo8" />
-        <img src="photo6.jpg" alt="photo6" />
-        <img src="photo5.jpg" alt="photo5" />
+        <!-- 1 РЯД -->
+        <img src="photo1.jpg" alt="photo1" /> <!-- вертикальная -->
+        <img src="photo5.jpg" alt="photo5" /> <!-- горизонтальная -->
+        <img src="photo2.jpg" alt="photo2" /> <!-- вертикальная -->
+      
+        <!-- 2 РЯД -->
+        <img src="photo6.jpg" alt="photo6" /> <!-- горизонтальная -->
+        <img src="photo3.jpg" alt="photo3" /> <!-- вертикальная -->
+        <img src="photo8.jpg" alt="photo8" /> <!-- горизонтальная -->
+        <img src="photo9.jpg" alt="photo9" /> <!-- вертикальная -->
+      
+        <!-- 3 РЯД -->
+        <img src="photo7.jpg" alt="photo7" /> <!-- горизонтальная -->
+        <img src="photo4.jpg" alt="photo4" /> <!-- вертикальная -->
       </div>
+      
       
 
       <p>RESONARE — это не просто красивое слово. Это метафора того, как мы можем заново услышать себя, отозваться на то, что нас трогает или волнует, звучать глубже и искреннее. Это не просто терапия — это процесс переосмысления, пересборки себя, возврата к своей истинной внутренней гармонии.</p>
