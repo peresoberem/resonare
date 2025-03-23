@@ -47,18 +47,42 @@
             color: #888;
         }
         img {
-            max-width: 35%;
+            max-width: 40%;
             height: auto;
-            border-radius: 0px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            margin-bottom: 30px;
+            margin-top: 60px;
+            margin-bottom: 40px;
         }
+
+        @media (max-width: 768px) {
+        img {
+            max-width: 70%;
+            margin-top: 80px;
+            margin-bottom: 50px;
+            }
+        }
+
         .text-block {
             margin-top: 30px;
             max-width: 600px;
             line-height: 1.6;
             font-size: 1.1rem;
         }
+
+        h3 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        .work-description {
+            margin-top: 20px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-weight: 200; /* Extra Light */
+            font-family: 'InterTight', sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+
         .overlay {
             display: none;
             position: fixed;
@@ -244,13 +268,13 @@
 
     <img src="ind.jpg" alt="ind">
 
-    <h3><strong>Как проходит работа?</strong></h3>
-    <ul>
-        <p>Наши встречи могут проходить индивидуально, в парах или в группе <br> 
-        Мы встречаемся в пространстве RESONARE в Тбилиси (Ваке) или онлайн <br>
+   <h3><strong>Как проходит работа?</strong></h3>
+    <p class="work-description">
+        Наши встречи могут проходить индивидуально, в парах или в группе<br>
+        Мы встречаемся в пространстве RESONARE в Тбилиси (Ваке) или онлайн<br>
         Каждая встреча индивидуальна и адаптирована под ваш конкретный запрос, а также текущее эмоциональное и физическое состояние<br>
-        LGBT+ friendly</p>
-    </ul>
+        LGBT+ friendly
+    </p>
 
     <div class="text-block">
         индивидуальная сессия 55 минут — 50$<br>
