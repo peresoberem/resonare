@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>formats.html</title>
+    <title>resonare.art - Цены</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        @font-face {
+            font-family: 'InterTight';
+            src: local('InterTight'), url('InterTight.ttf') format('ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background-color: black;
             color: white;
@@ -19,6 +30,8 @@
             text-align: center;
             padding: 40px 20px;
             box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
         }
         a {
             color: white;
@@ -148,17 +161,17 @@
         }
         @media (min-width: 769px) {
             .contact-icons {
-                gap: 8px; /* Уменьшаем расстояние между иконками */
+                gap: 8px;
                 left: calc(100% + 20px);
                 top: 50%;
-                transform: translateY(-50%)
+                transform: translateY(-50%);
             }
         }
 
         @media (max-width: 768px) {
             html, body {
                 height: 100dvh;
-                overflow-y: hidden;
+                overflow-y: auto;
                 justify-content: flex-start;
                 padding-top: 0;
             }
@@ -166,9 +179,8 @@
                 margin-top: 40px;
             }
             .image-container {
-                margin-top: 60px; /* или сколько тебе нужно, попробуй 60–80px */
+                margin-top: 60px;
             }  
-
             h1 {
                 font-size: 3.8rem;
                 margin-top: 10px;
@@ -203,36 +215,36 @@
             }
         }
     </style>
-     <script>
+    <script>
         let contactVisible = false;
         function toggleContacts() {
-          const icons = document.getElementById('contact-icons');
-          const overlay = document.getElementById('overlay');
-          if (contactVisible) {
-            icons.classList.remove('show');
-            icons.classList.add('hide');
-            overlay.classList.remove('active');
-          } else {
-            icons.classList.remove('hide');
-            icons.classList.add('show');
-            overlay.classList.add('active');
-          }
-          contactVisible = !contactVisible;
+            const icons = document.getElementById('contact-icons');
+            const overlay = document.getElementById('overlay');
+            if (contactVisible) {
+                icons.classList.remove('show');
+                icons.classList.add('hide');
+                overlay.classList.remove('active');
+            } else {
+                icons.classList.remove('hide');
+                icons.classList.add('show');
+                overlay.classList.add('active');
+            }
+            contactVisible = !contactVisible;
         }
         function closeOverlay() {
-          if (contactVisible) toggleContacts();
+            if (contactVisible) toggleContacts();
         }
-      </script>
-    </head>
-    <body>
-      <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
-      <a href="index.html">← Назад</a>
+    </script>
+</head>
+<body>
+    <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
+    <a href="index.html">← Назад</a>
 
     <img src="ind.jpg" alt="ind">
 
     <h3><strong>Как проходит работа?</strong></h3>
     <ul>
-      <p>Наши встречи могут проходить индивидуально, в парах или в группе <br> 
+        <p>Наши встречи могут проходить индивидуально, в парах или в группе <br> 
         Мы встречаемся в пространстве RESONARE в Тбилиси (Ваке) или онлайн <br>
         Каждая встреча индивидуальна и адаптирована под ваш конкретный запрос, а также текущее эмоциональное и физическое состояние<br>
         LGBT+ friendly</p>
@@ -242,23 +254,24 @@
         индивидуальная сессия 55 минут — 50$<br>
         парная сессия 80 минут — 70$<br>
         групповая сессия 120 минут — 20$<br>
-        встречи киноклуба 100–150 минут — donation based (любая купюра)</p>
+        встречи киноклуба 100–150 минут — donation based (любая купюра)
     </div>
+
     <footer>
         <a href="about.html">О ПРОЕКТЕ</a>
         <a href="author.html">ОБО МНЕ</a>
         <a href="price.html">ЦЕНЫ</a>
         <div class="footer-contact">
-          <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
-          <div id="contact-icons" class="contact-icons hide">
-            <a href="https://t.me/resonareart" target="_blank">
-              <img src="telegram.png" alt="Telegram">
-            </a>
-            <a href="mailto:anyapavlenk@gmail.com">
-              <img src="gmail.png" alt="Gmail">
-            </a>
-          </div>
+            <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
+            <div id="contact-icons" class="contact-icons hide">
+                <a href="https://t.me/resonareart" target="_blank">
+                    <img src="telegram.png" alt="Telegram">
+                </a>
+                <a href="mailto:anyapavlenk@gmail.com">
+                    <img src="gmail.png" alt="Gmail">
+                </a>
+            </div>
         </div>
-      </footer>
+    </footer>
 </body>
 </html>
