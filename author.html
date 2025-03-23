@@ -47,188 +47,208 @@
             margin-bottom: 1.5em;
         }
         .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 3;
-        }
-        .overlay.active {
-            display: block;
-        }
-        footer {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            z-index: 5;
-        }
-        footer a {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: color 0.3s;
-            font-family: 'InterTight', sans-serif;
-            position: static;
-        }
-        footer a:hover {
-            color: #888;
-        }
-        .footer-contact {
-            position: relative;
-        }
-        .contact-icons {
-            opacity: 0;
-            pointer-events: none;
-            position: absolute;
-            display: flex;
-            background-color: transparent;
-            padding: 0;
-            border: none;
-            z-index: 6;
-        }
-        .contact-icons.show {
-            animation: fly-in 0.6s ease forwards;
-            pointer-events: auto;
-        }
-        .contact-icons.hide {
-            animation: fly-out 0.4s ease forwards;
-            pointer-events: none;
-        }
-        .contact-icons img {
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateX(10px);
-            animation: none;
-        }
-        .contact-icons.show img:nth-child(1) {
-            animation: icon-in 0.3s ease forwards 0.15s;
-        }
-        .contact-icons.show img:nth-child(2) {
-            animation: icon-in 0.3s ease forwards 0.3s;
-        }
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 3;
+    }
+    .overlay.active {
+        display: block;
+    }
 
-        @keyframes icon-in {
-            from {
-                opacity: 0;
-                transform: translateX(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+    footer {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.1); /* светлая подложка */
+      backdrop-filter: blur(10px);
+      padding: 10px 0;
+    }
+    
+    footer a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+      font-family: 'InterTight', sans-serif;
+      position: static;
+    }
+    
+    footer a:hover {
+      color: #888;
+    }
+    
+    .footer-contact {
+      position: relative;
+    }
+    
+    .contact-icons {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      display: flex;
+      background-color: transparent;
+      padding: 0;
+      border: none;
+      z-index: 6;
+    }
+    
+    .contact-icons.show {
+      animation: fly-in 0.6s ease forwards;
+      pointer-events: auto;
+    }
+    
+    .contact-icons.hide {
+      animation: fly-out 0.4s ease forwards;
+      pointer-events: none;
+    }
+    
+    .contact-icons img {
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateX(10px);
+      animation: none;
+    }
+    
+    .contact-icons.show img:nth-child(1) {
+      animation: icon-in 0.3s ease forwards 0.15s;
+    }
+    
+    .contact-icons.show img:nth-child(2) {
+      animation: icon-in 0.3s ease forwards 0.3s;
+    }
 
-        @keyframes fly-in {
-            from {
-                opacity: 0;
-                transform: translateY(-50%) translateX(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(-50%) translateX(0);
-            }
-        }
+    /* Центрирование списка "В своей работе я объединяю" */
+    .work-approach-list {
+      text-align: center;
+      padding-left: 0;
+      list-style-position: inside;
+    }
 
-        @keyframes fly-out {
-            from {
-                opacity: 1;
-                transform: translateY(-50%) translateX(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-50%) translateX(10px);
-            }
-        }
-        @media (min-width: 769px) {
-            .contact-icons {
-                gap: 8px; /* Уменьшаем расстояние между иконками */
-                left: calc(100% + 20px);
-                top: 50%;
-                transform: translateY(-50%)
-            }
-        }
+    /* Уменьшение отступа после последнего раздела */
+    .subtitle:last-of-type {
+      margin-bottom: 40px;
+    }
 
-        @media (max-width: 768px) {
-            html, body {
-                height: 100dvh;
-                overflow-y: hidden;
-                justify-content: flex-start;
-                padding-top: 0;
-            }
-            .container {
-                margin-top: 40px;
-            }
-            .image-container {
-                margin-top: 60px; /* или сколько тебе нужно, попробуй 60–80px */
-            }
-            h1 {
-                font-size: 3.8rem;
-                margin-top: 10px;
-                margin-bottom: 30px;
-            }
-            .footer-contact {
-                position: relative;
-            }
-            .contact-icons {
-                flex-direction: column;
-                gap: 10px;
-                bottom: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                margin-bottom: 10px;
-            }
-            .contact-icons.show img:nth-child(1) {
-                animation: icon-in-vertical 0.3s ease forwards 0.15s;
-            }
-            .contact-icons.show img:nth-child(2) {
-                animation: icon-in-vertical 0.3s ease forwards 0.3s;
-            }
-            @keyframes icon-in-vertical {
-                from {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
+    /* Увеличение отступа после белого блока */
+    .wide-section.white-section + .subtitle {
+      margin-top: 60px;
+    }
+
+    @keyframes icon-in {
+      from {
+        opacity: 0;
+        transform: translateX(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fly-in {
+      from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+    }
+
+    @keyframes fly-out {
+      from {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-50%) translateX(10px);
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .contact-icons {
+        gap: 8px;
+        left: calc(100% + 20px);
+        top: 50%;
+        transform: translateY(-50%)
+      }
+    }
+
+    @media (max-width: 768px) {
+      .footer-contact {
+        position: relative;
+      }
+    }
+      
+      
+      .contact-icons {
+        flex-direction: column;
+        gap: 10px;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 10px;
+      }
+      
+      .contact-icons.show img:nth-child(1) {
+        animation: icon-in-vertical 0.3s ease forwards 0.15s;
+      }
+      
+      .contact-icons.show img:nth-child(2) {
+        animation: icon-in-vertical 0.3s ease forwards 0.3s;
+      }
+      
+      @keyframes icon-in-vertical {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
     <script>
-        let contactVisible = false;
-        function toggleContacts() {
-            const icons = document.getElementById('contact-icons');
-            const overlay = document.getElementById('overlay');
-            if (contactVisible) {
-                icons.classList.remove('show');
-                icons.classList.add('hide');
-                overlay.classList.remove('active');
-            } else {
-                icons.classList.remove('hide');
-                icons.classList.add('show');
-                overlay.classList.add('active');
-            }
-            contactVisible = !contactVisible;
-        }
-        function closeOverlay() {
-            if (contactVisible) toggleContacts();
-        }
-    </script>
+    let contactVisible = false;
+    function toggleContacts() {
+      const icons = document.getElementById('contact-icons');
+      const overlay = document.getElementById('overlay');
+      if (contactVisible) {
+        icons.classList.remove('show');
+        icons.classList.add('hide');
+        overlay.classList.remove('active');
+      } else {
+        icons.classList.remove('hide');
+        icons.classList.add('show');
+        overlay.classList.add('active');
+      }
+      contactVisible = !contactVisible;
+    }
+    function closeOverlay() {
+      if (contactVisible) toggleContacts();
+    }
+  </script>
 </head>
 <body>
-    <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
-    <a href="index.html">← Назад</a>
-    <img src="moi.jpg" alt="Анна Павленко" class="profile-pic">
+  <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
+  <a href="index.html">← Назад</a>
+
+    <img src="anna.jpg" alt="Анна" class="profile-pic">
     <div class="about-text">
         <p>Привет, я Анна Павленко, психолог и автор проекта <strong>Resonare</strong>. Я работаю в мультимодальном подходе, сочетая экзистенциальную терапию, работу с телом, звуком и арт-практики. Предпочитаю научно доказанные и проверенные методы, основанные на принципах нейробиологии.</p>
 
@@ -241,20 +261,20 @@
         <p>Мои ключевые ценности это искренность, ответственность, аутентичность, глубина и уязвимость. Если вы хотите лучше понять себя, найти внутренние опоры или пройти через сложные жизненные моменты с поддержкой – я буду рада встретиться с вами.</p>
     </div>
     <footer>
-        <a href="about.html">О ПРОЕКТЕ</a>
-        <a href="author.html">ОБО МНЕ</a>
-        <a href="price.html">ЦЕНЫ</a>
-        <div class="footer-contact">
-            <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
-            <div id="contact-icons" class="contact-icons hide">
-                <a href="https://t.me/resonareart" target="_blank">
-                    <img src="telegram.png" alt="Telegram">
-                </a>
-                <a href="mailto:anyapavlenk@gmail.com">
-                    <img src="gmail.png" alt="Gmail">
-                </a>
-            </div>
+      <a href="about.html">О ПРОЕКТЕ</a>
+      <a href="author.html">ОБО МНЕ</a>
+      <a href="price.html">ЦЕНЫ</a>
+      <div class="footer-contact">
+        <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
+        <div id="contact-icons" class="contact-icons hide">
+          <a href="https://t.me/resonareart" target="_blank">
+            <img src="telegram.png" alt="Telegram">
+          </a>
+          <a href="mailto:anyapavlenk@gmail.com">
+            <img src="gmail.png" alt="Gmail">
+          </a>
         </div>
+      </div>
     </footer>
 </body>
 </html>
