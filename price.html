@@ -88,17 +88,9 @@
             background: rgba(0, 0, 0, 0.6);
             z-index: 3;
         }
-        
+
         .overlay.active {
             display: block;
-        }
-
-        @media (max-width: 768px) {
-        img {
-            max-width: 80%;
-            margin-top: 70px;
-            margin-bottom: 30px;
-            }
         }
 
         .text-block {
@@ -259,6 +251,46 @@
                     transform: translateY(0);
                 }
             }
+
+            /* Исправления для мобильной версии */
+            .image-row {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+      
+            .image-row img {
+                width: 30%;
+                height: 207px; /* Увеличено на 15% с изначальных 180px */
+                object-fit: cover;
+            }
+      
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+      
+            .container {
+                width: 100%;
+                padding: 0;
+            }
+      
+            .wide-section.white-section {
+                padding: 40px 20px;
+                box-sizing: border-box;
+                text-align: center;
+            }
+      
+            .wide-section.white-section ul {
+                display: inline-block;
+                text-align: left;
+            }
+
+            .photo-collage {
+                width: 95%;
+                gap: 4px;
+        }
         }
 
         
