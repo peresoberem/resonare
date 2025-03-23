@@ -47,8 +47,25 @@
         }
         .about-text p {
             margin-bottom: 1.5em;
-          
         }
+
+    /* Центрирование списка "В своей работе я объединяю" */
+        .work-approach-list {
+          text-align: center;
+          padding-left: 0;
+          list-style-position: inside;
+        }
+
+    /* Уменьшение отступа после последнего раздела */
+        .subtitle:last-of-type {
+          margin-bottom: 40px;
+        }
+
+    /* Увеличение отступа после белого блока */
+        .wide-section.white-section + .subtitle {
+          margin-top: 60px;
+        }
+          
         .overlay {
         display: none;
         position: fixed;
@@ -127,26 +144,9 @@
     .contact-icons.show img:nth-child(1) {
       animation: icon-in 0.3s ease forwards 0.15s;
     }
-    
+
     .contact-icons.show img:nth-child(2) {
       animation: icon-in 0.3s ease forwards 0.3s;
-    }
-
-    /* Центрирование списка "В своей работе я объединяю" */
-    .work-approach-list {
-      text-align: center;
-      padding-left: 0;
-      list-style-position: inside;
-    }
-
-    /* Уменьшение отступа после последнего раздела */
-    .subtitle:last-of-type {
-      margin-bottom: 40px;
-    }
-
-    /* Увеличение отступа после белого блока */
-    .wide-section.white-section + .subtitle {
-      margin-top: 60px;
     }
 
     @keyframes icon-in {
@@ -196,8 +196,6 @@
         position: relative;
       }
     }
-      
-      
       .contact-icons {
         flex-direction: column;
         gap: 10px;
@@ -263,6 +261,7 @@
 
         <p>Мои ключевые ценности это искренность, ответственность, аутентичность, глубина и уязвимость. Если вы хотите лучше понять себя, найти внутренние опоры или пройти через сложные жизненные моменты с поддержкой – я буду рада встретиться с вами.</p>
     </div>
+    
     <footer>
       <a href="about.html">О ПРОЕКТЕ</a>
       <a href="author.html">ОБО МНЕ</a>
