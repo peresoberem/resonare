@@ -34,24 +34,7 @@
             position: relative;
             overflow-x: hidden;
         }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 3;
-        }
-        .overlay.active {
-            display: block;
-        }
 
-        .container {
-            max-width: 90%;
-            z-index: 2;
-        }
         a {
             color: white;
             text-decoration: none;
@@ -64,11 +47,50 @@
         a:hover {
             color: #888;
         }
-        img {
+
+        .container {
+            margin-top: 40px;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .image-row img {
+            height: 380px; /* Увеличено еще на 5px с 375px */
+            object-fit: cover;
+        }
+
+        #ind {
             max-width: 40%;
             height: auto;
             margin-top: 60px;
             margin-bottom: 30px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 3;
+        }
+        
+        .overlay.active {
+            display: block;
         }
 
         @media (max-width: 768px) {
@@ -115,7 +137,7 @@
             backdrop-filter: blur(10px);
             padding: 10px 0;
             }
-            
+
         footer a {
             color: white;
             text-decoration: none;
@@ -206,26 +228,10 @@
         }
 
         @media (max-width: 768px) {
-            html, body {
-                height: 100dvh;
-                overflow-y: auto;
-                justify-content: flex-start;
-                padding-top: 0;
-            }
-            .container {
-                margin-top: 40px;
-            }
-            .image-container {
-                margin-top: 60px;
-            }  
-            h1 {
-                font-size: 3.8rem;
-                margin-top: 10px;
-                margin-bottom: 30px;
-            }
             .footer-contact {
                 position: relative;
             }
+
             .contact-icons {
                 flex-direction: column;
                 gap: 10px;
@@ -234,12 +240,15 @@
                 transform: translateX(-50%);
                 margin-bottom: 10px;
             }
+
             .contact-icons.show img:nth-child(1) {
                 animation: icon-in-vertical 0.3s ease forwards 0.15s;
             }
+
             .contact-icons.show img:nth-child(2) {
                 animation: icon-in-vertical 0.3s ease forwards 0.3s;
             }
+
             @keyframes icon-in-vertical {
                 from {
                     opacity: 0;
@@ -251,6 +260,8 @@
                 }
             }
         }
+
+        
     </style>
      <script>
         let contactVisible = false;
@@ -277,7 +288,7 @@
     <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
     <a href="index.html">← На главную</a>
 
-    <img src="ind.jpg" alt="ind">
+    <img id="ind" src="ind.jpg" alt="ind">
 
    <h3>Как проходит работа?</h3>
     <p class="work-description">
