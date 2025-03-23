@@ -34,6 +34,24 @@
             position: relative;
             overflow-x: hidden;
         }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 3;
+        }
+        .overlay.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 90%;
+            z-index: 2;
+        }
         a {
             color: white;
             text-decoration: none;
@@ -84,21 +102,7 @@
             font-family: 'InterTight', sans-serif;
             letter-spacing: 0.3px;
         }
-
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 3;
-        }
-        .overlay.active {
-            display: block;
-        }
+        
         footer {
             position: fixed;
             bottom: 20px;
@@ -244,7 +248,7 @@
             }
         }
     </style>
-    <script>
+     <script>
         let contactVisible = false;
         function toggleContacts() {
             const icons = document.getElementById('contact-icons');
@@ -267,7 +271,7 @@
 </head>
 <body>
     <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
-    <a href="index.html">← Назад</a>
+    <a href="index.html">← На главную</a>
 
     <img src="ind.jpg" alt="ind">
 
