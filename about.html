@@ -189,22 +189,9 @@
       order: 9;
     }
 
-/* Адаптивность для мобильных устройств */
-    @media (max-width: 768px) {
-      .photo-collage {
-        width: 95%;
-        gap: 4px;
-      }
-  
-  /* Центральная фото №9 */
-      .photo-collage img:nth-child(9) {
-        width: 180px;
-      }
-  
-  /* Остальные фото чуть меньше для мобильной версии */
-      .photo-collage img:not(:nth-child(9)) {
-        width: 120px;
-      }
+    .photo-collage img:nth-child(10) {
+      width: 185px;
+      order: 10;
     }
 
     .overlay {
@@ -416,19 +403,11 @@
         display: inline-block;
         text-align: left;
       }
-      
-      /* Адаптивный асимметричный коллаж для мобильной версии */
-      .photo-collage {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* по 3 в ряд */
-    gap: 4px;
-  }
 
-  .photo-collage img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
+      .photo-collage {
+        width: 95%;
+        gap: 4px;
+      }
     }
   </style>
   <script>
@@ -534,6 +513,7 @@
         <!-- 3 РЯД -->
         <img src="photo7.jpg" alt="photo7" /> <!-- горизонтальная -->
         <img src="photo4.jpg" alt="photo4" /> <!-- вертикальная -->
+        <img src="photo10.jpg" alt="photo10" /> 
       </div>
       
       
