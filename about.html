@@ -125,38 +125,73 @@
 
     /* Обновленный коллаж с асимметричной версткой */
     .photo-collage {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: repeat(3, auto);
       gap: 6px;
-      max-width: 1000px;
-      margin: 40px auto;
+      width: fit-content;
+      margin: 30px auto;
+      justify-content: center;
     }
 
     .photo-collage img {
-      height: auto;
-      max-width: 100%;
-      object-fit: unset; /* важно! не кадрировать */
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
     }
 
+/* Центральная фотография */
     .photo-collage img:nth-child(9) {
-      width: 360px; /* центр, крупнее всех */
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      transform: scale(1.1);
       z-index: 2;
     }
 
-    .photo-collage img:nth-child(7) {
-      width: 180px; /* самая маленькая */
+/* Вверху */
+    .photo-collage img:nth-child(1) {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
     }
 
-    .photo-collage img:nth-child(1),
-    .photo-collage img:nth-child(2),
-    .photo-collage img:nth-child(3),
-    .photo-collage img:nth-child(4),
-    .photo-collage img:nth-child(5),
-    .photo-collage img:nth-child(6),
+    .photo-collage img:nth-child(2) {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .photo-collage img:nth-child(3) {
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+
+/* По бокам */
+    .photo-collage img:nth-child(4) {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+
+    .photo-collage img:nth-child(5) {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+    }
+
+/* Внизу */
+    .photo-collage img:nth-child(6) {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
+
     .photo-collage img:nth-child(8) {
-      width: 220px; /* остальные — средний размер */
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+
+/* Фото 7 (крупная) уменьшаем */
+    .photo-collage img:nth-child(7) {
+      grid-column: 3 / 4;
+      grid-row: 3 / 4;
+      max-width: 100%;
+      transform: scale(0.9);
     }
 
     .overlay {
@@ -371,36 +406,8 @@
       
       /* Адаптивный асимметричный коллаж для мобильной версии */
       .photo-collage {
-        flex-wrap: wrap;
-        justify-content: center;
+        grid-template-columns: repeat(3, auto);
         gap: 4px;
-        max-width: 100%;
-      }
-
-      .photo-collage img {
-        width: auto;
-        max-width: 100%;
-        height: auto;
-        object-fit: unset; /* оригинальные пропорции */
-      }
-
-      .photo-collage img:nth-child(9) {
-        width: 90%; /* крупная, центр экрана */
-        z-index: 2;
-      }
-
-      .photo-collage img:nth-child(7) {
-       width: 35%; /* маленькая */
-      }
-
-     .photo-collage img:nth-child(1),
-      .photo-collage img:nth-child(2),
-      .photo-collage img:nth-child(3),
-      .photo-collage img:nth-child(4),
-      .photo-collage img:nth-child(5),
-      .photo-collage img:nth-child(6),
-      .photo-collage img:nth-child(8) {
-        width: 48%;
       }
     }
   </style>
