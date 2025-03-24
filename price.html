@@ -58,18 +58,16 @@
             text-align: center;
             gap: 20px;
         }
-
         .image-row {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
 
-        .image-row img {
-            height: 380px; /* Увеличено еще на 5px с 375px */
-            object-fit: cover;
-        }
+    .image-row img {
+      height: 380px; /* Увеличено еще на 5px с 375px */
+      object-fit: cover;
 
         #ind {
             max-width: 40%;
@@ -218,8 +216,14 @@
                 transform: translateY(-50%);
             }
         }
-
         @media (max-width: 768px) {
+
+            img {
+             max-width: 80%;
+             margin-top: 70px;
+             margin-bottom: 30px;
+             } 
+
             .footer-contact {
                 position: relative;
             }
@@ -240,11 +244,6 @@
             .contact-icons.show img:nth-child(2) {
                 animation: icon-in-vertical 0.3s ease forwards 0.3s;
             }
-            img {
-             max-width: 80%;
-             margin-top: 70px;
-             margin-bottom: 30px;
-             }
 
             @keyframes icon-in-vertical {
                 from {
@@ -255,25 +254,6 @@
                     opacity: 1;
                     transform: translateY(0);
                 }
-            }
-
-            /* Исправления для мобильной версии */
-            .image-row {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-            }
-      
-            .image-row img {
-                width: 30%;
-                height: 207px; /* Увеличено на 15% с изначальных 180px */
-                object-fit: cover;
-            }
-      
-            .two-columns {
-                grid-template-columns: 1fr;
-                gap: 20px;
             }
       
             .container {
@@ -291,11 +271,6 @@
                 display: inline-block;
                 text-align: left;
             }
-
-            .photo-collage {
-                width: 95%;
-                gap: 4px;
-        }
         }
 
         
