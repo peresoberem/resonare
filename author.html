@@ -21,7 +21,7 @@
           text-align: center;
           position: relative;
         }
-        a {
+        a.back-link {
             color: white;
             text-decoration: none;
             font-size: 1.2rem;
@@ -30,7 +30,7 @@
             top: 20px;
             left: 20px;
         }
-        a:hover {
+        a.back-link:hover {
             color: #888;
         }
         .profile-pic {
@@ -38,7 +38,31 @@
             height: auto;
             margin-bottom: 30px;
         }
-          
+        .about-text {
+            max-width: 800px;
+            line-height: 1.6;
+            font-size: 1rem;
+            font-weight: 200;
+            font-style: italic;
+        }
+        .about-text p {
+            margin-bottom: 1.5em;
+        }
+        .external-links {
+            margin-top: 20px;
+            font-style: normal;
+        }
+        .external-links a {
+            display: block;
+            margin: 8px 0;
+            font-size: 1rem;
+            font-weight: 400;
+            color: white;
+            text-decoration: none;
+        }
+        .external-links a:hover {
+            color: #888;
+        }
         .overlay {
         display: none;
         position: fixed;
@@ -52,7 +76,6 @@
     .overlay.active {
         display: block;
     }
-
     footer {
       position: fixed;
       bottom: 20px;
@@ -61,11 +84,10 @@
       justify-content: center;
       gap: 30px;
       z-index: 5;
-      background: rgba(255, 255, 255, 0.1); /* светлая подложка */
+      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
       padding: 10px 0;
     }
-    
     footer a {
       color: white;
       text-decoration: none;
@@ -75,15 +97,12 @@
       font-family: 'InterTight', sans-serif;
       position: static;
     }
-    
     footer a:hover {
       color: #888;
     }
-    
     .footer-contact {
       position: relative;
     }
-    
     .contact-icons {
       opacity: 0;
       pointer-events: none;
@@ -94,17 +113,14 @@
       border: none;
       z-index: 6;
     }
-    
     .contact-icons.show {
       animation: fly-in 0.6s ease forwards;
       pointer-events: auto;
     }
-    
     .contact-icons.hide {
       animation: fly-out 0.4s ease forwards;
       pointer-events: none;
     }
-    
     .contact-icons img {
       width: 36px;
       height: 36px;
@@ -113,15 +129,12 @@
       transform: translateX(10px);
       animation: none;
     }
-    
     .contact-icons.show img:nth-child(1) {
       animation: icon-in 0.3s ease forwards 0.15s;
     }
-
     .contact-icons.show img:nth-child(2) {
       animation: icon-in 0.3s ease forwards 0.3s;
     }
-
     @keyframes icon-in {
       from {
         opacity: 0;
@@ -132,7 +145,6 @@
         transform: translateX(0);
       }
     }
-
     @keyframes fly-in {
       from {
         opacity: 0;
@@ -143,7 +155,6 @@
         transform: translateY(-50%) translateX(0);
       }
     }
-
     @keyframes fly-out {
       from {
         opacity: 1;
@@ -154,7 +165,6 @@
         transform: translateY(-50%) translateX(10px);
       }
     }
-    
     @media (min-width: 769px) {
       .contact-icons {
         gap: 8px;
@@ -163,12 +173,10 @@
         transform: translateY(-50%)
       }
     }
-
     @media (max-width: 768px) {
       .footer-contact {
         position: relative;
       }
-
       .contact-icons {
         flex-direction: column;
         gap: 10px;
@@ -178,25 +186,22 @@
         margin-bottom: 10px;
       }
     }
-      
-      .contact-icons.show img:nth-child(1) {
-        animation: icon-in-vertical 0.3s ease forwards 0.15s;
+    .contact-icons.show img:nth-child(1) {
+      animation: icon-in-vertical 0.3s ease forwards 0.15s;
+    }
+    .contact-icons.show img:nth-child(2) {
+      animation: icon-in-vertical 0.3s ease forwards 0.3s;
+    }
+    @keyframes icon-in-vertical {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
-      
-      .contact-icons.show img:nth-child(2) {
-        animation: icon-in-vertical 0.3s ease forwards 0.3s;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      
-      @keyframes icon-in-vertical {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+    }
     </style>
     <script>
     let contactVisible = false;
@@ -217,44 +222,45 @@
     function closeOverlay() {
       if (contactVisible) toggleContacts();
     }
-  </script>
+    </script>
 </head>
 <body>
   <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
-  <a href="index.html">← На главную</a>
+  <a href="index.html" class="back-link">← На главную</a>
 
-    <img src="anna.jpg" alt="Анна" class="profile-pic">
-    <div class="about-text">
-        <p>Привет, я Анна Павленко, психолог, член SEA (The Society for Existential Analysis, UK) и автор проекта <strong>Resonare</strong>. Я работаю в мультимодальном подходе, сочетая экзистенциальную терапию, работу с телом, звуком и арт-практики. Предпочитаю научно доказанные и проверенные методы, основанные на принципах нейробиологии.</p>
+  <img src="anna.jpg" alt="Анна" class="profile-pic">
+  <div class="about-text">
+    <p>Привет, я Анна Павленко, психолог, член SEA (The Society for Existential Analysis, UK) и автор проекта <strong>Resonare</strong>. Я работаю в мультимодальном подходе, сочетая экзистенциальную терапию, работу с телом, звуком и арт-практики. Предпочитаю научно доказанные и проверенные методы, основанные на принципах нейробиологии.</p>
 
-        <p>Мой путь в психологию начался задолго до того, как я получила профессиональное образование в этой сфере. В юности я сталкивалась с вопросами самоопределения, переживала сложные периоды, связанные с трудностями в семье, в социализации и с расстройством пищевого поведения. Это подтолкнуло меня к изучению принципов работы мозга и нервной системы, а также глубокому личному исследованию, которое привело в терапию, продлившуюся больше одиннадцати лет.</p>
+    <p>Мой путь в психологию начался задолго до того, как я получила профессиональное образование в этой сфере. В юности я сталкивалась с вопросами самоопределения, переживала сложные периоды, связанные с трудностями в семье, в социализации и с расстройством пищевого поведения. Это подтолкнуло меня к изучению принципов работы мозга и нервной системы, а также глубокому личному исследованию, которое привело в терапию, продлившуюся больше одиннадцати лет.</p>
 
-        <p>Параллельно с терапией я изучала холистический подход, принципы связи психики и тела, а также влияние музыки и искусства на внутреннее состояние. Практиковала массаж, нейромассаж и терапию звуком, функциональный тренинг и реабилитацию после травм. Позже мое увлечение психологией стало профессиональным путём: я прошла обучение в Международной школе Арт-терапии, Национальной академии психологического образования, Московском институте психоанализа. Обучалась семейной терапии, сексологии, экзистенциальной психологии, арт-терапии и телесным практикам, превратив собственный опыт в методику работы с людьми.</p>
+    <p>Параллельно с терапией я изучала холистический подход, принципы связи психики и тела, а также влияние музыки и искусства на внутреннее состояние. Практиковала массаж, нейромассаж и терапию звуком, функциональный тренинг и реабилитацию после травм. Позже мое увлечение психологией стало профессиональным путём: я прошла обучение в Международной школе Арт-терапии, Национальной академии психологического образования, Московском институте психоанализа. Обучалась семейной терапии, сексологии, экзистенциальной психологии, арт-терапии и телесным практикам, превратив собственный опыт в методику работы с людьми.</p>
 
-        <p>Сегодня я дипломированный психолог, продолжаю регулярно повышать свою квалификацию и прохожу супервизии у высококвалифицированных врачей-психотерапевтов. Я сопровождаю своих клиентов не только как профессионал, но и как человек, который на личном опыте знает, насколько важны бережность и уважение к индивидуальному пути каждого.</p>
+    <p>Сегодня я дипломированный психолог, продолжаю регулярно повышать свою квалификацию и прохожу супервизии у высококвалифицированных врачей-психотерапевтов. Я сопровождаю своих клиентов не только как профессионал, но и как человек, который на личном опыте знает, насколько важны бережность и уважение к индивидуальному пути каждого.</p>
 
-        <p>Мои ключевые ценности это искренность, ответственность, аутентичность, глубина и уязвимость. Если вы хотите лучше понять себя, найти внутренние опоры или пройти через сложные жизненные моменты с поддержкой – я буду рада встретиться с вами.</p>
-        <div class="external-links">
-          <a href='https://www.b17.ru/ann_p/?prt=1165829' target='_blank'>Моя анкета на сайте психологов B17.ru</a>
-          <a href='https://community.existentialanalysis.org.uk/user/resonare' target='_blank'>Моя анкета на SEA (The Society for Existential Analysis)</a>
-        </div>
+    <p>Мои ключевые ценности это искренность, ответственность, аутентичность, глубина и уязвимость. Если вы хотите лучше понять себя, найти внутренние опоры или пройти через сложные жизненные моменты с поддержкой – я буду рада встретиться с вами.</p>
+
+    <div class="external-links">
+      <a href='https://www.b17.ru/ann_p/?prt=1165829' target='_blank'>Моя анкета на сайте психологов B17.ru</a>
+      <a href='https://community.existentialanalysis.org.uk/user/resonare' target='_blank'>Моя анкета на SEA (The Society for Existential Analysis)</a>
     </div>
+  </div>
 
-    <footer>
-      <a href="about.html">О ПРОЕКТЕ</a>
-      <a href="author.html">ОБО МНЕ</a>
-      <a href="price.html">ЦЕНЫ</a>
-      <div class="footer-contact">
-        <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
-        <div id="contact-icons" class="contact-icons hide">
-          <a href="https://t.me/resonareart" target="_blank">
-            <img src="telegram.png" alt="Telegram">
-          </a>
-          <a href="mailto:anyapavlenk@gmail.com">
-            <img src="gmail.png" alt="Gmail">
-          </a>
-        </div>
+  <footer>
+    <a href="about.html">О ПРОЕКТЕ</a>
+    <a href="author.html">ОБО МНЕ</a>
+    <a href="price.html">ЦЕНЫ</a>
+    <div class="footer-contact">
+      <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
+      <div id="contact-icons" class="contact-icons hide">
+        <a href="https://t.me/resonareart" target="_blank">
+          <img src="telegram.png" alt="Telegram">
+        </a>
+        <a href="mailto:anyapavlenk@gmail.com">
+          <img src="gmail.png" alt="Gmail">
+        </a>
       </div>
-    </footer>
+    </div>
+  </footer>
 </body>
 </html>
