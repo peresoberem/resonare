@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анна Павленко | resonare | экзистенциальный психолог в Тбилиси и онлайн</title>
+    <meta name="description" content="Психолог, экзистенциальная терапия, телесная терапия, арт-терапия, терапия музыкой и звуком, аудиотерапия, индивидуальные и групповые сессии онлайн и в Тбилиси." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Resonare | Анна Павленко" />
+    <meta property="og:description" content="Экзистенциальный подход, арт-терапия, телесные практики и музыкальные (EMDR) техники. Онлайн и оффлайн-сессии в Тбилиси." />
+    <meta property="og:url" content="https://resonare.art" />
+    <meta property="og:image" content="https://resonare.art/eye.png" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+          background-color: black;
+          color: white;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          min-height: 100vh;
+          margin: 0;
+          padding: 60px 20px;
+          font-family: 'InterTight', sans-serif;
+          font-weight: 400; 
+          text-align: center;
+          position: relative;
+        }
+        a.back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        a.back-link:hover {
+            color: #888;
+        }
+        .profile-pic {
+            width: 320px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+        .about-text {
+            max-width: 800px;
+            line-height: 1.6;
+            font-size: 1rem;
+            font-weight: 200;
+            font-style: italic;
+        }
+        .about-text p {
+            margin-bottom: 1.5em;
+        }
+        .external-links {
+            margin-top: 20px;
+            font-style: normal;
+        }
+        .external-links a {
+            display: block;
+            margin: 8px 0;
+            font-size: 1rem;
+            font-weight: 400;
+            color: white;
+            text-decoration: none;
+        }
+        .external-links a:hover {
+            color: #888;
+        }
+        .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 3;
+    }
+    .overlay.active {
+        display: block;
+    }
+    footer {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 10px 0;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+      font-family: 'InterTight', sans-serif;
+      position: static;
+    }
+    footer a:hover {
+      color: #888;
+    }
+    .footer-contact {
+      position: relative;
+    }
+    .contact-icons {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      display: flex;
+      background-color: transparent;
+      padding: 0;
+      border: none;
+      z-index: 6;
+    }
+    .contact-icons.show {
+      animation: fly-in 0.6s ease forwards;
+      pointer-events: auto;
+    }
+    .contact-icons.hide {
+      animation: fly-out 0.4s ease forwards;
+      pointer-events: none;
+    }
+    .contact-icons img {
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateX(10px);
+      animation: none;
+    }
+    .contact-icons.show img:nth-child(1) {
+      animation: icon-in 0.3s ease forwards 0.15s;
+    }
+    .contact-icons.show img:nth-child(2) {
+      animation: icon-in 0.3s ease forwards 0.3s;
+    }
+    @keyframes icon-in {
+      from {
+        opacity: 0;
+        transform: translateX(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fly-in {
+      from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+    }
+    @keyframes fly-out {
+      from {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-50%) translateX(10px);
+      }
+    }
+    @media (min-width: 769px) {
+      .contact-icons {
+        gap: 8px;
+        left: calc(100% + 20px);
+        top: 50%;
+        transform: translateY(-50%)
+      }
+    }
+    @media (max-width: 768px) {
+      .footer-contact {
+        position: relative;
+      }
+      .contact-icons {
+        flex-direction: column;
+        gap: 10px;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 10px;
+      }
+    }
+    .contact-icons.show img:nth-child(1) {
+      animation: icon-in-vertical 0.3s ease forwards 0.15s;
+    }
+    .contact-icons.show img:nth-child(2) {
+      animation: icon-in-vertical 0.3s ease forwards 0.3s;
+    }
+    @keyframes icon-in-vertical {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    </style>
+    <script>
+    let contactVisible = false;
+    function toggleContacts() {
+      const icons = document.getElementById('contact-icons');
+      const overlay = document.getElementById('overlay');
+      if (contactVisible) {
+        icons.classList.remove('show');
+        icons.classList.add('hide');
+        overlay.classList.remove('active');
+      } else {
+        icons.classList.remove('hide');
+        icons.classList.add('show');
+        overlay.classList.add('active');
+      }
+      contactVisible = !contactVisible;
+    }
+    function closeOverlay() {
+      if (contactVisible) toggleContacts();
+    }
+    </script>
+</head>
+<body>
+    <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
+    <a href="index.html">← На главную</a>
+  
+    <div class="container">
+      <!-- Заголовок и вводная часть -->
+      <div class="title">Музыкальный тест настроения</div>
+      <div class="subtitle">
+        <p>Этот короткий тест подберёт музыку, резонирующую с твоим текущим состоянием. Ответь на несколько простых вопросов — и получи свой персональный плейлист.</p>
+      </div>
+  
+      <!-- Сам тест -->
+      <form id="musicTestForm">
+        <div class="subtitle">
+          <label for="color">Какой цвет ближе всего тебе сейчас?</label>
+          <select id="color" name="color">
+            <option value="blue">Серо-синий</option>
+            <option value="amber">Тёплый янтарный</option>
+            <option value="white">Белый и прозрачный</option>
+            <option value="purple">Фиолетовый</option>
+            <option value="black">Глубокий чёрный</option>
+            <option value="red">Красный, алый</option>
+          </select>
+        </div>
+  
+        <div class="subtitle">
+          <label for="body">Как тело ощущается изнутри?</label>
+          <select id="body" name="body">
+            <option value="fluid">Как в воде, мягко</option>
+            <option value="vibration">Лёгкая вибрация</option>
+            <option value="chest">Сжатие в груди</option>
+            <option value="pulse">Пульсация в животе</option>
+            <option value="weightless">Парение</option>
+          </select>
+        </div>
+  
+        <div class="subtitle">
+          <label for="space">Какое ощущение пространства вокруг?</label>
+          <select id="space" name="space">
+            <option value="empty">Прозрачность и пустота</option>
+            <option value="dense">Плотный воздух</option>
+            <option value="layered">Сложная структура, детали</option>
+            <option value="muffled">Приглушённость</option>
+          </select>
+        </div>
+  
+        <div class="subtitle">
+          <label for="weather">На улице сейчас скорее...</label>
+          <select id="weather" name="weather">
+            <option value="sun">Солнечно</option>
+            <option value="cloud">Пасмурно</option>
+            <option value="rain">Дождь</option>
+            <option value="night">Поздний вечер или ночь</option>
+          </select>
+        </div>
+  
+        <div class="subtitle">
+          <label for="intention">Что ты ищешь в музыке прямо сейчас?</label>
+          <select id="intention" name="intention">
+            <option value="reflection">Рефлексия</option>
+            <option value="focus">Фокус</option>
+            <option value="dreaming">Мечтания</option>
+            <option value="energy">Энергия</option>
+            <option value="sleep">Сон</option>
+          </select>
+        </div>
+  
+        <!-- Кнопка отправки -->
+        <div class="subtitle">
+          <button type="submit">Сгенерировать плейлист</button>
+        </div>
+      </form>
+  
+      <!-- Ответ от сервера -->
+      <div class="subtitle" id="result" style="display: none;"></div>
+    </div>
+  
+    <script>
+      // JS логика отправки формы и получения плейлиста
+      document.getElementById('musicTestForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+  
+        const formData = {
+          color: document.getElementById('color').value,
+          body: document.getElementById('body').value,
+          space: document.getElementById('space').value,
+          weather: document.getElementById('weather').value,
+          intention: document.getElementById('intention').value,
+        };
+  
+        const response = await fetch('/api/generate_playlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+  
+        const data = await response.json();
+        const resultBlock = document.getElementById('result');
+        resultBlock.innerHTML = `<p><strong>Твой плейлист готов:</strong></p><a href="${data.playlist_url}" target="_blank">Открыть в Spotify</a>`;
+        resultBlock.style.display = 'block';
+      });
+    </script>
+  
+    <!-- Футер остаётся без изменений -->
+    <footer>
+        <a href="about.html">О ПРОЕКТЕ</a>
+        <a href="author.html">ОБО МНЕ</a>
+        <a href="price.html">ЦЕНЫ</a>
+        <div class="footer-contact">
+          <a href="#" onclick="toggleContacts()">КОНТАКТЫ</a>
+          <div id="contact-icons" class="contact-icons hide">
+            <a href="https://t.me/resonareart" target="_blank">
+              <img src="telegram.png" alt="Telegram">
+            </a>
+            <a href="mailto:anyapavlenk@gmail.com">
+              <img src="gmail.png" alt="Gmail">
+            </a>
+          </div>
+        </div>
+      </footer>
+  </body>
+  </html>
+  
