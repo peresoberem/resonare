@@ -37,13 +37,13 @@ app.add_middleware(
 class MoodForm(BaseModel):
     intention: str
 
-# Привязка намерения к категории
-MOOD_TO_CATEGORY = {
-    "energy": "workout",
-    "reflection": "mood",
-    "relax": "chill",
-    "focus": "focus",
-    "party": "party"
+# Привязка намерения к строкам поиска (альтернатива сломанным категориям)
+MOOD_TO_QUERY = {
+    "energy": "energetic workout",
+    "reflection": "ambient reflective",
+    "relax": "relaxing instrumental",
+    "focus": "deep focus",
+    "party": "party hits"
 }
 
 def get_spotify_token():
@@ -57,9 +57,9 @@ def get_spotify_token():
         auth_response.raise_for_status()
         token = auth_response.json().get("access_token")
         if not token:
-            logger.error("❌ Не удалось получить access token")
+            logger.error("\u274c Не удалось получить access token")
             raise HTTPException(status_code=500, detail="Token missing")
-        logger.info("✅ Токен получен")
+        logger.info("\u2705 Токен получен")
         return token
     except Exception as e:
         logger.error(f"Ошибка при получении токена: {e}")
@@ -68,31 +68,39 @@ def get_spotify_token():
 @app.post("/api/generate_playlist")
 async def generate_playlist(data: MoodForm):
     logger.info(f"Получены данные формы: intention='{data.intention}'")
-    category_id = MOOD_TO_CATEGORY.get(data.intention, "mood")
-    logger.info(f"Категория: {category_id}")
+    query = MOOD_TO_QUERY.get(data.intention, "chill")
+    logger.info(f"🔍 Поисковый запрос: {query}")
 
     token = get_spotify_token()
     headers = {"Authorization": f"Bearer {token}"}
 
     try:
-        # Шаг 1: получить плейлисты из категории
-        playlist_resp = requests.get(
-            f"https://api.spotify.com/v1/browse/categories/{category_id}/playlists",
+        search_resp = requests.get(
+            "https://api.spotify.com/v1/search",
             headers=headers,
-            params={"limit": 1}
+            params={"q": query, "type": "playlist", "limit": 1}
         )
-        playlist_resp.raise_for_status()
-        playlists_data = playlist_resp.json()
+        search_resp.raise_for_status()
+        playlists_data = search_resp.json()
 
-        playlist_items = playlists_data.get("playlists", {}).get("items", [])
-        if not playlist_items:
-            logger.warning("Нет плейлистов в категории")
-            return {"error": "No playlists found"}
+        playlists = playlists_data.get("playlists")
+        if not playlists:
+            logger.warning("Нет объекта playlists в ответе Spotify")
+            return {"error": "No playlists object in response"}
 
-        playlist_id = playlist_items[0]["id"]
-        logger.info(f"Используем плейлист: {playlist_id}")
+        items = playlists.get("items")
+        if not items or not isinstance(items, list) or not items[0]:
+            logger.warning("Нет доступных или валидных плейлистов")
+            return {"error": "No valid playlist found"}
 
-        # Шаг 2: получить треки из плейлиста
+        playlist_id = items[0].get("id")
+        playlist_url = items[0].get("external_urls", {}).get("spotify")
+        if not playlist_id:
+            logger.warning("ID плейлиста отсутствует")
+            return {"error": "Playlist ID not found"}
+
+        logger.info(f"🎶 Используем найденный плейлист: {playlist_id}")
+
         tracks_resp = requests.get(
             f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
             headers=headers,
@@ -113,7 +121,11 @@ async def generate_playlist(data: MoodForm):
                 "preview_url": track.get("preview_url")
             })
 
-        return {"tracks": tracks}
+        logger.info(f"\u2705 Получено {len(tracks)} треков")
+        return {
+            "playlist_url": playlist_url,
+            "tracks": tracks
+        }
     except requests.exceptions.RequestException as e:
-        logger.error(f"Ошибка при получении плейлиста: {e}")
+        logger.error(f"Ошибка при получении данных: {e}")
         raise HTTPException(status_code=500, detail=str(e))
