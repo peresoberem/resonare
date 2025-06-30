@@ -195,6 +195,12 @@
         transform: translateX(-50%);
         margin-bottom: 10px;
       }
+      @media (max-width: 320px) {
+        h1 {
+          font-size: 2rem; /* Adjust font size for small screens */
+          white-space: normal; /* Allow text to wrap */
+        }
+      }
     }
     .contact-icons.show img:nth-child(1) {
       animation: icon-in-vertical 0.3s ease forwards 0.15s;
