@@ -60,6 +60,12 @@
         }
         @font-face {
             font-family: 'InterTight';
+            src: local('InterTight-Bold.ttf'), url('InterTight-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: bold;
+        }
+        @font-face {
+            font-family: 'InterTight';
             src: local('InterTight-Italic.ttf'), url('InterTight-Italic.ttf') format('truetype');
             font-weight: 400;
             font-style: italic;
@@ -196,6 +202,7 @@
         .approach-block {
             font-family: 'InterTight';
             font-weight: 400;   
+            font-style: bold;
             font-size: clamp(1rem, 2.5vw, 1.5rem);  
             margin-bottom: clamp(1rem, 3vw, 30px);
             display: flex;
