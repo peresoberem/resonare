@@ -1,448 +1,400 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Анна Павленко | resonare | экзистенциальный психолог в Тбилиси и онлайн</title>
-    <meta name="description" content="Экзистенциальный психолог Анна Павленко, сексолог, телесная терапия, арт-терапия, аудиотерапия, индивидуальные, парные и групповые сессии в Тбилиси и онлайн." />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Resonare | Анна Павленко" />
-    <meta property="og:description" content="Экзистенциальный психолог Анна Павленко | Интегративный подход | Тбилиси/онлайн." />
-    <meta property="og:url" content="https://resonare.art" />
-    <meta property="og:image" content="https://resonare.art/eye.png" />
-    <meta property="og:locale" content="ru_RU" />
-    <link rel="icon" href="eye.png" type="image/png">
-    <link rel="apple-touch-icon" href="eye.png">
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анна Павленко | resonare | экзистенциальный психолог в Тбилиси и онлайн</title>
+<meta name="description" content="Экзистенциальный психолог Анна Павленко. Индивидуальная и парная терапия в Тбилиси и онлайн. Тело, арт и звук — для тех, кто застрял в голове.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F2EA;
+  --paper-alt:#EBEADD;
+  --ink:#23211B;
+  --ink-soft:#5C594C;
+  --dark:#20241E;
+  --dark-soft:#B9BCA9;
+  --light:#EFEEE2;
+  --green:#44614C;
+  --green-deep:#33493A;
+  --wine:#A03A4B;
+  --wine-bright:#C4576A;
+  --line:#D9D7C5;
+  --line-dark:#3A3F37;
+  --radius:2px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter Tight',system-ui,sans-serif;
+  font-weight:400;
+  line-height:1.65;
+  font-size:17px;
+}
+::selection{background:var(--wine);color:var(--light)}
+img{max-width:100%;display:block}
+a{color:var(--green-deep);text-decoration:none;transition:color .25s}
+a:hover{color:var(--wine)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
 
-    <style>
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-Thin.ttf') format('truetype');
-            font-weight: 100;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-ThinItalic.ttf') format('truetype');
-            font-weight: 100;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-ExtraLight.ttf') format('truetype');
-            font-weight: 200;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-ExtraLightItalic.ttf') format('truetype');
-            font-weight: 200;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-Light.ttf') format('truetype');
-            font-weight: 300;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-LightItalic.ttf') format('truetype');
-            font-weight: 300;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: local('InterTight-Regular.ttf'), url('InterTight-Regular.ttf') format('truetype');
-            font-weight: 400;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-Regular.ttf') format('truetype');
-            font-weight: 400;
-            font-style: bold;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-Italic.ttf') format('truetype');
-            font-weight: 400;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-Medium.ttf') format('truetype');
-            font-weight: 500;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-MediumItalic.ttf') format('truetype');
-            font-weight: 500;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-SemiBold.ttf') format('truetype');
-            font-weight: 600;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-SemiBoldItalic.ttf') format('truetype');
-            font-weight: 600;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-Bold.ttf') format('truetype');
-            font-weight: 700;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-BoldItalic.ttf') format('truetype');
-            font-weight: 700;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-ExtraBold.ttf') format('truetype');
-            font-weight: 800;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-ExtraBoldItalic.ttf') format('truetype');
-            font-weight: 800;
-            font-style: italic;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-Black.ttf') format('truetype');
-            font-weight: 900;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'InterTight';
-            src: url('InterTight-BlackItalic.ttf') format('truetype');
-            font-weight: 900;
-            font-style: italic;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background-color: black;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            font-family: 'InterTight', sans-serif;
-            text-align: center;
-            position: relative;
-            overflow-x: hidden;
-            padding: 1rem;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 3;
-        }
-        .overlay.active {
-            display: block;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-        }
-        h1 {
-            font-family: 'InterTight';
-            font-size: clamp(2.5rem, 8vw, 8rem);
-            margin-bottom: clamp(1rem, 5vw, 40px);
-            padding: 0;
-            background: none;
-            color: white;
-            text-align: center;
-            overflow: visible;
-            white-space: nowrap;
-        }
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
 
-        .eye-img {
-            width: clamp(150px, 30vw, 250px);
-            margin-bottom: clamp(2rem, 8vw, 65px);
-        }
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:10;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;max-width:1060px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink)}
+.brand img{width:34px;height:34px;border-radius:50%}
+.brand span{font-family:'Cormorant',serif;font-size:1.35rem;font-weight:600;letter-spacing:.02em}
+nav.menu{display:flex;gap:24px;font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+nav.menu a{color:var(--ink-soft)}
+nav.menu a:hover{color:var(--wine)}
+@media(max-width:720px){nav.menu{gap:14px;font-size:.72rem}}
 
-        h2 {
-            font-family: 'InterTight';
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            font-weight: 200;
-            margin-bottom: clamp(0.5rem, 1.5vw, 15px);
-            color: white;
-            background: none;
-            text-align: center;
-            line-height: 1.4;
-        }
-        .subtext {
-            font-family: 'InterTight';
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            font-weight: 200;
-            font-style: italic;
-            color: white;
-            text-align: center;
-            max-width: min(800px, 90%);
-            margin: clamp(-1rem, -4vw, -40px) auto clamp(2rem, 6vw, 60px) auto;
-            line-height: 1.6;
-        }
+/* ---------- hero (loud) ---------- */
+.hero{
+  background:var(--dark);
+  color:var(--light);
+  padding:clamp(64px,10vw,120px) 0 clamp(56px,9vw,100px);
+  position:relative;overflow:hidden;
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}.hero-eye{order:-1;margin:0 auto}}
+.eyebrow{
+  font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--wine-bright);font-weight:500;margin-bottom:22px;
+}
+h1{
+  font-family:'Cormorant',serif;font-weight:500;
+  font-size:clamp(2.4rem,5.6vw,4.3rem);
+  line-height:1.06;letter-spacing:-.01em;
+  margin-bottom:26px;color:var(--light);
+}
+h1 em{font-style:italic;color:var(--wine-bright)}
+.hero p.lead{max-width:32em;color:var(--dark-soft);font-size:1.06rem;margin-bottom:36px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:14px 26px;border-radius:var(--radius);
+  font-size:.92rem;font-weight:500;letter-spacing:.04em;
+  border:1px solid var(--light);cursor:pointer;
+  transition:all .25s;
+}
+.btn.primary{background:var(--light);color:var(--dark)}
+.btn.primary:hover{background:var(--wine);border-color:var(--wine);color:var(--light)}
+.btn.ghost{color:var(--light)}
+.btn.ghost:hover{border-color:var(--wine-bright);color:var(--wine-bright)}
+.cta-note{margin-top:14px;font-size:.85rem;color:var(--dark-soft);font-style:italic}
 
-        footer {
-            width: 100%;
-            padding: 1rem;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: clamp(1rem, 3vw, 30px);
-            z-index: 5;
-        }
-        footer a {
-            color: white;
-            text-decoration: none;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            font-weight: bold;
-            transition: color 0.3s;
-            font-family: 'InterTight', sans-serif;
-            white-space: nowrap;
-        }
-        footer a:hover {
-            color: #888;
-        }
-        .footer-contact {
-            position: relative;
-        }
-        .contact-icons {
-            opacity: 0;
-            pointer-events: none;
-            position: absolute;
-            display: flex;
-            gap: 12px;
-            background-color: transparent;
-            padding: 0;
-            border: none;
-            z-index: 6;
-            left: calc(100% + 15px);
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .contact-icons.show {
-            animation: fly-in 0.6s ease forwards;
-            pointer-events: auto;
-        }
-        .contact-icons.hide {
-            animation: fly-out 0.4s ease forwards;
-            pointer-events: none;
-        }
-        .contact-icons img {
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateX(10px);
-            animation: none;
-        }
-        .contact-icons.show img:nth-child(1) {
-            animation: icon-in 0.3s ease forwards 0.15s;
-        }
-        .contact-icons.show img:nth-child(2) {
-            animation: icon-in 0.3s ease forwards 0.3s;
-        }
+/* signature: eye + resonance rings */
+.hero-eye{position:relative;width:min(330px,72vw);aspect-ratio:1;display:grid;place-items:center;justify-self:center}
+.hero-eye img{width:60%;border-radius:50%;position:relative;z-index:2;
+  box-shadow:0 0 60px rgba(196,87,106,.18)}
+.ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px solid rgba(239,238,226,.5);
+  opacity:0;
+  animation:resonate 6s ease-out infinite;
+}
+.ring:nth-child(2){animation-delay:2s;border-color:rgba(196,87,106,.55)}
+.ring:nth-child(3){animation-delay:4s}
+@keyframes resonate{
+  0%{transform:scale(.5);opacity:0}
+  15%{opacity:.7}
+  100%{transform:scale(1.12);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .ring{animation:none;opacity:.3;transform:scale(.72)}
+  .ring:nth-child(2){transform:scale(.92)}
+  .ring:nth-child(3){transform:scale(1.1)}
+  html{scroll-behavior:auto}
+}
 
-        @keyframes icon-in {
-            from {
-                opacity: 0;
-                transform: translateX(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+/* ---------- sections (quiet) ---------- */
+section{padding:clamp(56px,9vw,100px) 0}
+.sec-label{
+  font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--wine);font-weight:500;margin-bottom:18px;
+}
+h2{
+  font-family:'Cormorant',serif;font-weight:500;
+  font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.15;
+  margin-bottom:30px;max-width:20em;
+}
 
-        @keyframes fly-in {
-            from {
-                opacity: 0;
-                transform: translateY(-50%) translateX(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(-50%) translateX(0);
-            }
-        }
+/* recognition list */
+.alt{background:var(--paper-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.recognize{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;border:1px solid var(--line);background:var(--line)}
+@media(max-width:720px){.recognize{grid-template-columns:1fr}}
+.recognize div{background:var(--paper-alt);padding:26px 28px;position:relative;transition:background .3s}
+.recognize div:hover{background:var(--paper)}
+.recognize div::before{
+  content:"";position:absolute;left:0;top:26px;bottom:26px;width:2px;
+  background:var(--wine);opacity:0;transition:opacity .3s;
+}
+.recognize div:hover::before{opacity:1}
+.recognize p.q{
+  font-family:'Cormorant',serif;font-style:italic;font-weight:500;
+  font-size:1.35rem;line-height:1.3;margin-bottom:8px;
+}
+.recognize p.a{font-size:.9rem;color:var(--ink-soft)}
+.recognize-note{margin-top:26px;font-size:.95rem;color:var(--ink-soft);max-width:36em}
 
-        @keyframes fly-out {
-            from {
-                opacity: 1;
-                transform: translateY(-50%) translateX(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-50%) translateX(10px);
-            }
-        }
-        @media (min-width: 769px) {
-            .contact-icons {
-                /* Desktop positioning already set in main rule */
-            }
-        }
-        @media (min-width: 768px) {
-            h1 {
-                font-size: clamp(5.5rem, 11vw, 11rem); /* Increase font size for iPads and desktops */
-            }
-        }
-        @media (max-width: 768px) {
-            body {
-                padding: 0.5rem;
-            }
-            .container {
-                padding: 0.5rem;
-            }
-            footer {
-                padding: 0.5rem;
-                gap: 1rem;
-            }
-            .contact-icons {
-                left: calc(100% + 10px);
-                top: 50%;
-                transform: translateY(-50%);
-                flex-direction: row;
-                gap: 8px;
-            }
-            .contact-icons img {
-                width: 28px;
-                height: 28px;
-            }
-        }
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            h2 {
-                font-size: 1.2rem;
-            }
-            .subtext {
-                font-size: 0.9rem;
-            }
-            footer {
-                flex-direction: column;
-                align-items: center;
-            }
-        }    
-        @media (max-width: 350px) {
-            body {
-                padding: 0.25rem;
-            }
-            .container {
-                padding: 0.25rem;
-            }
-            h1 {
-                font-size: min(12vw, 2.2rem);
-                white-space: nowrap;
-                letter-spacing: -0.02em;
-            }
-            h2 {
-                font-size: 1.1rem;
-            }
-            .subtext {
-                font-size: 0.85rem;
-            }
-            footer {
-                flex-direction: column;
-                align-items: center;
-                padding: 0.25rem;
-            }
-        }
-        @media (max-width: 320px) {
-            h1 {
-                font-size: min(11vw, 2rem);
-                letter-spacing: -0.04em;
-            }
-        }
-        @media (max-width: 280px) {
-            h1 {
-                font-size: min(10vw, 1.8rem);
-                letter-spacing: -0.06em;
-            }
-        }
-    </style>
-    <script>
-        let contactVisible = false;
-        function toggleContacts() {
-            const icons = document.getElementById('contact-icons');
-            const overlay = document.getElementById('overlay');
-            if (contactVisible) {
-                icons.classList.remove('show');
-                icons.classList.add('hide');
-                overlay.classList.remove('active');
-            } else {
-                icons.classList.remove('hide');
-                icons.classList.add('show');
-                overlay.classList.add('active');
-            }
-            contactVisible = !contactVisible;
-        }
-        function closeOverlay() {
-            if (contactVisible) toggleContacts();
-        }
-    </script>
+/* approach */
+.approach{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+@media(max-width:800px){.approach{grid-template-columns:1fr;gap:32px}}
+.approach h3{
+  font-family:'Cormorant',serif;font-weight:600;font-size:1.45rem;
+  margin-bottom:12px;
+}
+.approach p{font-size:.97rem;color:var(--ink-soft)}
+.approach .num{display:block;width:34px;height:2px;background:var(--wine);margin-bottom:18px}
+
+/* cabinet */
+.cab-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+@media(max-width:800px){.cab-grid{grid-template-columns:1fr}}
+.cab-photos{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;align-items:start}
+.cab-photos img{border-radius:var(--radius);object-fit:cover;filter:saturate(.94)}
+.cab-photos img.tall{aspect-ratio:3/4.6;width:100%}
+.cab-photos img.wide{aspect-ratio:1/1;width:100%;margin-top:40px}
+.cab-text p{margin-bottom:16px;color:var(--ink-soft)}
+.cab-text p strong{color:var(--ink);font-weight:500}
+
+/* trust */
+.trust{border-top:1px solid var(--line)}
+.trust-row{display:flex;flex-wrap:wrap;gap:14px 44px;align-items:baseline;margin-bottom:22px}
+.trust-row b{font-family:'Cormorant',serif;font-size:1.3rem;font-weight:600}
+.trust-row span{font-size:.85rem;color:var(--ink-soft)}
+.trust p.note{font-size:.92rem;color:var(--ink-soft);max-width:42em}
+
+/* pricing */
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--line);background:var(--line);max-width:760px}
+@media(max-width:640px){.price-grid{grid-template-columns:1fr}}
+.price-grid>div{background:var(--paper);padding:30px}
+.price-grid h3{font-family:'Cormorant',serif;font-weight:600;font-size:1.4rem;margin-bottom:6px}
+.price-grid .p{font-size:1.9rem;font-weight:300;margin:10px 0 4px;color:var(--green-deep)}
+.price-grid small{color:var(--ink-soft);font-size:.88rem;display:block}
+.price-note{margin-top:22px;font-size:.92rem;color:var(--ink-soft);max-width:40em}
+
+/* contact (loud) */
+.contact{background:var(--dark);color:var(--light)}
+.contact .sec-label{color:var(--wine-bright)}
+.contact h2{color:var(--light)}
+.contact p{color:var(--dark-soft);max-width:34em;margin-bottom:30px}
+.contact a{color:var(--light);text-decoration:underline;text-underline-offset:3px}
+.contact a:hover{color:var(--wine-bright)}
+form{max-width:480px;display:grid;gap:14px;margin-top:8px}
+input,textarea{
+  background:transparent;border:1px solid var(--line-dark);border-radius:var(--radius);
+  padding:13px 14px;color:var(--light);font-family:inherit;font-size:.95rem;
+}
+input::placeholder,textarea::placeholder{color:#82887B}
+input:focus,textarea:focus{outline:none;border-color:var(--wine-bright)}
+textarea{min-height:110px;resize:vertical}
+form .btn{background:var(--light);color:var(--dark);border:none;justify-self:start;font-family:inherit}
+form .btn:hover{background:var(--wine);color:var(--light)}
+
+/* footer */
+footer{padding:44px 0 56px;font-size:.86rem;color:var(--ink-soft)}
+.foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer .fine{margin-top:18px;max-width:46em;font-size:.8rem;opacity:.8}
+</style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MWCR109H6L"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-MWCR109H6L');
-</script>
 <body>
-    <div id="overlay" class="overlay" onclick="closeOverlay()"></div>
-    <div class="container">
-        <h1>resonare</h1>
-        <img class="eye-img" src="eye.png" alt="Eye">
-        <h2>Экзистенциальный психолог Анна Павленко, член SEA* и FETE**</h2>
-        <p class="subtext"><br>*Сообщество экзистенциального анализа, UK <br>**Федерация экзистенциальной терапии, EU</p>
-    </div>
 
-    <footer>
-        <a href="about.html">О ПРОЕКТЕ</a>
-        <a href="author.html">ОБО МНЕ</a>
-        <a href="price.html">ЦЕНЫ</a>
-        <div class="footer-contact">
-            <a href="#" onclick="toggleContacts(); return false;">КОНТАКТЫ</a>
-            <div id="contact-icons" class="contact-icons hide">
-                <a href="https://t.me/resonareart" target="_blank">
-                    <img src="telegram.png" alt="Telegram">
-                </a>
-                <a href="mailto:anyapavlenk@gmail.com">
-                    <img src="gmail.png" alt="Gmail">
-                </a>
-            </div>
-        </div>
-    </footer>
+<header>
+  <div class="nav">
+    <a class="brand" href="#"><img src="{{EYE}}" alt=""><span>resonare</span></a>
+    <nav class="menu">
+      <a href="#priem">С чем приходят</a>
+      <a href="#podhod">Подход</a>
+      <a href="#kabinet">Кабинет</a>
+      <a href="#cena">Цены</a>
+      <a href="#" title="страница в работе">Обо мне</a>
+      <a href="#" title="страница в работе">Звук</a>
+      <a href="#contact">Связаться</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Анна Павленко · экзистенциальный психолог · Тбилиси / онлайн</p>
+      <h1>Терапия начинается <em>со встречи</em> — не с диагноза</h1>
+      <p class="lead">Передо мной не набор симптомов, который надо скорректировать, а живой человек — противоречивый, думающий и, бывает, уставший от собственного думания. Я не дам инструкцию, как правильно жить. Я помогу услышать, как хотите жить вы.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#contact">Бесплатное знакомство</a>
+        <a class="btn ghost" href="https://t.me/resonareart" target="_blank" rel="noopener">Написать в Telegram</a>
+      </div>
+      <p class="cta-note">Знакомство — короткий видеозвонок: уточним запрос и поймём, подходим ли друг другу.</p>
+    </div>
+    <div class="hero-eye" aria-hidden="true">
+      <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+      <img src="{{EYE}}" alt="">
+    </div>
+  </div>
+</div>
+
+<section class="alt" id="priem">
+  <div class="wrap">
+    <p class="sec-label">С чем приходят</p>
+    <h2>Если что-то из этого звучит вашим голосом — вам сюда</h2>
+    <div class="recognize">
+      <div>
+        <p class="q">«Я всё про себя понимаю. Но ничего не меняется»</p>
+        <p class="a">Застряли в голове: инсайты есть, жизнь прежняя. Идём туда, где понимание становится телесным.</p>
+      </div>
+      <div>
+        <p class="q">«Не понимаю, кто я и куда дальше»</p>
+        <p class="a">Кризис смысла и идентичности — когда старые опоры не держат, а новых ещё нет.</p>
+      </div>
+      <div>
+        <p class="q">«Тревога и пустота. Страшно думать о будущем»</p>
+        <p class="a">Экзистенциальная тревога, мысли о конечности, ощущение, что жизнь проходит мимо.</p>
+      </div>
+      <div>
+        <p class="q">«В близости у меня повторяется один и тот же сценарий»</p>
+        <p class="a">Дистанция, ревность, измены, страх раствориться или остаться одному. Работаю и с парами.</p>
+      </div>
+      <div>
+        <p class="q">«Отношения закончились — и я не знаю, кто я после них»</p>
+        <p class="a">Развод, расставание, проживание конца и поиск себя после.</p>
+      </div>
+      <div>
+        <p class="q">«Мне стыдно за свои желания»</p>
+        <p class="a">Сексуальность, непринятие тела, подавленные желания. Без осуждения — с профессиональной подготовкой в сексологии.</p>
+      </div>
+      <div>
+        <p class="q">«Сил нет. Интереса к жизни тоже»</p>
+        <p class="a">Выгорание и апатия — когда даже отдых больше не восстанавливает.</p>
+      </div>
+      <div>
+        <p class="q">«Я уехал_а — и будто потерял_а себя по дороге»</p>
+        <p class="a">Эмиграция, одиночество, утрата. Сложные отношения с телом и едой — тоже сюда.</p>
+      </div>
+    </div>
+    <p class="recognize-note">Не нашли свой запрос? Это не значит, что с ним нельзя прийти. Напишите — обсудим.</p>
+  </div>
+</section>
+
+<section id="podhod">
+  <div class="wrap">
+    <p class="sec-label">Подход</p>
+    <h2>Экзистенциальная база. Тело, арт и звук — как путь к ней</h2>
+    <div class="approach">
+      <div>
+        <span class="num"></span>
+        <h3>Встреча, а не техника</h3>
+        <p>Основа моей работы — экзистенциальная терапия: свобода, выбор, смысл, конечность. Я не даю готовых ответов — инструкция извне лишает шанса обрести внутреннюю опору. Вместо этого создаю пространство, где вы сможете услышать себя.</p>
+      </div>
+      <div>
+        <span class="num"></span>
+        <h3>Не только разговор</h3>
+        <p>Для тех, кто «понимает, но не чувствует», — тело, дыхание, образы, глина, метафора. И звук: у меня музыкальный бэкграунд, и я использую его как рабочий инструмент — от голосовых практик до аудиостимуляции для стабилизации при тревоге.</p>
+      </div>
+      <div>
+        <span class="num"></span>
+        <h3>Метод подбираем вместе</h3>
+        <p>Работаю в плюралистической рамке: вы — главный авторитет в том, что вам помогает. Открыто предлагаю разные пути, решаем вместе. Бережно отношусь к разным форматам отношений. LGBTQ+ friendly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="kabinet">
+  <div class="wrap">
+    <div class="cab-grid">
+      <div class="cab-text">
+        <p class="sec-label">Кабинет</p>
+        <h2>Комната с тёплым светом, а не клиника</h2>
+        <p>Очно принимаю в Тбилиси, в домашнем кабинете: много растений, всё для арт-работы — краски, глина, инструменты. Есть кушетка, если так комфортнее. Адрес пришлю после записи.</p>
+        <p><strong>Здесь живут две кошки.</strong> Для кого-то это лучшая часть терапии, а если у вас аллергия или вы просто не про котов — есть онлайн: работаю в нём так же полноценно, как очно.</p>
+      </div>
+      <div class="cab-photos">
+        <img class="tall" src="{{STUDIO}}" alt="Пространство для арт-работы">
+        <img class="wide" src="{{ROOM}}" alt="Кабинет: кресла и тёплый свет">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <p class="sec-label">Квалификация</p>
+    <div class="trust-row">
+      <div><b>SEA</b><br><span>The Society for Existential Analysis, UK</span></div>
+      <div><b>FETE</b><br><span>Federation for Existential Therapy of Europe</span></div>
+      <div><b>РПА</b><br><span>Рекомендательное письмо Российской психотерапевтической ассоциации, 2026</span></div>
+    </div>
+    <p class="note">Дипломы и сертификаты — экзистенциальный подход, семейная терапия и сексология, арт-терапия — собраны в моём <a href="https://www.b17.ru/" target="_blank" rel="noopener">профиле на b17</a>. Работаю под именем Анна Павленко; документы об образовании — на паспортную фамилию.</p>
+  </div>
+</section>
+
+<section id="cena">
+  <div class="wrap">
+    <p class="sec-label">Формат и стоимость</p>
+    <h2>Очно в Тбилиси и онлайн</h2>
+    <div class="price-grid">
+      <div>
+        <h3>Индивидуальная сессия</h3>
+        <small>55 минут · очно или онлайн</small>
+        <p class="p">$70</p>
+        <small>≈ 190 лари · оплата в лари, долларах, евро или рублях</small>
+      </div>
+      <div>
+        <h3>Парная сессия</h3>
+        <small>75 минут · очно или онлайн</small>
+        <p class="p">$100</p>
+        <small>≈ 270 лари · оплата в лари, долларах, евро или рублях</small>
+      </div>
+    </div>
+    <p class="price-note">Перед началом работы — бесплатный видеозвонок-знакомство: уточним запрос и почувствуем, подходим ли друг другу. Это ни к чему не обязывает.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="sec-label">Связаться</p>
+    <h2>Первый шаг — просто написать</h2>
+    <p>Расскажите в паре слов, что привело, — или ничего не рассказывайте и просто предложите время для знакомства. Отвечаю лично, обычно в течение дня.</p>
+    <form onsubmit="event.preventDefault();const n=this.name.value,c=this.contact.value,m=this.msg.value;location.href='mailto:anyapavlenk@gmail.com?subject='+encodeURIComponent('Запрос с сайта resonare — '+n)+'&body='+encodeURIComponent(m+'\n\nКонтакт: '+c);">
+      <input name="name" placeholder="Как к вам обращаться" required>
+      <input name="contact" placeholder="Telegram или e-mail для ответа" required>
+      <textarea name="msg" placeholder="Пара слов о запросе (необязательно)"></textarea>
+      <button class="btn" type="submit">Отправить</button>
+    </form>
+    <p style="margin-top:26px;font-size:.9rem">Или напрямую: <a href="https://t.me/resonareart" target="_blank" rel="noopener">Telegram</a> · <a href="mailto:anyapavlenk@gmail.com">anyapavlenk@gmail.com</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <b style="font-family:'Cormorant',serif;font-size:1.1rem">resonare</b> · Анна Павленко<br>
+        Экзистенциальный психолог · Тбилиси / онлайн
+      </div>
+      <div>
+        <a href="https://t.me/resonareart" target="_blank" rel="noopener">Telegram</a> ·
+        <a href="https://www.b17.ru/" target="_blank" rel="noopener">b17</a> ·
+        <a href="mailto:anyapavlenk@gmail.com">E-mail</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 · Психологическое консультирование не заменяет медицинскую помощь. При острых состояниях, пожалуйста, обратитесь к врачу-психиатру — при необходимости помогу с маршрутизацией.</p>
+  </div>
+</footer>
+
 </body>
 </html>
