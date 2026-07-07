@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Звук | resonare | Анна Павленко</title>
+<meta name="description" content="Генеративный звук для психологических состояний: дыхание, гудение, изо-принцип, эмбиент. Экспериментальная страница практики resonare.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<style>
+:root{
+  --night:#14161F;
+  --deep:#0A0C13;
+  --night-2:#1B1E2B;
+  --night-3:#20242F;
+  --night-soft:#A9AEC2;
+  --light:#F4F3EA;
+  --blue:#2B3ED9;
+  --blue-soft:#6E7FF0;
+  --ice:#9FB0FF;
+  --line:#2A2E40;
+  --dim:#767C93;
+  --radius:2px;
+  --dock-h:76px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--night);color:var(--light);
+  font-family:'Inter Tight',system-ui,sans-serif;
+  line-height:1.65;font-size:17px;min-height:100vh;
+  padding-bottom:calc(var(--dock-h) + 18px);
+}
+::selection{background:var(--blue);color:var(--light)}
+a{color:var(--blue-soft);text-decoration:none;transition:color .25s}
+a:hover{color:var(--light)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue-soft);outline-offset:3px}
+button{font-family:inherit;color:inherit}
+.wrap{max-width:1020px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
+
+header{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--night) 88%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:58px;max-width:1020px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
+.brand{font-family:'Old Standard TT',serif;font-size:1.25rem;font-weight:700;color:var(--light)}
+.back{font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;font-weight:500;color:var(--night-soft)}
+.back:hover{color:var(--blue-soft)}
+
+.intro{padding:clamp(30px,4.5vw,48px) 0 14px}
+h1{font-family:'Old Standard TT',serif;font-weight:400;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.08;margin-bottom:14px}
+h1 em{font-style:italic;color:var(--blue-soft)}
+.intro p{max-width:44em;color:var(--night-soft);font-size:.95rem;margin-bottom:8px}
+.intro p b{color:var(--light);font-weight:500}
+.fine{font-size:.82rem;color:var(--dim);max-width:46em;font-style:italic}
+
+/* tabs */
+.tabs{display:flex;gap:8px;padding:18px 0 0;flex-wrap:wrap}
+.tab{
+  background:transparent;border:1px solid var(--line);border-radius:30px;
+  padding:9px 20px;font-size:.85rem;letter-spacing:.06em;font-weight:500;
+  cursor:pointer;transition:all .25s;color:var(--night-soft);
+}
+.tab:hover{border-color:var(--blue-soft);color:var(--light)}
+.tab.on{background:var(--blue-soft);border-color:var(--blue-soft);color:var(--deep)}
+
+/* stage */
+.stage{
+  position:relative;margin:16px 0 0;
+  height:clamp(260px,42vh,420px);
+  width:100vw;margin-left:calc(50% - 50vw);
+  background:radial-gradient(ellipse at 50% 45%, #10131E 0%, var(--deep) 78%);
+  overflow:hidden;
+}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage .hint{
+  position:absolute;inset:0;display:grid;place-items:center;
+  color:var(--dim);font-size:.9rem;font-style:italic;
+  transition:opacity .6s;pointer-events:none;text-align:center;padding:0 20px;
+}
+
+/* cards */
+.deck{padding:22px 0 8px}
+.group{display:none}
+.group.on{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:rise .45s ease}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:860px){.group.on{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.group.on{grid-template-columns:1fr}}
+.card{
+  background:var(--night-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 18px 14px;text-align:left;position:relative;
+  transition:border-color .3s,background .3s;
+}
+.card:hover{border-color:var(--blue-soft)}
+.card.active{border-color:var(--blue-soft);background:var(--night-3)}
+.card h3{
+  font-family:'Old Standard TT',serif;font-weight:400;font-size:1.25rem;line-height:1.2;
+  margin-bottom:4px;cursor:pointer;
+}
+.card h3 em{font-style:italic;color:var(--blue-soft)}
+.card p.why{font-size:.83rem;color:var(--night-soft);line-height:1.5;margin-bottom:10px;cursor:pointer}
+.card .dot{position:absolute;top:15px;right:15px;width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .3s}
+.card.active .dot{background:var(--blue-soft);animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(110,127,240,.5)}100%{box-shadow:0 0 0 14px rgba(110,127,240,0)}}
+.row{display:flex;gap:10px;align-items:center}
+.play{
+  background:transparent;border:1px solid var(--light);border-radius:var(--radius);
+  padding:8px 18px;font-size:.82rem;font-weight:500;letter-spacing:.04em;cursor:pointer;transition:all .25s;
+}
+.play:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+.card.active .play{background:var(--blue-soft);border-color:var(--blue-soft);color:var(--deep)}
+.how{
+  background:none;border:none;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);cursor:pointer;padding:8px 2px;transition:color .25s;
+}
+.how:hover{color:var(--blue-soft)}
+.exp{
+  max-height:0;overflow:hidden;transition:max-height .5s ease;
+  font-size:.85rem;color:var(--night-soft);
+}
+.exp .inner{padding:10px 2px 6px;border-top:1px solid var(--line);margin-top:8px}
+.exp p{margin-bottom:8px}
+.exp b{color:var(--light);font-weight:500}
+
+/* dock */
+.dock{
+  position:fixed;bottom:0;left:0;right:0;z-index:30;
+  background:color-mix(in srgb,var(--deep) 92%,transparent);
+  backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);
+  min-height:var(--dock-h);
+}
+.dock-in{
+  max-width:1020px;margin:0 auto;padding:12px clamp(20px,4vw,32px);
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.stop{
+  background:transparent;border:1px solid var(--light);border-radius:var(--radius);
+  padding:10px 20px;font-size:.85rem;font-weight:500;letter-spacing:.04em;cursor:pointer;transition:all .25s;
+}
+.stop:hover{border-color:var(--blue-soft);color:var(--blue-soft)}
+.vol{display:flex;align-items:center;gap:10px;color:var(--night-soft);font-size:.8rem}
+input[type=range]{-webkit-appearance:none;appearance:none;width:130px;height:2px;background:var(--line);outline:none;border-radius:2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--blue-soft);cursor:pointer;border:none}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--blue-soft);cursor:pointer;border:none}
+.timer{display:flex;gap:6px;align-items:center;color:var(--night-soft);font-size:.8rem}
+.tchip{
+  background:transparent;border:1px solid var(--line);border-radius:20px;
+  padding:4px 12px;font-size:.78rem;cursor:pointer;transition:all .25s;color:var(--night-soft);
+}
+.tchip:hover{border-color:var(--blue-soft);color:var(--light)}
+.tchip.on{background:var(--blue-soft);border-color:var(--blue-soft);color:var(--deep)}
+.status{font-size:.82rem;color:var(--night-soft);font-style:italic;flex:1;min-width:180px}
+.status b{color:var(--blue-soft);font-weight:500}
+@media(max-width:640px){.status{order:-1;flex-basis:100%;min-width:0}}
+
+/* note */
+.note{padding:clamp(36px,5vw,52px) 0 10px}
+.note p{max-width:46em;color:var(--night-soft);font-size:.9rem;margin-bottom:12px}
+.note p b{color:var(--light);font-weight:500}
+footer{border-top:1px solid var(--line);margin-top:28px;padding:28px 0 20px;font-size:.83rem;color:var(--dim)}
+@media(prefers-reduced-motion:reduce){
+  .card.active .dot{animation:none}
+  .group.on{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <span class="brand">resonare · звук</span>
+    <a class="back" href="index.html">← на главную</a>
+  </div>
+</header>
+
+<main>
+
+<div class="intro wrap">
+  <h1>Звук, который <em>встречает</em> состояние</h1>
+  <p>Ничего из этого не записано заранее: звук рождается прямо в браузере и никогда не повторяется. <b>Наушники сделают всё это в разы лучше.</b> Громкость держите тише, чем кажется нужным: это среда, а не концерт.</p>
+  <p class="fine">Это опора, а не терапия. Если какой-то звук неприятен, просто выключите его, сделайте длинный выдох через рот и оглядите комнату, назвав про себя три предмета: телу легче вернуться, когда есть выдох и глаза.</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab on" data-g="practices">Практики</button>
+    <button class="tab" data-g="states">Состояния</button>
+    <button class="tab" data-g="ambient">Эмбиент</button>
+  </div>
+</div>
+
+<div class="stage">
+  <canvas id="viz"></canvas>
+  <div class="hint" id="hint">выберите звук ниже, и частицы оживут вместе с ним</div>
+</div>
+
+<div class="deck wrap">
+  <div class="group on" id="g-practices"></div>
+  <div class="group" id="g-states"></div>
+  <div class="group" id="g-ambient"></div>
+</div>
+
+<section class="note wrap">
+  <p><b>На чём это основано.</b> На том, как тело и мозг отвечают на звук: темп, регистр, пространство и тишина влияют на дыхание, пульс и внимание. Я опираюсь на исследования и на собственный музыкальный и практический опыт, без обещаний и чудес. Это опоры, а не таблетки.</p>
+  <p>Страница живёт и меняется вместе с моей практикой. Если что-то отозвалось, или наоборот совсем мимо, <a href="index.html#contact">расскажите мне</a>: это ценнее любой статистики.</p>
+</section>
+
+</main>
+
+<div class="dock">
+  <div class="dock-in">
+    <button class="stop" id="stopBtn">Тишина</button>
+    <div class="vol"><span>громкость</span><input type="range" id="vol" min="0" max="100" value="65" aria-label="Громкость"></div>
+    <div class="timer"><span>таймер</span>
+      <button class="tchip on" data-m="0">∞</button>
+      <button class="tchip" data-m="5">5</button>
+      <button class="tchip" data-m="10">10</button>
+      <button class="tchip" data-m="20">20</button>
+    </div>
+    <p class="status" id="status"></p>
+  </div>
+</div>
+
+<script>
+/* ================= КАТАЛОГ ================= */
+const CATALOG = {
+practices: [
+ {id:'breath', t:'Дыхание', em:'выдох длиннее', why:'Длинный выдох включает тормозную ветвь нервной системы: пульс и мысли замедляются.',
+  how:`<p><b>Как.</b> Вдох носом, пока круг из частиц растёт. Выдох ртом, мягко и без усилия, пока опадает: выдох здесь длиннее вдоха, и это не случайно.</p><p><b>Сколько.</b> 3–5 минут. Что можно вынести: спокойнее дыхание, тише внутри, а иногда просто паузу среди дня, и это тоже результат.</p><p>Если закружилась голова, вернитесь к обычному дыханию: это сигнал остановиться, а не стараться сильнее.</p>`},
+ {id:'breath478', t:'Дыхание', em:'4 · 7 · 8', why:'Формула с задержкой: вдох на 4, пауза на 7, выдох на 8. Многим помогает перед сном.',
+  how:`<p><b>Как.</b> Следуйте за кругом и подписями: вдох носом, задержка, длинный выдох через рот со звуком «ффх». Достаточно 4–6 циклов.</p><p><b>Честно.</b> Строгих исследований именно этой формулы немного, но длинный выдох в её основе изучен хорошо. Если задержка некомфортна (сильная тревога, давление, беременность), выбирайте ровное дыхание рядом.</p>`},
+ {id:'hum', t:'Гудение', em:'звук изнутри', why:'Вибрация собственного голоса массирует изнутри: грудь, горло, лицо. Простой способ найти тело, когда оно потерялось.',
+  how:`<p><b>Как.</b> Вдох носом. На выдохе тяните «м-м-м» с закрытым ртом, тихо и без усилия, любой высоты. Слушайте, как ваш тон встречается с дроном и обертонами, они будут приходить и уходить сами.</p><p><b>Сколько.</b> 8–10 выдохов. Возможные эффекты: тепло в груди, зевота (отличный знак), или просто смешно, что тоже считается.</p>`},
+ {id:'pauses', t:'Паузы', em:'тишина работает', why:'Тишина после звука успокаивает сильнее самого звука: в паузе тело догоняет услышанное.',
+  how:`<p><b>Как.</b> Фразу слушайте как чужой разговор в кафе, без задачи. Когда наступает тишина, ничего не делайте: просто заметьте, что происходит с телом, когда звук ушёл. Паузы будут расти, это задумано.</p><p><b>Что можно вынести.</b> От скуки до неожиданной ясности. Всё считается.</p>`},
+],
+states: [
+ {id:'anxiety', t:'Тревога', em:'заземление', why:'Низкий тёплый гул и почти нет движения. Опора, а не развлечение.',
+  how:`<p><b>Как слушать.</b> Устройтесь так, чтобы чувствовать опору под собой. Внимание можно отдать самому низкому звуку: он никуда не денется, в этом и смысл.</p><p><b>Сколько.</b> 5–10 минут или пока не надоест. Возможные эффекты: чуть больше земли, медленнее выдох, иногда просто компания вашей тревоге.</p>`},
+ {id:'sadness', t:'Грусть', em:'сопровождение', why:'Редкая минорная линия в большом пространстве. Не развеселить, а побыть рядом.',
+  how:`<p><b>Как слушать.</b> Ничего не чинить. Можно смотреть в окно, можно плакать: звук выдержит. Слушайте сколько нужно.</p><p><b>Эффекты.</b> От «стало тише» до «наконец-то заплакал_а», и второе не хуже первого.</p>`},
+ {id:'emptiness', t:'Пустота', em:'мягкое движение', why:'Редкие ноты, которые слегка блуждают. Ничего не требуют, просто движутся.',
+  how:`<p><b>Как слушать.</b> Вполуха. Можно занять руки чем-то простым: чай, тетрадь, перебирание чего угодно. Звук слегка движется, чтобы пустота не была неподвижной.</p><p><b>Эффекты.</b> Мягкий сдвиг, желание встать за чаем, любое микродвижение уже победа.</p>`},
+ {id:'anger', t:'Злость', em:'разрядка', why:'Пульс с телом и весом. Напряжение накапливается волной и сбрасывается: разрядка как драматургия.',
+  how:`<p><b>Как слушать.</b> Громкость можно выше обычного. Двигайтесь, если тянет: стучите ладонью по колену в ритм, ходите по комнате. Трек сам накапливает и сбрасывает напряжение, присоединяйтесь.</p><p><b>Эффекты.</b> Разрядка, глубокий выдох, иногда неожиданный смех.</p>`},
+ {id:'arousal', t:'Перевозбуждение', em:'снижение', why:'Начинает в вашем темпе и за несколько минут незаметно замедляется, дыхание обычно уползает следом.',
+  how:`<p><b>Как слушать.</b> Просто оставьте фоном и занимайтесь чем занимались: темп сам сползёт вниз. Специально расслабляться не нужно, за вас это сделает арифметика.</p><p><b>Сколько.</b> Минут 6–8: к этому времени замедление завершится.</p>`},
+ {id:'dissoc', t:'Диссоциация', em:'возвращение', why:'Мягкий сердечный пульс, а звуки ходят слева направо. Ясные опоры для внимания.',
+  how:`<p><b>Как слушать.</b> Следите ушами за звуком, который переходит из уха в ухо: это возвращает в тело. Параллельно можно называть про себя предметы вокруг, по одному на каждый переход.</p><p><b>Эффекты.</b> Чётче контуры, ближе пол под ногами, здесь и сейчас становится буквальнее.</p>`},
+],
+ambient: [
+ {id:'warmth', t:'Тепло', em:'лампово', why:'Близкие переборы, потрескивания и мягкий свет. Как комната, где вас ждали.',
+  how:`<p><b>Для чего.</b> Фоном для вечера, книги, обнимания с котом. Задачи нет, есть уют.</p>`},
+ {id:'insomnia', t:'К ночи', em:'всё медленнее', why:'Очень медленные волны, редкие колокольчики издалека, ветер. Темп сам уходит вниз.',
+  how:`<p><b>Для чего.</b> В кровати, глаза закрыты. Поставьте таймер на 10–20 минут в панели снизу, и звук погаснет сам.</p>`},
+ {id:'focus', t:'Ясность', em:'фон для работы', why:'Тёплый шум, мягкий свингующий пульс, редкие аккорды. Фон, за который цепляется внимание.',
+  how:`<p><b>Для чего.</b> Под работу и чтение. Громкость ниже голоса мыслей: этот трек должен ощущаться, а не слушаться.</p>`},
+]};
+
+/* ================= ДВИЖОК ================= */
+let nodes=[], current=null, pauseTimer=null, limitTimer=null, silencePhase=false;
+const master={gain:null, analyser:null};
+let breathMode=null, breathStamp=0, bilateral=false, limitMin=0;
+
+function db(v){return -46+(v/100)*40;}
+function reg(...ns){ns.forEach(n=>nodes.push(n));return ns[0];}
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const maybe=p=>Math.random()<p;
+const human=t=>t+(Math.random()-.5)*.035;
+function space(size=.85,wet=.45,damp=1800){const r=new Tone.Freeverb({roomSize:size,dampening:damp});r.wet.value=wet;return reg(r);}
+function killAll(){
+  Tone.Transport.stop();Tone.Transport.cancel();
+  Tone.Transport.bpm.cancelScheduledValues(Tone.now());
+  Tone.Transport.swing=0;
+  if(pauseTimer){clearTimeout(pauseTimer);pauseTimer=null;}
+  if(limitTimer){clearTimeout(limitTimer);limitTimer=null;}
+  nodes.forEach(n=>{try{n.dispose();}catch(e){}});
+  nodes=[];breathMode=null;bilateral=false;silencePhase=false;
+}
+
+/* ---- I. практики ---- */
+function startBreath(){ // вдох 4 (нос), выдох 6 (рот)
+  const rev=space(.9,.5).connect(master.gain);
+  const droneA=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-13,envelope:{attack:3,decay:1,sustain:1,release:5}})).connect(rev);
+  droneA.triggerAttack('A2');
+  const droneE=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-19,envelope:{attack:3,decay:1,sustain:1,release:5}})).connect(rev);
+  droneE.triggerAttack('E3');
+  const toneGain=reg(new Tone.Gain(0)).connect(rev);
+  const voice=reg(new Tone.Synth({oscillator:{type:'fatsine',count:2,spread:6},volume:-11,envelope:{attack:.1,decay:.1,sustain:1,release:.2}}));
+  voice.connect(toneGain);voice.triggerAttack('A3');
+  const airGain=reg(new Tone.Gain(0)).connect(reg(new Tone.Filter(900,'lowpass')).connect(rev));
+  const air=reg(new Tone.Noise('pink'));air.volume.value=-18;air.connect(airGain);air.start();
+  breathMode={inhale:4,hold:0,exhale:6};
+  Tone.Transport.scheduleRepeat(t=>{
+    breathStamp=Date.now();
+    toneGain.gain.cancelScheduledValues(t);
+    toneGain.gain.setValueAtTime(toneGain.gain.value,t);
+    toneGain.gain.linearRampToValueAtTime(.5,t+4);      // вдох: тон растёт
+    toneGain.gain.linearRampToValueAtTime(.04,t+10);    // выдох: тон тает
+    airGain.gain.cancelScheduledValues(t);
+    airGain.gain.setValueAtTime(.0,t+4);
+    airGain.gain.linearRampToValueAtTime(.5,t+5.2);     // выдох ртом: воздух
+    airGain.gain.linearRampToValueAtTime(0,t+10);
+  },10);
+  Tone.Transport.bpm.value=55;Tone.Transport.start();
+}
+function startBreath478(){
+  const rev=space(.9,.5).connect(master.gain);
+  const drone=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-14,envelope:{attack:3,decay:1,sustain:1,release:5}})).connect(rev);
+  drone.triggerAttack('A2');
+  const toneGain=reg(new Tone.Gain(0)).connect(rev);
+  const voice=reg(new Tone.Synth({oscillator:{type:'fatsine',count:2,spread:6},volume:-11,envelope:{attack:.1,decay:.1,sustain:1,release:.2}}));
+  voice.connect(toneGain);voice.triggerAttack('A3');
+  const shimmer=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-22,envelope:{attack:1.5,decay:.5,sustain:1,release:2}}));
+  const shGain=reg(new Tone.Gain(0)).connect(rev);shimmer.connect(shGain);shimmer.triggerAttack('E4');
+  const airGain=reg(new Tone.Gain(0)).connect(reg(new Tone.Filter(800,'lowpass')).connect(rev));
+  const air=reg(new Tone.Noise('pink'));air.volume.value=-16;air.connect(airGain);air.start();
+  breathMode={inhale:4,hold:7,exhale:8};
+  Tone.Transport.scheduleRepeat(t=>{
+    breathStamp=Date.now();
+    toneGain.gain.cancelScheduledValues(t);
+    toneGain.gain.setValueAtTime(toneGain.gain.value,t);
+    toneGain.gain.linearRampToValueAtTime(.5,t+4);       // вдох
+    toneGain.gain.setValueAtTime(.5,t+4);
+    toneGain.gain.linearRampToValueAtTime(.35,t+11);     // задержка: тон держится
+    toneGain.gain.linearRampToValueAtTime(.03,t+19);     // выдох
+    shGain.gain.cancelScheduledValues(t);
+    shGain.gain.setValueAtTime(0,t+4);
+    shGain.gain.linearRampToValueAtTime(.4,t+6);         // мерцание на задержке
+    shGain.gain.linearRampToValueAtTime(0,t+12);
+    airGain.gain.cancelScheduledValues(t);
+    airGain.gain.setValueAtTime(0,t+11);
+    airGain.gain.linearRampToValueAtTime(.55,t+13);      // долгий выдох ртом
+    airGain.gain.linearRampToValueAtTime(0,t+19);
+  },19);
+  Tone.Transport.bpm.value=55;Tone.Transport.start();
+}
+function startHum(){
+  const rev=space(.9,.5).connect(master.gain);
+  const root=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-11,envelope:{attack:3,decay:1,sustain:1,release:6}})).connect(rev);
+  root.triggerAttack('A2');
+  const sub=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-17,envelope:{attack:4,decay:1,sustain:1,release:6}})).connect(rev);
+  sub.triggerAttack('A1');
+  // диджериду-слой: формантное движение
+  const didg=reg(new Tone.MonoSynth({oscillator:{type:'sawtooth'},volume:-24,envelope:{attack:3,decay:1,sustain:1,release:5},filterEnvelope:{attack:2,decay:1,sustain:1,baseFrequency:120,octaves:1}}));
+  const formant=reg(new Tone.AutoFilter({frequency:.07,baseFrequency:140,octaves:2.6,filter:{type:'bandpass',Q:2.5}}).start());
+  didg.connect(formant);formant.connect(rev);
+  didg.triggerAttack('A1');
+  // обертоновые голоса приходят и уходят
+  const partials=[220,330,440,660].map(f=>{
+    const g=reg(new Tone.Gain(0)).connect(rev);
+    const o=reg(new Tone.Oscillator(f,'sine'));o.volume.value=-16;o.connect(g);o.start();
+    return g;
+  });
+  Tone.Transport.scheduleRepeat(t=>{
+    const g=pick(partials);
+    g.gain.cancelScheduledValues(t);
+    g.gain.linearRampToValueAtTime(Math.random()*.28,t+2.5);
+    g.gain.linearRampToValueAtTime(0,t+7);
+  },'4s');
+  Tone.Transport.bpm.value=56;Tone.Transport.start();
+}
+function startPauses(){
+  const rev=space(.92,.55).connect(master.gain);
+  const pan=reg(new Tone.Panner(0)).connect(rev);
+  const voice=reg(new Tone.FMSynth({harmonicity:1.5,modulationIndex:3,volume:-10,envelope:{attack:.6,decay:2,sustain:.3,release:5}})).connect(pan);
+  const low=reg(new Tone.Synth({oscillator:{type:'triangle'},volume:-16,envelope:{attack:2,decay:1,sustain:.8,release:6}})).connect(rev);
+  const scale=['G3','Bb3','C4','D4','F4','G4'];
+  let pause=8;
+  function phrase(){
+    if(!nodes.includes(voice))return;
+    silencePhase=false;
+    statusEl.innerHTML='звучит: <b>Паузы</b> · фраза';
+    low.triggerAttackRelease('G2','14s');
+    const n=5+Math.floor(Math.random()*3);
+    for(let i=0;i<n;i++){
+      const t=human(Tone.now()+i*(1.8+Math.random()*.9));
+      pan.pan.setValueAtTime((Math.random()*2-1)*.45,t-.01);
+      voice.triggerAttackRelease(pick(scale),pick(['2n','1n']),t);
+    }
+    const dur=n*2.3+3;
+    pauseTimer=setTimeout(()=>{
+      silencePhase=true;
+      statusEl.innerHTML='звучит: <b>Паузы</b> · тишина '+Math.round(pause)+' с · ничего не делайте';
+      pauseTimer=setTimeout(()=>{pause=Math.min(30,pause+4);phrase();},pause*1000);
+    },dur*1000);
+  }
+  Tone.Transport.bpm.value=56;Tone.Transport.start();
+  phrase();
+}
+
+/* ---- II. состояния ---- */
+function startAnxiety(){
+  const filt=reg(new Tone.Filter(420,'lowpass')).connect(master.gain);
+  const rev=space(.9,.5).connect(filt);
+  const pad=reg(new Tone.PolySynth(Tone.Synth,{oscillator:{type:'sine'},volume:-8,envelope:{attack:6,decay:2,sustain:.9,release:10}})).connect(rev);
+  pad.triggerAttack(['C2','G2','C3']);
+  const shimPan=reg(new Tone.AutoPanner({frequency:.04,depth:.45}).start());
+  const shimmer=reg(new Tone.PolySynth(Tone.Synth,{oscillator:{type:'sine',detune:6},volume:-22,envelope:{attack:8,decay:3,sustain:.7,release:12}}));
+  shimmer.connect(shimPan);shimPan.connect(rev);
+  shimmer.triggerAttack(['G4','C5']);
+  const lfo=reg(new Tone.LFO({frequency:.05,min:260,max:520})).connect(filt.frequency);lfo.start();
+  const bell=reg(new Tone.FMSynth({harmonicity:2.5,modulationIndex:6,volume:-17,envelope:{attack:.5,decay:3,sustain:0,release:5}})).connect(rev);
+  Tone.Transport.scheduleRepeat(t=>{if(maybe(.55))bell.triggerAttackRelease(pick(['C4','G3','E4']),'2n',human(t));},'8s');
+  Tone.Transport.bpm.value=60;Tone.Transport.start();
+}
+function startSadness(){
+  const rev=space(.92,.6).connect(master.gain);
+  const del=reg(new Tone.FeedbackDelay('4n',.35)).connect(rev);del.wet.value=.3;
+  const vPan=reg(new Tone.AutoPanner({frequency:.06,depth:.4}).start());
+  const voice=reg(new Tone.FMSynth({harmonicity:1.5,modulationIndex:3,volume:-10,envelope:{attack:.8,decay:2,sustain:.3,release:6}}));
+  voice.connect(vPan);vPan.connect(del);
+  const low=reg(new Tone.Synth({oscillator:{type:'triangle'},volume:-14,envelope:{attack:4,decay:2,sustain:.8,release:8}})).connect(rev);
+  low.triggerAttack('D2');
+  const pad=reg(new Tone.PolySynth(Tone.Synth,{oscillator:{type:'sine'},volume:-20,envelope:{attack:6,decay:3,sustain:.6,release:10}})).connect(rev);
+  pad.triggerAttack(['D3','A3','F4']);
+  const scale=['D3','F3','G3','A3','C4','D4','F4'];
+  let ph=0;
+  Tone.Transport.scheduleRepeat(t=>{
+    ph=(ph+1)%90;
+    const wave=Math.sin(ph/90*Math.PI);
+    if(maybe(.35+wave*.5))voice.triggerAttackRelease(pick(scale),pick(['2n','1n']),human(t));
+  },'3.5s');
+  Tone.Transport.bpm.value=56;Tone.Transport.start();
+}
+function startEmptiness(){
+  const filt=reg(new Tone.Filter(1400,'lowpass')).connect(master.gain);
+  const rev=space(.85,.4).connect(filt);
+  const del=reg(new Tone.PingPongDelay('8n.',.3)).connect(rev);del.wet.value=.42;
+  const pluck=reg(new Tone.AMSynth({harmonicity:2,volume:-11,envelope:{attack:.02,decay:.6,sustain:.1,release:1.4}})).connect(del);
+  const pad=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-24,envelope:{attack:5,decay:2,sustain:.6,release:8}})).connect(rev);
+  pad.triggerAttack('A2');
+  const scale=['A3','C4','D4','E4','G4','A4','C5'];
+  let idx=2, rest=0;
+  Tone.Transport.scheduleRepeat(t=>{
+    if(rest>0){rest--;return;}
+    if(maybe(.08)){rest=2+Math.floor(Math.random()*3);return;}   // случайное молчание
+    if(maybe(.55)){
+      idx+=pick([-2,-1,-1,1,1,2]);                                // блуждание, не лестница
+      idx=Math.max(0,Math.min(scale.length-1,idx));
+      let note=scale[idx];
+      if(maybe(.12))note=Tone.Frequency(note).transpose(12).toNote(); // редкий прыжок октавой
+      pluck.volume.value=-14+Math.random()*6;
+      pluck.triggerAttackRelease(note,'8n',human(t));
+    }
+  },'0:0:3');
+  Tone.Transport.bpm.value=64;Tone.Transport.start();
+}
+function startAnger(){ // переписана: вес, свинг, накопление и сброс
+  const comp=reg(new Tone.Compressor(-16,3)).connect(master.gain);
+  const boomRev=space(.9,.9,900);boomRev.connect(comp);
+  const kick=reg(new Tone.MembraneSynth({volume:-5,octaves:7,pitchDecay:.12,envelope:{attack:.001,decay:.5,sustain:0,release:.4}})).connect(comp);
+  const sub=reg(new Tone.MonoSynth({oscillator:{type:'sine'},volume:-10,envelope:{attack:.005,decay:.3,sustain:0,release:.2},filterEnvelope:{baseFrequency:120,octaves:0}})).connect(comp);
+  const tom=reg(new Tone.MembraneSynth({volume:-12,octaves:4,pitchDecay:.08,envelope:{attack:.001,decay:.35,sustain:0,release:.3}})).connect(comp);
+  const shakF=reg(new Tone.Filter(5200,'bandpass')).connect(comp);
+  const shaker=reg(new Tone.NoiseSynth({volume:-27,envelope:{attack:.004,decay:.05,sustain:0}})).connect(shakF);
+  const droneF=reg(new Tone.Filter(240,'lowpass')).connect(comp);
+  const drone=reg(new Tone.MonoSynth({oscillator:{type:'fatsawtooth',count:3,spread:18},volume:-24,envelope:{attack:4,decay:2,sustain:1,release:6},filterEnvelope:{baseFrequency:200,octaves:0}})).connect(droneF);
+  drone.triggerAttack('E1');
+  const swellF=reg(new Tone.Filter(300,'lowpass')).connect(comp);
+  const swellG=reg(new Tone.Gain(0)).connect(swellF);
+  const swellN=reg(new Tone.Noise('white'));swellN.volume.value=-14;swellN.connect(swellG);swellN.start();
+  const crash=reg(new Tone.MetalSynth({volume:-20,envelope:{attack:.001,decay:1.6,release:1.2},harmonicity:4,resonance:700}));crash.connect(boomRev);
+  Tone.Transport.swing=.18;Tone.Transport.swingSubdivision='8n';
+  let step=0,bar=0,boomBar=-1;
+  Tone.Transport.scheduleRepeat(t=>{
+    const s=step%8;
+    if(s===0)bar++;
+    const cyc=bar%12;                       // цикл 12 тактов
+    const build=cyc/12;                     // напряжение растёт
+    if(cyc===10&&s===0){                    // подъём: шум ползёт вверх
+      swellG.gain.setValueAtTime(0,t);
+      swellG.gain.linearRampToValueAtTime(.6,t+4.2);
+      swellF.frequency.setValueAtTime(300,t);
+      swellF.frequency.linearRampToValueAtTime(3800,t+4.2);
+    }
+    if(cyc===0&&s===0&&bar>1){              // СБРОС
+      swellG.gain.cancelScheduledValues(t);swellG.gain.linearRampToValueAtTime(0,t+.15);
+      kick.triggerAttackRelease('A0','4n',t);
+      sub.triggerAttackRelease('E1','2n',t);
+      crash.triggerAttackRelease('8n',t);
+      boomBar=bar;
+    }
+    const sparse=(bar===boomBar);           // такт после сброса: почти тишина
+    if(!sparse){
+      if(s===0){kick.triggerAttackRelease('C1','8n',t);sub.triggerAttackRelease('E1','8n',t);}
+      if(s===6&&maybe(.75)){kick.triggerAttackRelease('C1','8n',t);sub.triggerAttackRelease('E1','8n',t);}
+      if(s===3&&maybe(.35+build*.4))tom.triggerAttackRelease('G1','8n',human(t));
+      if(s===7&&maybe(.25+build*.35))tom.triggerAttackRelease('B1','8n',human(t));
+    }
+    step++;
+  },'8n');
+  Tone.Transport.scheduleRepeat(t=>{
+    const cyc=(bar%12)/12;
+    if(maybe(.25+cyc*.45))shaker.triggerAttackRelease('16n',human(t));
+  },'16n');
+  Tone.Transport.bpm.value=88;Tone.Transport.start();
+}
+function startArousal(){
+  const filt=reg(new Tone.Filter(1800,'lowpass')).connect(master.gain);
+  const rev=space(.88,.45).connect(filt);
+  const aPan=reg(new Tone.AutoPanner({frequency:.06,depth:.5}).start());
+  const arp=reg(new Tone.AMSynth({harmonicity:1.5,volume:-13,envelope:{attack:.05,decay:.5,sustain:.2,release:1.2}}));
+  arp.connect(aPan);aPan.connect(rev);
+  const pad=reg(new Tone.PolySynth(Tone.Synth,{oscillator:{type:'fatsine',count:2,spread:8},volume:-15,envelope:{attack:5,decay:2,sustain:.8,release:9}})).connect(rev);
+  const chords=[['G2','D3','A3'],['E2','B2','G3']];
+  let ci=0;pad.triggerAttack(chords[0]);
+  Tone.Transport.scheduleRepeat(t=>{pad.releaseAll(t);ci=(ci+1)%2;pad.triggerAttack(chords[ci],t+.6);},'20s');
+  const scale=['G3','A3','B3','D4','E4','G4'];
+  Tone.Transport.scheduleRepeat(t=>{
+    if(maybe(.8)){arp.volume.value=-16+Math.random()*6;arp.triggerAttackRelease(pick(scale),'8n',human(t));}
+  },'0:0:2');
+  Tone.Transport.bpm.value=84;Tone.Transport.start();
+  Tone.Transport.bpm.rampTo(52,240);filt.frequency.rampTo(650,240);
+}
+function startDissoc(){ // билатеральность теперь сухая и явная
+  const room=space(.5,.15).connect(master.gain);
+  const heartF=reg(new Tone.Filter(170,'lowpass')).connect(room);
+  const heart=reg(new Tone.MembraneSynth({volume:-9,octaves:1.6,pitchDecay:.02,envelope:{attack:.002,decay:.35,sustain:0,release:.25}})).connect(heartF);
+  const tickPan=reg(new Tone.Panner(0)).connect(master.gain);   // сухо, мимо реверба
+  const tick=reg(new Tone.Synth({oscillator:{type:'triangle'},volume:-15,envelope:{attack:.03,decay:.22,sustain:0,release:.25}})).connect(tickPan);
+  const padPan=reg(new Tone.AutoPanner({frequency:.05,depth:.65}).start());
+  const pad=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-22,envelope:{attack:5,decay:2,sustain:.8,release:8}}));
+  pad.connect(padPan);padPan.connect(room);
+  pad.triggerAttack('A2');
+  bilateral=true;
+  let beat=0;
+  Tone.Transport.scheduleRepeat(t=>{
+    heart.triggerAttackRelease('C1','16n',t);
+    heart.triggerAttackRelease('B0','16n',t+.22);
+    const side=beat%2===0?-.9:.9;
+    tickPan.pan.setValueAtTime(side,t+.4);
+    tick.triggerAttackRelease('A3','16n',t+.5);
+    beat++;
+  },'1n');
+  Tone.Transport.bpm.value=60;Tone.Transport.start();
+}
+
+/* ---- III. эмбиент ---- */
+function startWarmth(){
+  const filt=reg(new Tone.Filter(1000,'lowpass')).connect(master.gain);
+  const rev=space(.85,.35).connect(filt);
+  const chorus=reg(new Tone.Chorus({frequency:1.4,delayTime:3.5,depth:.7,wet:.45}).start()).connect(rev);
+  const pad=reg(new Tone.PolySynth(Tone.Synth,{oscillator:{type:'fattriangle',count:3,spread:14},volume:-19,envelope:{attack:4,decay:2,sustain:.85,release:8}})).connect(chorus);
+  const chords=[['F2','C3','A3'],['Bb2','F3','D4'],['F2','C3','A3'],['C3','G3','E4']];
+  let ci=0;pad.triggerAttack(chords[0]);
+  Tone.Transport.scheduleRepeat(t=>{pad.releaseAll(t);ci=(ci+1)%chords.length;pad.triggerAttack(chords[ci],t+.5);},'22s');
+  const padLfo=reg(new Tone.LFO({frequency:.05,min:650,max:1150})).connect(filt.frequency);padLfo.start();
+  // ламповые потрескивания: каждое в своей точке стерео
+  const crPan=reg(new Tone.Panner(0)).connect(master.gain);
+  const crackle=reg(new Tone.NoiseSynth({volume:-27,envelope:{attack:.001,decay:.014,sustain:0}})).connect(reg(new Tone.Filter(3400,'highpass')).connect(crPan));
+  Tone.Transport.scheduleRepeat(t=>{
+    if(maybe(.22)){crPan.pan.setValueAtTime(Math.random()*2-1,t-.005);crackle.volume.value=-30+Math.random()*7;crackle.triggerAttackRelease('64n',human(t));}
+  },'16n');
+  // близкие переборы, сухие, у ушка
+  const plPan=reg(new Tone.Panner(0)).connect(master.gain);
+  const pluck=reg(new Tone.PluckSynth({volume:-13,resonance:.96,dampening:3200})).connect(plPan);
+  const plWet=reg(new Tone.Gain(.18)).connect(rev);pluck.connect(plWet);
+  const scale=['F3','A3','C4','F4','G4','A4','C5'];
+  let ph=0;
+  Tone.Transport.scheduleRepeat(t=>{
+    ph=(ph+1)%70;
+    const wave=Math.sin(ph/70*Math.PI);
+    if(maybe(.25+wave*.45)){plPan.pan.setValueAtTime((Math.random()*2-1)*.55,t-.01);pluck.triggerAttack(pick(scale),human(t));}
+  },'2s');
+  Tone.Transport.bpm.value=58;Tone.Transport.start();
+}
+function startInsomnia(){
+  const filt=reg(new Tone.Filter(500,'lowpass')).connect(master.gain);
+  const rev=space(.95,.65).connect(filt);
+  // ветер: слышимый, дышит
+  const windG=reg(new Tone.Gain(.12)).connect(filt);
+  const wind=reg(new Tone.Noise('pink'));wind.volume.value=-10;wind.connect(windG);wind.start();
+  const windLfo=reg(new Tone.LFO({frequency:.02,min:.04,max:.16})).connect(windG.gain);windLfo.start();
+  const padPan=reg(new Tone.AutoPanner({frequency:.03,depth:.5}).start());
+  const pad=reg(new Tone.PolySynth(Tone.Synth,{oscillator:{type:'fatsine',count:2,spread:6},volume:-14,envelope:{attack:8,decay:4,sustain:.7,release:14}}));
+  pad.connect(padPan);padPan.connect(rev);
+  const chords=[['C2','G2'],['Ab1','Eb2'],['C2','G2'],['F2','C3']];
+  let ci=0;pad.triggerAttack(chords[0]);
+  Tone.Transport.scheduleRepeat(t=>{pad.releaseAll(t);ci=(ci+1)%chords.length;pad.triggerAttack(chords[ci],t+1);},'30s');
+  // магия: редкие колокольчики издалека
+  const bellPan=reg(new Tone.Panner(0)).connect(rev);
+  const bell=reg(new Tone.FMSynth({harmonicity:3.01,modulationIndex:14,volume:-26,envelope:{attack:.01,decay:4,sustain:0,release:6}})).connect(bellPan);
+  Tone.Transport.scheduleRepeat(t=>{
+    if(maybe(.5)){bellPan.pan.setValueAtTime(Math.random()*2-1,t-.01);bell.triggerAttackRelease(pick(['E5','G5','C6','B5']),'1m',human(t));}
+  },'14s');
+  const lfo=reg(new Tone.LFO({frequency:.03,min:220,max:430})).connect(filt.frequency);lfo.start();
+  Tone.Transport.bpm.value=44;Tone.Transport.start();
+  Tone.Transport.bpm.rampTo(38,300);
+}
+function startFocus(){
+  const comp=reg(new Tone.Compressor(-20,3)).connect(master.gain);
+  // тёплый шум: слышимый
+  const nzF=reg(new Tone.Filter(1400,'lowpass')).connect(comp);
+  const nzG=reg(new Tone.Gain(.13)).connect(nzF);
+  const nz=reg(new Tone.Noise('pink'));nz.volume.value=-10;nz.connect(nzG);nz.start();
+  const nzLfo=reg(new Tone.LFO({frequency:.04,min:.08,max:.16})).connect(nzG.gain);nzLfo.start();
+  const rev=space(.8,.4).connect(comp);
+  const kick=reg(new Tone.MembraneSynth({volume:-17,octaves:2,pitchDecay:.03,envelope:{attack:.001,decay:.3,sustain:0,release:.2}})).connect(comp);
+  const rimF=reg(new Tone.Filter(2100,'bandpass')).connect(comp);
+  const rim=reg(new Tone.NoiseSynth({volume:-21,envelope:{attack:.001,decay:.03,sustain:0}})).connect(rimF);
+  const keys=reg(new Tone.PolySynth(Tone.AMSynth,{harmonicity:2,volume:-21,envelope:{attack:.4,decay:1.5,sustain:.3,release:3}})).connect(reg(new Tone.Chorus({frequency:.8,delayTime:4,depth:.5,wet:.35}).start()).connect(rev));
+  const kchords=[['A3','C4','E4'],['G3','B3','D4'],['F3','A3','C4']];
+  Tone.Transport.swing=.12;Tone.Transport.swingSubdivision='16n';
+  let step=0;
+  Tone.Transport.scheduleRepeat(t=>{
+    const s=step%8;
+    if(s===0&&maybe(.9))kick.triggerAttackRelease('C2','16n',t);
+    if(s===4&&maybe(.5))kick.triggerAttackRelease('C2','16n',t);
+    if(s%2===1&&maybe(.55)){rim.volume.value=-23+Math.random()*5;rim.triggerAttackRelease('32n',human(t));}
+    step++;
+  },'8n');
+  Tone.Transport.scheduleRepeat(t=>{if(maybe(.65))keys.triggerAttackRelease(pick(kchords),'2n',human(t));},'8s');
+  Tone.Transport.bpm.value=74;Tone.Transport.start();
+}
+
+const ENGINES={breath:startBreath,breath478:startBreath478,hum:startHum,pauses:startPauses,
+  anxiety:startAnxiety,sadness:startSadness,emptiness:startEmptiness,anger:startAnger,arousal:startArousal,dissoc:startDissoc,
+  warmth:startWarmth,insomnia:startInsomnia,focus:startFocus};
+const LABELS={};
+Object.values(CATALOG).flat().forEach(c=>LABELS[c.id]=c.t+' · '+c.em);
+
+/* ================= UI ================= */
+const statusEl=document.getElementById('status'),volEl=document.getElementById('vol'),hintEl=document.getElementById('hint');
+
+Object.entries(CATALOG).forEach(([g,items])=>{
+  const box=document.getElementById('g-'+g);
+  items.forEach(c=>{
+    const d=document.createElement('div');
+    d.className='card';d.id='card-'+c.id;
+    d.innerHTML=`<span class="dot"></span>
+      <h3 data-id="${c.id}">${c.t} · <em>${c.em}</em></h3>
+      <p class="why" data-id="${c.id}">${c.why}</p>
+      <div class="row"><button class="play" data-id="${c.id}">Начать</button>
+      <button class="how" data-x="x-${c.id}">как слушать</button></div>
+      <div class="exp" id="x-${c.id}"><div class="inner">${c.how}</div></div>`;
+    box.appendChild(d);
+  });
+});
+document.querySelectorAll('.play, .card h3, .card p.why').forEach(el=>el.addEventListener('click',()=>select(el.dataset.id)));
+document.querySelectorAll('.how').forEach(b=>b.addEventListener('click',()=>{
+  const x=document.getElementById(b.dataset.x);
+  x.style.maxHeight=x.style.maxHeight&&x.style.maxHeight!=='0px'?'0px':x.scrollHeight+'px';
+}));
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  document.querySelectorAll('.group').forEach(x=>x.classList.remove('on'));
+  document.getElementById('g-'+b.dataset.g).classList.add('on');
+}));
+
+async function select(id){
+  await Tone.start();
+  if(!master.gain){
+    master.gain=new Tone.Gain(1);
+    master.analyser=new Tone.Analyser('waveform',1024);
+    const lim=new Tone.Limiter(-2);
+    master.gain.connect(master.analyser);
+    master.gain.connect(lim);lim.toDestination();
+    Tone.Destination.volume.value=db(volEl.value);
+  }
+  master.gain.gain.cancelScheduledValues(Tone.now());
+  master.gain.gain.rampTo(0,.8);
+  setTimeout(()=>{
+    killAll();
+    master.gain.gain.rampTo(1,1.2);
+    ENGINES[id]();
+    current=id;
+    armLimit();
+    document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+    document.getElementById('card-'+id).classList.add('active');
+    document.querySelectorAll('.play').forEach(x=>x.textContent='Начать');
+    document.querySelector('#card-'+id+' .play').textContent='Звучит';
+    if(id!=='pauses'){
+      statusEl.innerHTML='звучит: <b>'+LABELS[id]+'</b>'
+        +(id==='arousal'?' · темп снижается ~4 минуты':'')
+        +(id==='insomnia'?' · будет всё медленнее':'');
+    }
+    hintEl.style.opacity=0;
+  },850);
+}
+function fadeStop(msg){
+  if(!master.gain)return;
+  master.gain.gain.rampTo(0,2);
+  setTimeout(()=>{killAll();current=null;
+    document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+    document.querySelectorAll('.play').forEach(x=>x.textContent='Начать');
+    statusEl.textContent=msg||'Тишина тоже звук.';hintEl.style.opacity=1;},2100);
+}
+document.getElementById('stopBtn').addEventListener('click',()=>fadeStop());
+volEl.addEventListener('input',e=>{if(Tone&&Tone.Destination)Tone.Destination.volume.rampTo(db(e.target.value),.1);});
+document.querySelectorAll('.tchip').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tchip').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');limitMin=+b.dataset.m;armLimit();
+}));
+function armLimit(){
+  if(limitTimer){clearTimeout(limitTimer);limitTimer=null;}
+  if(limitMin>0&&current){limitTimer=setTimeout(()=>fadeStop('Таймер: звук погас сам. Спокойной.'),limitMin*60000);}
+}
+
+/* ================= ЧАСТИЦЫ ================= */
+const canvas=document.getElementById('viz'),ctx=canvas.getContext('2d');
+const dpr=Math.min(2,window.devicePixelRatio||1);
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function resize(){canvas.width=canvas.clientWidth*dpr;canvas.height=canvas.clientHeight*dpr;}
+window.addEventListener('resize',resize);resize();
+
+const N=92,P=[];
+const COLORS=['#6E7FF0','#6E7FF0','#9FB0FF','#F4F3EA'];
+for(let i=0;i<N;i++)P.push({
+  a:Math.random()*Math.PI*2, r:Math.pow(Math.random(),.7),
+  sp:.2+Math.random()*.9, tw:Math.random()*Math.PI*2,
+  c:COLORS[Math.floor(Math.random()*COLORS.length)],
+  px:null, py:null
+});
+let phase=0;
+
+function amp(){
+  if(!master.analyser)return 0;
+  const buf=master.analyser.getValue();let s=0;
+  for(let i=0;i<buf.length;i++)s+=buf[i]*buf[i];
+  return Math.sqrt(s/buf.length);
+}
+function breathPhase(){
+  if(!breathMode)return null;
+  const {inhale,hold,exhale}=breathMode;
+  const cyc=inhale+hold+exhale;
+  const el=((Date.now()-breathStamp)/1000)%cyc;
+  if(el<inhale)return{name:'вдох · носом',b:el/inhale,tIn:el,tLeft:inhale-el};
+  if(el<inhale+hold)return{name:'задержка',b:1,tIn:el-inhale,tLeft:inhale+hold-el};
+  const e=el-inhale-hold;
+  return{name:'выдох · ртом, длиннее',b:1-e/exhale,tIn:e,tLeft:exhale-e};
+}
+
+function draw(){
+  requestAnimationFrame(draw);
+  const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h);
+  phase+=1/60;
+  const active=!!current;
+  const a=active?amp():0;
+  const dimmed=silencePhase?.35:1;
+  const cx=w/2+(bilateral?Math.sin(phase*Math.PI)*w*.14:0), cy=h/2;
+  const bp=breathStamp?breathPhase():null;
+  const breathing=!!bp;
+  const ringR=breathing?Math.min(w,h)*(0.18+bp.b*0.3):0;
+
+  ctx.shadowColor='#6E7FF0';
+  P.forEach((p,i)=>{
+    let tx,ty;
+    if(breathing){
+      const ang=(i/N)*Math.PI*2+phase*.05;
+      const jit=Math.sin(phase*1.6+p.tw)*3*dpr;
+      tx=cx+Math.cos(ang)*(ringR+jit);
+      ty=cy+Math.sin(ang)*(ringR+jit)*.85;
+    } else {
+      if(!reduced)p.a+=(active?p.sp:.12)*.008*(1+a*4);
+      const spread=Math.min(w,h)*(0.24+a*0.95);
+      const rr=p.r*spread+(active?Math.sin(phase*2+p.r*10)*a*40*dpr:0);
+      tx=cx+Math.cos(p.a)*rr;
+      ty=cy+Math.sin(p.a)*rr*0.62;
+    }
+    if(p.px===null){p.px=tx;p.py=ty;}
+    const k=breathing?.1:.25;
+    p.px+=(tx-p.px)*k;p.py+=(ty-p.py)*k;
+    const tw=.55+Math.sin(phase*2.3+p.tw)*.45;
+    ctx.shadowBlur=(active?9:4)*dpr*tw;
+    ctx.beginPath();ctx.arc(p.px,p.py,(1+p.r*1.7+a*3)*dpr*tw,0,Math.PI*2);
+    ctx.fillStyle=p.c;
+    ctx.globalAlpha=(active?.38+p.r*.4:.16)*dimmed*tw;
+    ctx.fill();
+  });
+  ctx.shadowBlur=0;ctx.globalAlpha=1;
+
+  if(breathing){
+    const fade=Math.min(1, bp.tIn*1.4, bp.tLeft*1.4);   // плавное появление и угасание
+    ctx.fillStyle='#C9CEE6';
+    ctx.font='italic '+(15*dpr)+'px "Old Standard TT", serif';
+    ctx.textAlign='center';
+    ctx.globalAlpha=.85*fade;
+    ctx.fillText(bp.name,cx,cy+5*dpr);
+    ctx.globalAlpha=1;
+  }
+}
+draw();
+</script>
+
+</body>
+</html>
