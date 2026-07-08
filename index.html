@@ -420,17 +420,22 @@ footer .fine{margin-top:20px;max-width:46em;font-size:.8rem;opacity:.8}
   <div class="wrap">
     <p class="sec-label">Связаться</p>
     <h2>Первый шаг: записаться на знакомство</h2>
-    <p>Эта форма записывает вас на бесплатное знакомство: видеозвонок на 15-20 минут, где мы уточним запрос, посмотрим друг на друга и решим, идём ли дальше. Очные встречи я назначаю после такого созвона. Отвечаю лично, обычно в течение дня.</p>
-    <!-- ФОРМА: сейчас работает через почтовый клиент посетителя (mailto).
-         После регистрации на formspree.io заменить onsubmit на:
-         action="https://formspree.io/f/ТВОЙ_ID" method="POST" -->
-    <form onsubmit="event.preventDefault();const n=this.name.value,c=this.contact.value,m=this.msg.value;location.href='mailto:anyapavlenk@gmail.com?subject='+encodeURIComponent('Знакомство с психологом: '+n)+'&body='+encodeURIComponent(m+'\n\nКонтакт: '+c);">
+    <p>Эта форма записывает вас через e-mail на бесплатное знакомство: видеозвонок на 15-20 минут, где мы уточним запрос, посмотрим друг на друга и решим, идём ли дальше. Очные встречи я назначаю после такого созвона. Отвечаю лично, обычно в течение дня.</p>
+    
+    <form onsubmit="event.preventDefault();const n=this.name.value,c=this.contact.value,m=this.msg.value;location.href='mailto:anyapavlenk@gmail.com?subject='+encodeURIComponent('Знакомство с психологом: '+n)+'&body='+encodeURIComponent(m+'\n\nКонтакт: '+c); setTimeout(() => { window.location.href = 'index.html'; }, 1000);">
       <input name="name" placeholder="Как к вам обращаться" required>
       <input name="contact" placeholder="Ваш e-mail для ответа" required>
       <textarea name="msg" placeholder="Пара слов о запросе (необязательно)"></textarea>
       <button class="btn" type="submit">Записаться на знакомство</button>
     </form>
-    <p style="margin-top:28px;font-size:.9rem">Или напрямую: <a href="https://t.me/resonareart" target="_blank" rel="noopener">Telegram</a> · <a href="mailto:anyapavlenk@gmail.com">anyapavlenk@gmail.com</a></p>
+    
+    <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+      <a href="index.html" class="btn" style="background: transparent; border: 1px solid var(--line); color: var(--night-soft); padding: 8px 20px; font-size: 0.9rem; text-decoration: none; border-radius: 2px;">← На главную</a>
+      <span style="color: var(--dim); font-size: 0.85rem;">или напишите напрямую:</span>
+      <a href="https://t.me/resonareart" target="_blank" rel="noopener" style="color: var(--blue-soft);">Telegram</a>
+      <span style="color: var(--dim);">·</span>
+      <a href="mailto:anyapavlenk@gmail.com" style="color: var(--blue-soft);">anyapavlenk@gmail.com</a>
+    </div>
   </div>
 </section>
 
