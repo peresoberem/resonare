@@ -420,11 +420,11 @@ footer .fine{margin-top:20px;max-width:46em;font-size:.8rem;opacity:.8}
   <div class="wrap">
     <p class="sec-label">Связаться</p>
     <h2>Первый шаг: записаться на знакомство</h2>
-    <p>Эта форма записывает вас на бесплатное знакомство: видеозвонок минут на двадцать, где мы уточним запрос, посмотрим друг на друга и решим, идём ли дальше. Очные встречи я назначаю после такого созвона. Отвечаю лично, обычно в течение дня.</p>
+    <p>Эта форма записывает вас на бесплатное знакомство: видеозвонок на 15-20 минут, где мы уточним запрос, посмотрим друг на друга и решим, идём ли дальше. Очные встречи я назначаю после такого созвона. Отвечаю лично, обычно в течение дня.</p>
     <!-- ФОРМА: сейчас работает через почтовый клиент посетителя (mailto).
          После регистрации на formspree.io заменить onsubmit на:
          action="https://formspree.io/f/ТВОЙ_ID" method="POST" -->
-    <form onsubmit="event.preventDefault();const n=this.name.value,c=this.contact.value,m=this.msg.value;location.href='mailto:anyapavlenk@gmail.com?subject='+encodeURIComponent('Знакомство с сайта resonare: '+n)+'&body='+encodeURIComponent(m+'\n\nКонтакт: '+c);">
+    <form onsubmit="event.preventDefault();const n=this.name.value,c=this.contact.value,m=this.msg.value;location.href='mailto:anyapavlenk@gmail.com?subject='+encodeURIComponent('Знакомство с психологом: '+n)+'&body='+encodeURIComponent(m+'\n\nКонтакт: '+c);">
       <input name="name" placeholder="Как к вам обращаться" required>
       <input name="contact" placeholder="Ваш e-mail для ответа" required>
       <textarea name="msg" placeholder="Пара слов о запросе (необязательно)"></textarea>
