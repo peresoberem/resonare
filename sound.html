@@ -234,7 +234,7 @@ practices: [
  {id:'breath', t:'Дыхание', em:'выдох длиннее', why:'Длинный выдох включает тормозную ветвь нервной системы: пульс и мысли замедляются.',
   how:`<p><b>Как.</b> Вдох носом, пока круг из частиц растёт. Выдох ртом, мягко и без усилия, можно со звуком: выдох здесь длиннее вдоха, и это не случайно.</p><p><b>Сколько.</b> 3–5 минут. Что можно вынести: спокойнее дыхание, тише внутри, а иногда просто паузу среди дня, и это тоже результат.</p><p>Если закружилась голова, вернитесь к обычному дыханию: это сигнал остановиться, а не стараться сильнее.</p>`},
  {id:'breath478', t:'Дыхание', em:'4 · 7 · 8', why:'Формула с задержкой: вдох на 4, пауза на 7, выдох на 8. Многим помогает перед сном.',
-  how:`<p><b>Как.</b> Можно с закрытыми глазами, звук сам ведёт: на вдохе растёт мягкий тон, на задержке шуршат камушки у самого уха, на долгом выдохе откатывает волна. Достаточно 4–6 циклов.</p><p><b>Честно.</b> Строгих исследований именно этой формулы немного, но длинный выдох в её основе изучен хорошо. Если задержка некомфортна (сильная тревога, давление, беременность), выбирайте ровное дыхание рядом.</p>`},
+  how:`<p><b>Как.</b> Можно с закрытыми глазами, звук сам ведёт: каждая фаза звучит по-своему — на вдохе звук растёт, на задержке живёт тихо, на долгом выдохе длинно откатывает. Достаточно 4–6 циклов.</p><p><b>Честно.</b> Строгих исследований именно этой формулы немного, но длинный выдох в её основе изучен хорошо. Если задержка некомфортна (сильная тревога, давление, беременность), выбирайте ровное дыхание рядом.</p>`},
  {id:'hum', t:'Гудение', em:'звук изнутри', why:'Вибрация собственного голоса массирует изнутри: грудь, горло, лицо. Простой способ найти тело, когда оно потерялось.',
   how:`<p><b>Как.</b> Вдох носом. На выдохе тяните «м-м-м» с закрытым ртом, тихо и без усилия. Внизу гудит один низкий тон, а голоса вступают по очереди, тянут и умолкают — как будто рядом мычат несколько человек. Присоединяйтесь любым из своих голосов.</p><p><b>Сколько.</b> 8–10 выдохов. Возможные эффекты: тепло в груди, зевота (отличный знак), или просто смешно, что тоже считается.</p>`},
  {id:'pauses', t:'Паузы', em:'тишина работает', why:'Тишина после звука успокаивает сильнее самого звука: в паузе тело догоняет услышанное.',
@@ -313,8 +313,7 @@ function startBreath(){ // вдох 4 (нос), выдох 6 (рот)
 }
 function startBreath478(){
   /* Жёсткая сетка цикла 19 c: ВДОХ 0–4 · ЗАДЕРЖКА 4–11 · ВЫДОХ 11–19.
-     Каждая фаза — свой звук, границы совпадают с визуализацией,
-     потому что и звук, и круг читают одни и те же часы транспорта. */
+     Звук и круг читают одни часы транспорта — разойтись не могут. */
   const rev=space(.9,.5).connect(master.gain);
   const drone=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-17,envelope:{attack:3,decay:1,sustain:1,release:5}})).connect(rev);
   drone.triggerAttack('A2');
@@ -322,20 +321,21 @@ function startBreath478(){
   const toneGain=reg(new Tone.Gain(0)).connect(rev);
   const voice=reg(new Tone.Synth({oscillator:{type:'fatsine',count:2,spread:6},volume:-11,envelope:{attack:.1,decay:.1,sustain:1,release:.2}}));
   voice.connect(toneGain);voice.triggerAttack('A3');
-  // ЗАДЕРЖКА: камушки — низкие, редкие, объёмные, «у самого уха»:
-  // коричневый шум вместо розового (ниже и круглее), полоса ~0.8–1.4 кГц вместо 1.8–4,
-  // каждый камушек в своей точке стерео, почти без реверба — сухость и создаёт близость
+  // ЗАДЕРЖКА: перекаты — едва уловимые, круглые, редкие, у самого уха
   const pebPan=reg(new Tone.Panner(0));
-  const pebF=reg(new Tone.Filter(1100,'bandpass'));pebF.Q.value=.9;
+  const pebF=reg(new Tone.Filter(800,'bandpass'));pebF.Q.value=.8;
   const pebGain=reg(new Tone.Gain(0));
   pebF.connect(pebPan);pebPan.connect(pebGain);
   pebGain.connect(master.gain);                          // сухо → близко
-  const pebWet=reg(new Tone.Gain(.13)).connect(rev);pebGain.connect(pebWet); // чуть воздуха
-  const peb=reg(new Tone.NoiseSynth({noise:{type:'brown'},volume:-9,envelope:{attack:.006,decay:.09,sustain:0}})).connect(pebF);
-  // ВЫДОХ: волна — стартует ровно на 11-й секунде
+  const pebWet=reg(new Tone.Gain(.1)).connect(rev);pebGain.connect(pebWet);
+  const peb=reg(new Tone.NoiseSynth({noise:{type:'brown'},volume:-14,envelope:{attack:.02,decay:.16,sustain:0}})).connect(pebF);
+  // ВЫДОХ: прибой — низкое тело волны + шипящая верхушка, у каждого своя огибающая
+  const bodyF=reg(new Tone.Filter(420,'lowpass')).connect(rev);
+  const gBody=reg(new Tone.Gain(0)).connect(bodyF);
+  const bodyN=reg(new Tone.Noise('brown'));bodyN.volume.value=-12;bodyN.connect(gBody);bodyN.start();
   const waveFilt=reg(new Tone.Filter(800,'lowpass')).connect(rev);
-  const airGain=reg(new Tone.Gain(0)).connect(waveFilt);
-  const air=reg(new Tone.Noise('pink'));air.volume.value=-16;air.connect(airGain);air.start();
+  const gHiss=reg(new Tone.Gain(0)).connect(waveFilt);
+  const hissN=reg(new Tone.Noise('pink'));hissN.volume.value=-16;hissN.connect(gHiss);hissN.start();
   breathMode={inhale:4,hold:7,exhale:8};
   Tone.Transport.scheduleRepeat(t=>{
     // 1) ВДОХ (0–4): только тон, каждый цикл новая нота
@@ -343,33 +343,40 @@ function startBreath478(){
     toneGain.gain.cancelScheduledValues(t);
     toneGain.gain.setValueAtTime(0,t);
     toneGain.gain.linearRampToValueAtTime(.5,t+4);       // растёт все 4 счёта
-    toneGain.gain.linearRampToValueAtTime(0,t+4.6);      // и быстро уступает камушкам
-    // 2) ЗАДЕРЖКА (4–11): огибающая камушков, вступает и уходит мягко
-    pebF.frequency.setValueAtTime(850+Math.random()*500,t+4);
+    toneGain.gain.linearRampToValueAtTime(0,t+4.6);
+    // 2) ЗАДЕРЖКА (4–11): тихая огибающая перекатов
+    pebF.frequency.setValueAtTime(600+Math.random()*400,t+4);
     pebGain.gain.cancelScheduledValues(t);
     pebGain.gain.setValueAtTime(0,t+4);
-    pebGain.gain.linearRampToValueAtTime(.8,t+4.8);
-    pebGain.gain.setValueAtTime(.8,t+10.2);
+    pebGain.gain.linearRampToValueAtTime(.55,t+5);
+    pebGain.gain.setValueAtTime(.55,t+10.2);
     pebGain.gain.linearRampToValueAtTime(0,t+11);
-    // 3) ВЫДОХ (11–19): волна поднялась и откатывает до конца цикла
+    // 3) ВЫДОХ (11–19): накат → первый спад → лёгкий возврат → длинный тающий откат
+    const pk=.4+Math.random()*.2;
     waveFilt.frequency.cancelScheduledValues(t);
-    waveFilt.frequency.setValueAtTime(750+Math.random()*450,t+11);
-    waveFilt.frequency.exponentialRampToValueAtTime(230+Math.random()*90,t+19);
-    airGain.gain.cancelScheduledValues(t);
-    airGain.gain.setValueAtTime(0,t+11);
-    airGain.gain.linearRampToValueAtTime(.45+Math.random()*.25,t+13);
-    airGain.gain.linearRampToValueAtTime(0,t+19);
-    // сами камушки: редкая случайная россыпь, каждый со своей стороны;
-    // время строго возрастает, любой сбой глотаем — ошибок в консоль не сыпет
-    try{
-      let pt=t+4.4;
-      while(pt<t+10.5){
-        pebPan.pan.setValueAtTime((Math.random()*2-1)*.8,pt-.01);
-        peb.volume.setValueAtTime(-12+Math.random()*6,pt-.01);
-        peb.triggerAttackRelease(.05,pt,.25+Math.random()*.75);
-        pt+=.25+Math.random()*.55;                       // пауза 0.25–0.8 c: реже и рандомнее
-      }
-    }catch(e){}
+    waveFilt.frequency.setValueAtTime(850+Math.random()*350,t+11);
+    waveFilt.frequency.exponentialRampToValueAtTime(260+Math.random()*80,t+18.5);
+    gHiss.gain.cancelScheduledValues(t);
+    gHiss.gain.setValueAtTime(0,t+11);
+    gHiss.gain.linearRampToValueAtTime(pk,t+12.6);
+    gHiss.gain.linearRampToValueAtTime(pk*.55,t+14.2);
+    gHiss.gain.linearRampToValueAtTime(pk*.7,t+15.3);    // неровность настоящей волны
+    gHiss.gain.setTargetAtTime(0,t+15.5,1.4);            // хвост тает, не обрубается
+    gBody.gain.cancelScheduledValues(t);
+    gBody.gain.setValueAtTime(0,t+11);
+    gBody.gain.linearRampToValueAtTime(pk*.8,t+12.2);
+    gBody.gain.setTargetAtTime(0,t+13.5,2.1);
+    // перекаты: редкие, тихие, каждый со своей стороны;
+    // каждый защищён отдельно — один сбой не гасит остальные
+    let pt=t+4.6;
+    while(pt<t+10.2){
+      try{
+        pebPan.pan.setValueAtTime((Math.random()*2-1)*.7,pt-.02);
+        peb.triggerAttackRelease(.09,pt,.12+Math.random()*.3);
+      }catch(e){}
+      pt+=.45+Math.random()*.75;                         // пауза 0.45–1.2 c
+      if(maybe(.3))pt-=.3;                               // иногда двойной перекат
+    }
   },19);
   Tone.Transport.bpm.value=55;Tone.Transport.start();
 }
