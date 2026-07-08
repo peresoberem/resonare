@@ -234,9 +234,9 @@ practices: [
  {id:'breath', t:'Дыхание', em:'выдох длиннее', why:'Длинный выдох включает тормозную ветвь нервной системы: пульс и мысли замедляются.',
   how:`<p><b>Как.</b> Вдох носом, пока круг из частиц растёт. Выдох ртом, мягко и без усилия, можно со звуком: выдох здесь длиннее вдоха, и это не случайно.</p><p><b>Сколько.</b> 3–5 минут. Что можно вынести: спокойнее дыхание, тише внутри, а иногда просто паузу среди дня, и это тоже результат.</p><p>Если закружилась голова, вернитесь к обычному дыханию: это сигнал остановиться, а не стараться сильнее.</p>`},
  {id:'breath478', t:'Дыхание', em:'4 · 7 · 8', why:'Формула с задержкой: вдох на 4, пауза на 7, выдох на 8. Многим помогает перед сном.',
-  how:`<p><b>Как.</b> Следуйте за кругом и подписями: вдох носом, задержка, длинный выдох через рот со звуком «ффх». Достаточно 4–6 циклов.</p><p><b>Честно.</b> Строгих исследований именно этой формулы немного, но длинный выдох в её основе изучен хорошо. Если задержка некомфортна (сильная тревога, давление, беременность), выбирайте ровное дыхание рядом.</p>`},
+  how:`<p><b>Как.</b> Можно с закрытыми глазами, звук сам ведёт: на вдохе растёт мягкий тон, на задержке шуршат камушки у самого уха, на долгом выдохе откатывает волна. Достаточно 4–6 циклов.</p><p><b>Честно.</b> Строгих исследований именно этой формулы немного, но длинный выдох в её основе изучен хорошо. Если задержка некомфортна (сильная тревога, давление, беременность), выбирайте ровное дыхание рядом.</p>`},
  {id:'hum', t:'Гудение', em:'звук изнутри', why:'Вибрация собственного голоса массирует изнутри: грудь, горло, лицо. Простой способ найти тело, когда оно потерялось.',
-  how:`<p><b>Как.</b> Вдох носом. На выдохе тяните «м-м-м» с закрытым ртом, тихо и без усилия, любой высоты. Слушайте, как ваш тон встречается с дроном и обертонами, они будут приходить и уходить сами.</p><p><b>Сколько.</b> 8–10 выдохов. Возможные эффекты: тепло в груди, зевота (отличный знак), или просто смешно, что тоже считается.</p>`},
+  how:`<p><b>Как.</b> Вдох носом. На выдохе тяните «м-м-м» с закрытым ртом, тихо и без усилия. Внизу гудит один низкий тон, а голоса вступают по очереди, тянут и умолкают — как будто рядом мычат несколько человек. Присоединяйтесь любым из своих голосов.</p><p><b>Сколько.</b> 8–10 выдохов. Возможные эффекты: тепло в груди, зевота (отличный знак), или просто смешно, что тоже считается.</p>`},
  {id:'pauses', t:'Паузы', em:'тишина работает', why:'Тишина после звука успокаивает сильнее самого звука: в паузе тело догоняет услышанное.',
   how:`<p><b>Как.</b> Фразу слушайте как чужой разговор в кафе, без задачи. Когда наступает тишина, ничего не делайте: просто заметьте, что происходит с телом, когда звук ушёл. Паузы будут расти, это задумано.</p><p><b>Что можно вынести.</b> От скуки до неожиданной ясности. Всё считается.</p>`},
 ],
@@ -268,7 +268,7 @@ ambient: [
 /* ================= ДВИЖОК ================= */
 let nodes=[], current=null, pauseTimer=null, limitTimer=null, silencePhase=false;
 const master={gain:null, analyser:null};
-let breathMode=null, breathStamp=0, bilateral=false, limitMin=0;
+let breathMode=null, bilateral=false, limitMin=0;
 
 function db(v){return -46+(v/100)*40;}
 function reg(...ns){ns.forEach(n=>nodes.push(n));return ns[0];}
@@ -300,7 +300,6 @@ function startBreath(){ // вдох 4 (нос), выдох 6 (рот)
   const air=reg(new Tone.Noise('pink'));air.volume.value=-18;air.connect(airGain);air.start();
   breathMode={inhale:4,hold:0,exhale:6};
   Tone.Transport.scheduleRepeat(t=>{
-    breathStamp=Date.now();
     toneGain.gain.cancelScheduledValues(t);
     toneGain.gain.setValueAtTime(toneGain.gain.value,t);
     toneGain.gain.linearRampToValueAtTime(.5,t+4);      // вдох: тон растёт
@@ -313,38 +312,46 @@ function startBreath(){ // вдох 4 (нос), выдох 6 (рот)
   Tone.Transport.bpm.value=55;Tone.Transport.start();
 }
 function startBreath478(){
+  /* Жёсткая сетка цикла 19 c: ВДОХ 0–4 · ЗАДЕРЖКА 4–11 · ВЫДОХ 11–19.
+     Каждая фаза — свой звук, границы совпадают с визуализацией,
+     потому что и звук, и круг читают одни и те же часы транспорта. */
   const rev=space(.9,.5).connect(master.gain);
   const drone=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-17,envelope:{attack:3,decay:1,sustain:1,release:5}})).connect(rev);
   drone.triggerAttack('A2');
-  // ВДОХ: растущий тон
+  // ВДОХ: мягкое растущее гудение — сигнал «пора вдыхать»
   const toneGain=reg(new Tone.Gain(0)).connect(rev);
   const voice=reg(new Tone.Synth({oscillator:{type:'fatsine',count:2,spread:6},volume:-11,envelope:{attack:.1,decay:.1,sustain:1,release:.2}}));
   voice.connect(toneGain);voice.triggerAttack('A3');
-  // ЗАДЕРЖКА: камушки — россыпь коротких сухих песчинок
-  const pebF=reg(new Tone.Filter(2600,'bandpass'));pebF.Q.value=1.2;
-  const pebGain=reg(new Tone.Gain(0)).connect(rev);pebF.connect(pebGain);
-  const peb=reg(new Tone.NoiseSynth({noise:{type:'pink'},volume:-13,envelope:{attack:.004,decay:.055,sustain:0}})).connect(pebF);
-  // ВЫДОХ: волна
+  // ЗАДЕРЖКА: камушки — низкие, редкие, объёмные, «у самого уха»:
+  // коричневый шум вместо розового (ниже и круглее), полоса ~0.8–1.4 кГц вместо 1.8–4,
+  // каждый камушек в своей точке стерео, почти без реверба — сухость и создаёт близость
+  const pebPan=reg(new Tone.Panner(0));
+  const pebF=reg(new Tone.Filter(1100,'bandpass'));pebF.Q.value=.9;
+  const pebGain=reg(new Tone.Gain(0));
+  pebF.connect(pebPan);pebPan.connect(pebGain);
+  pebGain.connect(master.gain);                          // сухо → близко
+  const pebWet=reg(new Tone.Gain(.13)).connect(rev);pebGain.connect(pebWet); // чуть воздуха
+  const peb=reg(new Tone.NoiseSynth({noise:{type:'brown'},volume:-9,envelope:{attack:.006,decay:.09,sustain:0}})).connect(pebF);
+  // ВЫДОХ: волна — стартует ровно на 11-й секунде
   const waveFilt=reg(new Tone.Filter(800,'lowpass')).connect(rev);
   const airGain=reg(new Tone.Gain(0)).connect(waveFilt);
   const air=reg(new Tone.Noise('pink'));air.volume.value=-16;air.connect(airGain);air.start();
   breathMode={inhale:4,hold:7,exhale:8};
   Tone.Transport.scheduleRepeat(t=>{
-    // 1) ВДОХ (0–4): только растущий тон, каждый цикл — новая нота
+    // 1) ВДОХ (0–4): только тон, каждый цикл новая нота
     voice.setNote(pick(['A3','B3','E3','F#3','C#4']),t);
     toneGain.gain.cancelScheduledValues(t);
-    toneGain.gain.setValueAtTime(toneGain.gain.value,t);
-    toneGain.gain.linearRampToValueAtTime(.5,t+4);
-    toneGain.gain.linearRampToValueAtTime(0,t+5.2);
-    // 2) ЗАДЕРЖКА (4–11): огибающая шороха
-    pebF.frequency.setValueAtTime(1800+Math.random()*2200,t+4);
-    const lvl=.4+Math.random()*.3;
+    toneGain.gain.setValueAtTime(0,t);
+    toneGain.gain.linearRampToValueAtTime(.5,t+4);       // растёт все 4 счёта
+    toneGain.gain.linearRampToValueAtTime(0,t+4.6);      // и быстро уступает камушкам
+    // 2) ЗАДЕРЖКА (4–11): огибающая камушков, вступает и уходит мягко
+    pebF.frequency.setValueAtTime(850+Math.random()*500,t+4);
     pebGain.gain.cancelScheduledValues(t);
     pebGain.gain.setValueAtTime(0,t+4);
-    pebGain.gain.linearRampToValueAtTime(lvl,t+5);
-    pebGain.gain.setValueAtTime(lvl,t+10);
+    pebGain.gain.linearRampToValueAtTime(.8,t+4.8);
+    pebGain.gain.setValueAtTime(.8,t+10.2);
     pebGain.gain.linearRampToValueAtTime(0,t+11);
-    // 3) ВЫДОХ (11–19): только волна — поднялась и откатывает
+    // 3) ВЫДОХ (11–19): волна поднялась и откатывает до конца цикла
     waveFilt.frequency.cancelScheduledValues(t);
     waveFilt.frequency.setValueAtTime(750+Math.random()*450,t+11);
     waveFilt.frequency.exponentialRampToValueAtTime(230+Math.random()*90,t+19);
@@ -352,42 +359,62 @@ function startBreath478(){
     airGain.gain.setValueAtTime(0,t+11);
     airGain.gain.linearRampToValueAtTime(.45+Math.random()*.25,t+13);
     airGain.gain.linearRampToValueAtTime(0,t+19);
-    // песчинки: строго возрастающее время, любой сбой глотаем
+    // сами камушки: редкая случайная россыпь, каждый со своей стороны;
+    // время строго возрастает, любой сбой глотаем — ошибок в консоль не сыпет
     try{
-      let pt=t+4.1;
-      const gap=.06+Math.random()*.1;
-      while(pt<t+10.85){
-        peb.triggerAttackRelease(.03,pt,.2+Math.random()*.8);
-        pt+=gap+.02+Math.random()*.09;
+      let pt=t+4.4;
+      while(pt<t+10.5){
+        pebPan.pan.setValueAtTime((Math.random()*2-1)*.8,pt-.01);
+        peb.volume.setValueAtTime(-12+Math.random()*6,pt-.01);
+        peb.triggerAttackRelease(.05,pt,.25+Math.random()*.75);
+        pt+=.25+Math.random()*.55;                       // пауза 0.25–0.8 c: реже и рандомнее
       }
     }catch(e){}
   },19);
   Tone.Transport.bpm.value=55;Tone.Transport.start();
 }
 function startHum(){
-  const rev=space(.9,.5).connect(master.gain);
-  const root=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-11,envelope:{attack:3,decay:1,sustain:1,release:6}})).connect(rev);
+  /* Храмовое гудение: непрерывное низкое основание,
+     а «люди» вступают мягко — громкостью через долгие рампы,
+     никакой цифровой атаки: осцилляторы гудят всегда, слышимость наплывает 2.5–4 c. */
+  const rev=space(.92,.5).connect(master.gain);
+  const root=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-12,envelope:{attack:5,decay:1,sustain:1,release:8}})).connect(rev);
   root.triggerAttack('A2');
-  const sub=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-17,envelope:{attack:4,decay:1,sustain:1,release:6}})).connect(rev);
+  const sub=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-17,envelope:{attack:6,decay:1,sustain:1,release:8}})).connect(rev);
   sub.triggerAttack('A1');
-  // диджериду-слой: формантное движение
-  const didg=reg(new Tone.MonoSynth({oscillator:{type:'sawtooth'},volume:-24,envelope:{attack:3,decay:1,sustain:1,release:5},filterEnvelope:{attack:2,decay:1,sustain:1,baseFrequency:120,octaves:1}}));
-  const formant=reg(new Tone.AutoFilter({frequency:.07,baseFrequency:140,octaves:2.6,filter:{type:'bandpass',Q:2.5}}).start());
-  didg.connect(formant);formant.connect(rev);
+  // горловая основа-диджериду: форманта медленно движется, тон не прерывается
+  const formant=reg(new Tone.AutoFilter({frequency:.07,baseFrequency:140,octaves:2.6,filter:{type:'bandpass',Q:2.5}}).start()).connect(rev);
+  const didg=reg(new Tone.MonoSynth({oscillator:{type:'sawtooth'},volume:-22,envelope:{attack:4,decay:1,sustain:1,release:6},filterEnvelope:{attack:3,decay:1,sustain:1,baseFrequency:120,octaves:1}})).connect(formant);
   didg.triggerAttack('A1');
-  // обертоновые голоса приходят и уходят
-  const partials=[220,330,440,660].map(f=>{
-    const g=reg(new Tone.Gain(0)).connect(rev);
-    const o=reg(new Tone.Oscillator(f,'sine'));o.volume.value=-16;o.connect(g);o.start();
-    return g;
-  });
+  // четыре голоса: у каждого своё «горло» (форманта), своё лёгкое вибрато и своя расстройка
+  const notes=['A1','E2','A2','C#3','E3'];               // только низкий регистр
+  const monks=[];
+  for(let i=0;i<4;i++){
+    const g=reg(new Tone.Gain(0)).connect(rev);          // громкость голоса, стартует с нуля
+    const throat=reg(new Tone.Filter(300+i*160+Math.random()*80,'bandpass'));throat.Q.value=1.1+Math.random()*.8;
+    const vib=reg(new Tone.Vibrato({frequency:3.8+Math.random()*1.4,depth:.05+Math.random()*.04}));
+    const v=reg(new Tone.MonoSynth({portamento:.4,oscillator:{type:'sawtooth'},detune:(Math.random()*2-1)*12,volume:-14,envelope:{attack:.5,decay:.3,sustain:1,release:2},filterEnvelope:{attack:.5,decay:1,sustain:1,baseFrequency:700,octaves:0}}));
+    v.connect(vib);vib.connect(throat);throat.connect(g);
+    v.triggerAttack(pick(notes));                        // гудит всегда, но пока не слышен
+    monks.push({v,g,busy:0});
+  }
+  const enter=(m,t)=>{
+    const dur=6+Math.random()*7;                         // тянет 6–13 c
+    m.busy=t+dur+5;
+    m.v.setNote(pick(notes),t+.2);
+    const lvl=.35+Math.random()*.3;
+    m.g.gain.cancelScheduledValues(t);
+    m.g.gain.setValueAtTime(m.g.gain.value,t);
+    m.g.gain.linearRampToValueAtTime(lvl,t+2.5+Math.random()*1.5); // наплывает, как человек начинает мычать
+    m.g.gain.setValueAtTime(lvl,t+dur);
+    m.g.gain.linearRampToValueAtTime(0,t+dur+4.5);       // и мягко умолкает
+  };
   Tone.Transport.scheduleRepeat(t=>{
-    const g=pick(partials);
-    g.gain.cancelScheduledValues(t);
-    g.gain.linearRampToValueAtTime(Math.random()*.28,t+2.5);
-    g.gain.linearRampToValueAtTime(0,t+7);
-  },'4s');
-  Tone.Transport.bpm.value=56;Tone.Transport.start();
+    const free=monks.filter(m=>t>m.busy);
+    if(free.length)enter(pick(free),t);
+    if(free.length>2&&maybe(.4))enter(pick(monks.filter(m=>t>m.busy)),t+2.5); // иногда двое почти разом
+  },'5s');
+  Tone.Transport.bpm.value=54;Tone.Transport.start();
 }
 function startPauses(){
   const rev=space(.92,.55).connect(master.gain);
@@ -804,10 +831,13 @@ function amp(){
   return Math.sqrt(s/buf.length);
 }
 function breathPhase(){
+  /* Фаза дыхания считается от часов аудио-транспорта — тех же,
+     по которым запланирован звук. Поэтому звук и круг не могут разойтись. */
   if(!breathMode)return null;
+  if(!window.Tone||Tone.Transport.state!=='started')return null;
   const {inhale,hold,exhale}=breathMode;
   const cyc=inhale+hold+exhale;
-  const el=((Date.now()-breathStamp)/1000)%cyc;
+  const el=Tone.Transport.seconds%cyc;
   if(el<inhale)return{name:'вдох · носом',b:el/inhale,tIn:el,tLeft:inhale-el};
   if(el<inhale+hold)return{name:'задержка',b:1,tIn:el-inhale,tLeft:inhale+hold-el};
   const e=el-inhale-hold;
@@ -823,7 +853,7 @@ function draw(){
   const a=active?amp():0;
   const dimmed=silencePhase?.35:1;
   const cx=w/2+(bilateral?Math.sin(phase*Math.PI)*w*.14:0), cy=h/2;
-  const bp=breathStamp?breathPhase():null;
+  const bp=breathPhase();
   const breathing=!!bp;
   const ringR=breathing?Math.min(w,h)*(0.18+bp.b*0.3):0;
 
