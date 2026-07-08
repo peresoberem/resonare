@@ -421,16 +421,17 @@ footer .fine{margin-top:20px;max-width:46em;font-size:.8rem;opacity:.8}
     <p class="sec-label">Связаться</p>
     <h2>Первый шаг: записаться на знакомство</h2>
     <p>Эта форма записывает вас на бесплатное знакомство: видеозвонок минут на двадцать, где мы уточним запрос, посмотрим друг на друга и решим, идём ли дальше. Очные встречи я назначаю после такого созвона. Отвечаю лично, обычно в течение дня.</p>
-    <!-- ФОРМА: сейчас работает через почтовый клиент посетителя (mailto).
-         После регистрации на formspree.io заменить onsubmit на:
-         action="https://formspree.io/f/ТВОЙ_ID" method="POST" -->
-    <form onsubmit="event.preventDefault();const n=this.name.value,c=this.contact.value,m=this.msg.value;location.href='mailto:anyapavlenk@gmail.com?subject='+encodeURIComponent('Знакомство с сайта resonare: '+n)+'&body='+encodeURIComponent(m+'\n\nКонтакт: '+c);">
-      <input name="name" placeholder="Как к вам обращаться" required>
-      <input name="contact" placeholder="Telegram или e-mail для ответа" required>
-      <textarea name="msg" placeholder="Пара слов о запросе (необязательно)"></textarea>
-      <button class="btn" type="submit">Записаться на знакомство</button>
-    </form>
-    <p style="margin-top:28px;font-size:.9rem">Или напрямую: <a href="https://t.me/resonareart" target="_blank" rel="noopener">Telegram</a> · <a href="mailto:anyapavlenk@gmail.com">anyapavlenk@gmail.com</a></p>
+    
+    <button id="fillout-trigger" class="btn" style="margin-bottom: 16px;">Записаться на знакомство</button>
+    
+    <div data-fillout-id="avXFbaRSRtus" data-fillout-embed-type="slider" data-fillout-slider-direction="right" data-fillout-inherit-parameters data-fillout-popup-size="medium"></div>
+    <script src="https://server.fillout.com/embed/v1/"></script>
+    
+    <p style="margin-top:28px;font-size:.9rem">
+      Или напрямую: 
+      <a href="https://t.me/resonareart" target="_blank" rel="noopener">Telegram</a> · 
+      <a href="mailto:anyapavlenk@gmail.com">anyapavlenk@gmail.com</a>
+    </p>
   </div>
 </section>
 
