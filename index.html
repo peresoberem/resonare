@@ -10,6 +10,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Анна Павленко",
+  "jobTitle": "Экзистенциальный психолог",
+  "description": "Экзистенциальный психолог. Индивидуальная и парная терапия в Тбилиси и онлайн. Работа через тело, арт и звук.",
+  "url": "https://resonare.art",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Тбилиси",
+    "addressCountry": "GE"
+  },
+  "knowsAbout": ["экзистенциальная терапия", "плюралистический подход", "парная терапия", "телесно-ориентированная работа", "арт-терапия"],
+  "memberOf": [
+    {"@type": "Organization", "name": "The Society for Existential Analysis"},
+    {"@type": "Organization", "name": "Federation for Existential Therapy of Europe"}
+  ],
+  "sameAs": ["https://www.b17.ru/ann_p/", "https://t.me/resonareart"]
+}
+</script>
 <style>
 :root{
   --paper:#FBFAF3;
@@ -31,7 +52,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{
   scroll-behavior:smooth;
-  scroll-padding-top:var(--header-h);
+  scroll-padding-top:var(--header-h); /* единственный отступ для снапа и якорей; scroll-margin на секциях НЕ дублировать */
   scroll-snap-type:y mandatory;
 }
 body{
@@ -52,17 +73,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(20px,4vw,32px);width:100%}
 
 /* ============ снап: один экран — один раздел ============ */
-.snap{
+.snap,.snap-unit{
   scroll-snap-align:start;
   min-height:calc(100svh - var(--header-h));
-  display:flex;flex-direction:column;justify-content:center;
 }
-.snap-unit{ /* составной экран: hero+полоса, контакт+футер */
-  scroll-snap-align:start;
-  min-height:calc(100svh - var(--header-h));
-  display:flex;flex-direction:column;
-}
-.snap-unit>.fill{flex:1;display:flex;flex-direction:column;justify-content:center}
+.snap{display:flex;flex-direction:column;justify-content:center}
+.snap-unit{display:flex;flex-direction:column}
 
 /* ---------- header ---------- */
 header{
@@ -75,21 +91,28 @@ header{
 .brand{display:flex;align-items:center;gap:10px;color:var(--ink);flex-shrink:0}
 .brand img{width:30px;height:30px;border-radius:50%}
 .brand span{font-family:'Old Standard TT',serif;font-size:1.28rem;font-weight:700;letter-spacing:.02em}
-nav.menu{display:flex;gap:clamp(14px,2.4vw,26px);font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;font-weight:500}
+nav.menu{display:flex;align-items:center;gap:clamp(12px,2vw,22px);font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;font-weight:500}
 nav.menu a{color:var(--ink-soft)}
 nav.menu a:hover{color:var(--blue)}
+/* отдельные страницы: выделены в шапке */
+nav.menu a.page-link{
+  color:var(--blue);font-weight:600;
+}
+nav.menu a.page-link:hover{color:var(--ink)}
+nav.menu .menu-sep{width:1px;height:16px;background:var(--line);flex-shrink:0}
 .burger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
 .burger span{display:block;width:22px;height:2px;background:var(--ink);transition:transform .3s,opacity .3s}
 @media(max-width:860px){
   nav.menu{
     display:none;
     position:absolute;top:var(--header-h);left:0;right:0;
-    flex-direction:column;gap:0;
+    flex-direction:column;gap:0;align-items:stretch;
     background:var(--paper);
     border-bottom:1px solid var(--line);
   }
   nav.menu.open{display:flex}
   nav.menu a{padding:14px clamp(20px,4vw,32px);border-top:1px solid var(--line)}
+  nav.menu .menu-sep{display:none}
   .burger{display:flex}
   body.menu-open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   body.menu-open .burger span:nth-child(2){opacity:0}
@@ -97,9 +120,8 @@ nav.menu a:hover{color:var(--blue)}
 }
 
 /* ---------- shared ---------- */
-section,.hero{scroll-margin-top:var(--header-h)}
-section{padding:clamp(36px,5vw,60px) 0}
-.sec-head{margin-bottom:24px}
+section{padding:clamp(28px,4.5vw,56px) 0}
+.sec-head{margin-bottom:22px}
 .sec-label{
   font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--blue);font-weight:600;margin-bottom:8px;
@@ -122,7 +144,7 @@ h2{
 .hero{
   background:var(--night);
   color:var(--light);
-  padding:clamp(30px,4.5vw,64px) 0;
+  padding:clamp(26px,4vw,60px) 0;
   position:relative;overflow:hidden;
   flex:1;display:flex;align-items:center;
 }
@@ -136,7 +158,7 @@ h2{
 }
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;position:relative;z-index:1}
 @media(max-width:820px){
-  .hero-grid{grid-template-columns:1fr;gap:16px}
+  .hero-grid{grid-template-columns:1fr;gap:14px}
   .hero-eye{order:-1;margin:0 auto}
 }
 .eyebrow{
@@ -150,7 +172,7 @@ h1{
   margin-bottom:18px;color:var(--light);
 }
 h1 em{font-style:italic;color:var(--blue-soft)}
-.hero p.lead{max-width:31em;color:var(--night-soft);font-size:1.02rem;margin-bottom:24px}
+.hero p.lead{max-width:31em;color:var(--night-soft);font-size:1.02rem;margin-bottom:22px}
 .hero p.lead b{color:var(--light);font-weight:500}
 .cta-row{display:flex;gap:12px;flex-wrap:wrap}
 .btn{
@@ -168,9 +190,9 @@ h1 em{font-style:italic;color:var(--blue-soft)}
 /* signature: eye + rings + warm glow */
 .hero-eye{position:relative;width:min(300px,54vw);aspect-ratio:1;display:grid;place-items:center;justify-self:center}
 @media(max-width:820px){
-  .hero-eye{width:min(168px,42vw)}
-  .hero p.lead{font-size:.94rem;margin-bottom:18px}
-  .cta-note{display:none} /* дублирует текст в «Связаться», на мобиле экономим экран */
+  .hero-eye{width:min(160px,40vw)}
+  .hero p.lead{font-size:.93rem;margin-bottom:16px}
+  .cta-note{display:none}
 }
 .hero-eye::before{
   content:"";position:absolute;
@@ -215,13 +237,14 @@ h1 em{font-style:italic;color:var(--blue-soft)}
 /* ---------- trust bar ---------- */
 .trustbar{background:var(--night-lite);border-top:1px solid var(--line-night);color:var(--night-soft);padding:15px 0}
 .trustbar .row{
-  display:flex;flex-wrap:wrap;align-items:baseline;
+  display:flex;flex-wrap:wrap;align-items:center;
   gap:6px clamp(16px,2.6vw,36px);
   font-size:.84rem;line-height:1.55;
 }
 .trustbar b{color:var(--light);font-weight:600}
-.trustbar a.about-link{color:var(--blue-soft);white-space:nowrap}
+.trustbar a.about-link{color:var(--blue-soft);white-space:nowrap;margin-left:auto}
 .trustbar a.about-link:hover{color:var(--light)}
+@media(max-width:1060px){.trustbar a.about-link{margin-left:0}}
 /* мобила: одна строка, пункты ротируются */
 @media(max-width:760px){
   .trustbar{padding:13px 0}
@@ -229,7 +252,7 @@ h1 em{font-style:italic;color:var(--blue-soft)}
   .trustbar .row>*{
     position:absolute;inset:0;
     opacity:0;transition:opacity .6s ease;
-    text-align:center;
+    text-align:center;margin:0;
   }
   .trustbar .row>.show{opacity:1}
 }
@@ -311,7 +334,6 @@ h1 em{font-style:italic;color:var(--blue-soft)}
   border-bottom:1px solid var(--blue);padding-bottom:1px;
 }
 .approach a.sound-link:hover{color:var(--ink);border-color:var(--ink)}
-/* мобила: карточки подхода листаются вбок, чтобы раздел влез в экран */
 @media(max-width:820px){
   .approach{
     display:grid;grid-auto-flow:column;grid-template-columns:none;
@@ -339,7 +361,7 @@ h1 em{font-style:italic;color:var(--blue-soft)}
 .cab-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,60px);align-items:center}
 @media(max-width:860px){
   .cab-grid{grid-template-columns:1fr}
-  .cab-art{display:none} /* на мобиле бережём высоту экрана */
+  .cab-art{display:none}
 }
 .cab-text p{margin-bottom:14px;color:var(--ink-soft);font-size:.97rem}
 .cab-text p strong{color:var(--ink);font-weight:500}
@@ -356,8 +378,8 @@ h1 em{font-style:italic;color:var(--blue-soft)}
 .price-note{margin-top:16px;font-size:.9rem;color:var(--ink-soft);max-width:40em}
 
 /* ---------- contact ---------- */
-.contact{background:var(--night);color:var(--light);flex:1;display:flex;align-items:center;padding:clamp(32px,4.5vw,56px) 0}
-.contact p.intro{color:var(--night-soft);max-width:34em;margin-bottom:20px;font-size:.95rem}
+.contact{background:var(--night);color:var(--light);flex:1;display:flex;align-items:center;padding:clamp(28px,4vw,52px) 0}
+.contact p.intro{color:var(--night-soft);max-width:34em;margin-bottom:18px;font-size:.95rem}
 .contact a{color:var(--light);text-decoration:underline;text-underline-offset:3px}
 .contact a:hover{color:var(--blue-soft)}
 form{max-width:480px;display:grid;gap:11px}
@@ -367,7 +389,7 @@ input,textarea{
 }
 input::placeholder,textarea::placeholder{color:#767C93}
 input:focus,textarea:focus{outline:none;border-color:var(--blue-soft)}
-textarea{min-height:80px;resize:vertical}
+textarea{min-height:76px;resize:vertical}
 form .btn{background:var(--light);color:var(--night);border:none;justify-self:start;font-family:inherit}
 form .btn:hover{background:var(--blue);color:#fff}
 form .btn[disabled]{opacity:.55;cursor:default}
@@ -377,18 +399,11 @@ form .btn[disabled]{opacity:.55;cursor:default}
 .form-status.err{color:#E08B7A}
 .direct{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:.88rem;color:var(--night-soft)}
 
-/* ---------- footer (тёмный, в одном экране со «Связаться») ---------- */
+/* ---------- footer ---------- */
 footer{
   background:var(--night-lite);border-top:1px solid var(--line-night);
-  padding:24px 0 30px;font-size:.85rem;color:var(--night-soft);
+  padding:22px 0 28px;font-size:.85rem;color:var(--night-soft);
 }
-.foot-pages{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:16px}
-.foot-pages a{
-  color:var(--blue-soft);font-size:1rem;
-  font-family:'Old Standard TT',serif;font-weight:700;
-  text-decoration:none;
-}
-.foot-pages a:hover{color:var(--light)}
 .foot-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .foot-grid b{color:var(--light)}
 footer a{color:var(--night-soft);text-decoration:underline;text-underline-offset:3px}
@@ -424,12 +439,13 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
       <span></span><span></span><span></span>
     </button>
     <nav class="menu" id="menu">
+      <a class="page-link" href="about.html">Обо мне →</a>
+      <a class="page-link" href="sound.html">Звук →</a>
+      <span class="menu-sep" aria-hidden="true"></span>
       <a href="#priem">С чем приходят</a>
       <a href="#podhod">Подход</a>
       <a href="#kabinet">Кабинет</a>
       <a href="#cena">Цены</a>
-      <a href="about.html">Обо мне</a>
-      <a href="sound.html">Звук</a>
       <a href="#contact">Связаться</a>
     </nav>
   </div>
@@ -565,13 +581,13 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
 <!-- ЭКРАН 5 -->
 <section class="snap" id="kabinet">
   <div class="wrap reveal">
+    <div class="sec-head">
+      <p class="sec-label">Кабинет</p>
+      <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
+      <h2>Комната с тёплым светом, а не клиника</h2>
+    </div>
     <div class="cab-grid">
       <div class="cab-text">
-        <div class="sec-head">
-          <p class="sec-label">Кабинет</p>
-          <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
-          <h2>Комната с тёплым светом, а не клиника</h2>
-        </div>
         <p>Очно я принимаю в Тбилиси, в районе Чугурети. Кабинет домашний: тёплый свет, зелень, материалы для творческой работы и телесных практик. Бинбэг, стул или кушетка — правильно то, что комфортно вам сейчас.</p>
         <p><strong>Здесь живут две кошки.</strong> Для кого-то это лучшая часть терапии. Если у вас аллергия или очные встречи сейчас не подходят, есть онлайн: он не копирует живую комнату, но настоящему контакту это не мешает — проверено.</p>
       </div>
@@ -597,12 +613,18 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
           </g>
           <!-- кот -->
           <g stroke="currentColor" stroke-width="1.4">
-            <path d="M101 107 L106 92 L116 101"/>
-            <path d="M122 100 L130 88 L136 100"/>
+            <!-- уши: основания посажены на контур головы -->
+            <path d="M107 104 L111 90 L118 100"/>
+            <path d="M123 100 L129 88 L134 101"/>
+            <!-- голова + спина -->
             <path d="M97 128 C95 112 104 101 117 100 C130 99 137 108 136 120 C136 126 133 131 128 134 C154 130 176 136 186 146 C190 151 191 155 191 158"/>
+            <!-- грудь -->
             <path d="M99 128 C98 140 98 150 100 158"/>
+            <!-- хвост -->
             <path d="M100 158 C86 156 80 146 90 140 C96 136 102 140 100 146"/>
-            <path d="M120 158 q5 -7 10 0" opacity=".6"/>
+            <!-- передние лапки, аккуратно подобраны -->
+            <path d="M112 158 q4 -6 8 0" opacity=".65"/>
+            <path d="M124 158 q4 -6 8 0" opacity=".65"/>
             <!-- морда: закрытые глаза и улыбка -->
             <path d="M107 118 q3 3 6 0"/>
             <path d="M120 117 q3 3 6 0"/>
@@ -682,10 +704,6 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
 
   <footer>
     <div class="wrap">
-      <div class="foot-pages">
-        <a href="about.html">Обо мне →</a>
-        <a href="sound.html">Звук →</a>
-      </div>
       <div class="foot-grid">
         <div>
           <b style="font-family:'Old Standard TT',serif;font-size:1.1rem">resonare</b> · Анна Павленко<br>
@@ -718,44 +736,56 @@ document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
   document.querySelector('.burger').setAttribute('aria-expanded','false');
 }));
 
-/* ---- карусель «с чем приходят»: стрелки, точки, автолистание, каскад ---- */
+/* ---- карусель: стрелки, точки-СТРАНИЦЫ, автолистание, каскад ---- */
 (function(){
   const track=document.getElementById('recTrack');
   if(!track) return;
   const cards=[...track.querySelectorAll('.rec-card')];
   const dotsBox=document.getElementById('recDots');
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const step=()=>cards[0].getBoundingClientRect().width+16;
-  const idx=()=>Math.round(track.scrollLeft/step());
-  const goTo=i=>track.scrollTo({left:Math.max(0,Math.min(i,cards.length-1))*step(),behavior:'smooth'});
 
-  /* точки */
-  cards.forEach((_,i)=>{
-    const d=document.createElement('button');
-    d.setAttribute('aria-label','Запрос '+(i+1));
-    d.addEventListener('click',()=>{stopAuto();goTo(i)});
-    dotsBox.appendChild(d);
-  });
-  const dots=[...dotsBox.children];
-  const paint=()=>{const i=idx();dots.forEach((d,k)=>d.classList.toggle('active',k===i))};
-  paint();
-  let t;track.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(paint,60)},{passive:true});
+  const cardStep=()=>cards[0].getBoundingClientRect().width+16;
+  const perPage=()=>Math.max(1,Math.round(track.clientWidth/cardStep()));
+  const pageCount=()=>Math.ceil(cards.length/perPage());
+  const curPage=()=>Math.min(pageCount()-1,Math.round(track.scrollLeft/(cardStep()*perPage())));
+  const goPage=p=>{
+    const n=pageCount();
+    const target=Math.max(0,Math.min(p,n-1));
+    track.scrollTo({left:target*cardStep()*perPage(),behavior:'smooth'});
+  };
 
-  /* стрелки */
-  document.getElementById('recPrev').addEventListener('click',()=>{stopAuto();goTo(idx()-1)});
-  document.getElementById('recNext').addEventListener('click',()=>{stopAuto();goTo(idx()+1)});
+  /* точки = страницы; пересобираются при ресайзе */
+  let dots=[];
+  function buildDots(){
+    dotsBox.innerHTML='';
+    dots=[];
+    for(let i=0;i<pageCount();i++){
+      const d=document.createElement('button');
+      d.setAttribute('aria-label','Страница '+(i+1));
+      d.addEventListener('click',()=>{stopAuto();goPage(i)});
+      dotsBox.appendChild(d);dots.push(d);
+    }
+    paint();
+  }
+  function paint(){const p=curPage();dots.forEach((d,k)=>d.classList.toggle('active',k===p))}
+  buildDots();
+  let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(buildDots,150)});
+  let sT;track.addEventListener('scroll',()=>{clearTimeout(sT);sT=setTimeout(paint,60)},{passive:true});
 
-  /* автолистание на мобиле, пока пользователь не вмешался */
-  let auto=null;
+  /* стрелки листают страницами */
+  document.getElementById('recPrev').addEventListener('click',()=>{stopAuto();goPage(curPage()-1)});
+  document.getElementById('recNext').addEventListener('click',()=>{stopAuto();goPage(curPage()+1)});
+
+  /* автолистание на мобиле до первого касания */
+  let auto=null,stopped=false;
   function startAuto(){
-    if(reduce||auto||window.innerWidth>860) return;
+    if(reduce||auto||stopped||window.innerWidth>860) return;
     auto=setInterval(()=>{
-      const i=idx();
-      goTo(i>=cards.length-1?0:i+1);
+      const p=curPage();
+      goPage(p>=pageCount()-1?0:p+1);
     },4200);
   }
-  function stopAuto(){if(auto){clearInterval(auto);auto=null;stopped=true}}
-  let stopped=false;
+  function stopAuto(){if(auto){clearInterval(auto);auto=null}stopped=true}
   ['pointerdown','touchstart','wheel'].forEach(ev=>track.addEventListener(ev,stopAuto,{passive:true}));
   if('IntersectionObserver' in window){
     new IntersectionObserver(es=>{
