@@ -242,9 +242,8 @@ h1 em{font-style:italic;color:var(--blue-soft)}
   font-size:.84rem;line-height:1.55;
 }
 .trustbar b{color:var(--light);font-weight:600}
-.trustbar a.about-link{color:var(--blue-soft);white-space:nowrap;margin-left:auto}
+.trustbar a.about-link{color:var(--blue-soft);white-space:nowrap}
 .trustbar a.about-link:hover{color:var(--light)}
-@media(max-width:1060px){.trustbar a.about-link{margin-left:0}}
 /* мобила: одна строка, пункты ротируются */
 @media(max-width:760px){
   .trustbar{padding:13px 0}
@@ -265,6 +264,11 @@ h1 em{font-style:italic;color:var(--blue-soft)}
   display:grid;grid-auto-flow:column;
   grid-auto-columns:min(330px,76vw);
   gap:16px;
+}
+@media(min-width:861px){
+  .rec-track{grid-auto-columns:calc((100% - 32px)/3)} /* три карточки целиком + два зазора */
+}
+.rec-track{
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   padding:6px 2px 14px;
@@ -439,14 +443,14 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
       <span></span><span></span><span></span>
     </button>
     <nav class="menu" id="menu">
-      <a class="page-link" href="about.html">Обо мне →</a>
-      <a class="page-link" href="sound.html">Звук →</a>
-      <span class="menu-sep" aria-hidden="true"></span>
       <a href="#priem">С чем приходят</a>
       <a href="#podhod">Подход</a>
-      <a href="#kabinet">Кабинет</a>
+      <a href="#kabinet">Формат</a>
       <a href="#cena">Цены</a>
       <a href="#contact">Связаться</a>
+      <span class="menu-sep" aria-hidden="true"></span>
+      <a class="page-link" href="about.html">Обо мне</a>
+      <a class="page-link" href="sound.html">Звук</a>
     </nav>
   </div>
 </header>
@@ -582,14 +586,14 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
 <section class="snap" id="kabinet">
   <div class="wrap reveal">
     <div class="sec-head">
-      <p class="sec-label">Кабинет</p>
+      <p class="sec-label">Где мы встречаемся</p>
       <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
-      <h2>Комната с тёплым светом, а не клиника</h2>
+      <h2>Полноценно онлайн — и комната с тёплым светом в Тбилиси</h2>
     </div>
     <div class="cab-grid">
       <div class="cab-text">
-        <p>Очно я принимаю в Тбилиси, в районе Чугурети. Кабинет домашний: тёплый свет, зелень, материалы для творческой работы и телесных практик. Бинбэг, стул или кушетка — правильно то, что комфортно вам сейчас.</p>
-        <p><strong>Здесь живут две кошки.</strong> Для кого-то это лучшая часть терапии. Если у вас аллергия или очные встречи сейчас не подходят, есть онлайн: он не копирует живую комнату, но настоящему контакту это не мешает — проверено.</p>
+        <p>Работать можно полностью онлайн: разговор, арт-практики, телесная работа и звук хорошо живут в видеоформате — понадобятся наушники и немного места. Это равноценный путь, а не запасной.</p>
+        <p>Очно принимаю в Тбилиси, в районе Чугурети. Кабинет домашний: тёплый свет, зелень, материалы для творческой работы и телесных практик. Бинбэг, стул или кушетка — правильно то, что комфортно вам сейчас. <strong>Здесь живут две кошки</strong> — для кого-то это лучшая часть терапии, а если у вас аллергия, вы уже знаете, какая дверь ваша.</p>
       </div>
       <!-- кот на подоконнике, растение, солнце -->
       <svg class="cab-art" viewBox="0 0 280 210" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -613,9 +617,9 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
           </g>
           <!-- кот -->
           <g stroke="currentColor" stroke-width="1.4">
-            <!-- уши: основания посажены на контур головы -->
-            <path d="M107 104 L111 90 L118 100"/>
-            <path d="M123 100 L129 88 L134 101"/>
+            <!-- уши: оба основания на контуре головы -->
+            <path d="M108 103 L113 91 L119 100"/>
+            <path d="M122 100 L127 89 L132 102"/>
             <!-- голова + спина -->
             <path d="M97 128 C95 112 104 101 117 100 C130 99 137 108 136 120 C136 126 133 131 128 134 C154 130 176 136 186 146 C190 151 191 155 191 158"/>
             <!-- грудь -->
@@ -629,8 +633,11 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
             <path d="M107 118 q3 3 6 0"/>
             <path d="M120 117 q3 3 6 0"/>
             <path d="M110 127 q3 3 6 0 q3 3 6 0"/>
-            <path d="M96 122 l-11 -2" opacity=".5"/>
-            <path d="M96 126 l-11 2" opacity=".5"/>
+            <!-- усы: от обеих щёк -->
+            <path d="M105 121 l-11 -3" opacity=".5"/>
+            <path d="M105 125 l-11 2" opacity=".5"/>
+            <path d="M128 120 l11 -3" opacity=".5"/>
+            <path d="M128 124 l11 2" opacity=".5"/>
           </g>
           <!-- растение -->
           <g stroke="currentColor" stroke-width="1.4">
@@ -650,7 +657,7 @@ footer .fine{margin-top:14px;max-width:46em;font-size:.78rem;opacity:.75}
 <section class="snap" id="cena">
   <div class="wrap reveal">
     <div class="sec-head">
-      <p class="sec-label">Формат и стоимость</p>
+      <p class="sec-label">Стоимость</p>
       <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
       <h2>Очно в Тбилиси и онлайн</h2>
     </div>
