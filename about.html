@@ -13,50 +13,117 @@
 <style>
 :root{
   --paper:#FBFAF3;
-  --paper-alt:#F2F1E6;
+  --paper-alt:#F1F0E4;
   --ink:#191813;
   --ink-soft:#5D5B4F;
   --night:#14161F;
+  --night-lite:#1B1E2C;
   --night-soft:#A9AEC2;
   --light:#F4F3EA;
   --blue:#2B3ED9;
   --blue-soft:#6E7FF0;
+  --amber:#D8A46A;
   --line:#E3E1D2;
+  --line-night:#2A2E40;
   --radius:2px;
-  --header-h:62px;
+  --header-h:60px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:var(--header-h);
+  scroll-snap-type:y mandatory;
+}
 body{
   background:var(--paper);color:var(--ink);
   font-family:'Inter Tight',system-ui,sans-serif;
-  line-height:1.75;font-size:17px;
+  line-height:1.7;font-size:17px;
 }
 ::selection{background:var(--blue);color:var(--light)}
 img{max-width:100%;display:block}
 a{color:var(--blue);text-decoration:none;transition:color .25s}
 a:hover{color:var(--ink)}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.wrap{max-width:1000px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 clamp(20px,4vw,32px);width:100%}
 
+/* снап: один экран — один раздел */
+.snap,.snap-unit{
+  scroll-snap-align:start;
+  min-height:calc(100svh - var(--header-h));
+}
+.snap{display:flex;flex-direction:column;justify-content:center}
+.snap-unit{display:flex;flex-direction:column}
+
+/* ---------- header (общий с главной) ---------- */
 header{
   position:sticky;top:0;z-index:20;
-  background:color-mix(in srgb,var(--paper) 90%,transparent);
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
 .nav{display:flex;align-items:center;justify-content:space-between;height:var(--header-h);max-width:1000px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
-.brand{font-family:'Old Standard TT',serif;font-size:1.3rem;font-weight:700;color:var(--ink)}
-.back{font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;font-weight:500;color:var(--ink-soft)}
-.back:hover{color:var(--blue)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);flex-shrink:0}
+.brand img{width:30px;height:30px;border-radius:50%}
+.brand span{font-family:'Old Standard TT',serif;font-size:1.28rem;font-weight:700;letter-spacing:.02em}
+nav.menu{display:flex;align-items:center;gap:clamp(12px,2vw,22px);font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;font-weight:500}
+nav.menu a{color:var(--ink-soft)}
+nav.menu a:hover{color:var(--blue)}
+nav.menu a.page-link{color:var(--blue);font-weight:600}
+nav.menu a.page-link:hover{color:var(--ink)}
+nav.menu a.page-link.here{color:var(--ink);pointer-events:none}
+nav.menu .menu-sep{width:1px;height:16px;background:var(--line);flex-shrink:0}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);transition:transform .3s,opacity .3s}
+@media(max-width:860px){
+  nav.menu{
+    display:none;
+    position:absolute;top:var(--header-h);left:0;right:0;
+    flex-direction:column;gap:0;align-items:stretch;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  nav.menu.open{display:flex}
+  nav.menu a{padding:14px clamp(20px,4vw,32px);border-top:1px solid var(--line)}
+  nav.menu .menu-sep{display:none}
+  .burger{display:flex}
+  body.menu-open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  body.menu-open .burger span:nth-child(2){opacity:0}
+  body.menu-open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
 
-.hero{padding:clamp(52px,8vw,90px) 0 clamp(36px,5vw,56px)}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,56px);align-items:start}
-@media(max-width:780px){.hero-grid{grid-template-columns:1fr}.portrait{max-width:380px;margin:0 auto}}
-.eyebrow{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:20px}
+/* ---------- shared ---------- */
+section{padding:clamp(28px,4.5vw,56px) 0}
+.sec-label{
+  font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue);font-weight:600;margin-bottom:8px;
+}
+.on-dark .sec-label{color:var(--blue-soft)}
+.sec-wave{width:88px;height:12px;stroke:var(--blue);opacity:.5;margin-bottom:14px;display:block}
+.on-dark .sec-wave{stroke:var(--blue-soft)}
+h2{
+  font-family:'Old Standard TT',serif;font-weight:400;
+  font-size:clamp(1.5rem,3vw,2.15rem);line-height:1.16;
+  margin-bottom:18px;max-width:20em;color:var(--ink);
+}
+.on-dark h2{color:var(--light)}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;scroll-snap-type:none}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ---------- hero ---------- */
+.hero{background:var(--paper)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,56px);align-items:center}
+@media(max-width:780px){
+  .hero-grid{grid-template-columns:1fr;gap:20px}
+  .portrait{max-width:300px;margin:0 auto}
+}
+.eyebrow{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:18px}
 h1{
   font-family:'Old Standard TT',serif;font-weight:400;
-  font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.08;margin-bottom:24px;
+  font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.08;margin-bottom:20px;
 }
 h1 em{font-style:italic;color:var(--blue)}
 .hero p{color:var(--ink-soft);max-width:32em;margin-bottom:14px}
@@ -68,24 +135,15 @@ h1 em{font-style:italic;color:var(--blue)}
 }
 @media(max-width:780px){.portrait svg{right:-14px}}
 
-.divider{display:flex;justify-content:center;padding:clamp(8px,2vw,16px) 0}
-.divider svg{width:min(340px,60vw);height:26px;stroke:var(--blue);opacity:.45}
-
-.story{padding:clamp(28px,4vw,48px) 0}
-.story .sec-label{
-  font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue);font-weight:600;margin-bottom:14px;
-}
-.story h2{
-  font-family:'Old Standard TT',serif;font-weight:400;
-  font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.15;margin-bottom:18px;max-width:20em;
-}
+/* ---------- story ---------- */
 .story p{color:var(--ink-soft);max-width:38em;margin-bottom:16px}
 .story p b{color:var(--ink);font-weight:500}
+.s-alt{background:var(--paper-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 
-.quote{background:var(--night);color:var(--light);padding:clamp(52px,8vw,80px) 0;text-align:center;position:relative;overflow:hidden}
+/* ---------- quote ---------- */
+.quote{background:var(--night);color:var(--light);text-align:center;position:relative;overflow:hidden}
 .quote::after{
-  content:"été invincible";
+  content:"Ich und Du";
   position:absolute;bottom:-.16em;right:-.05em;
   font-family:'Old Standard TT',serif;font-style:italic;
   font-size:clamp(4rem,11vw,9rem);line-height:1;
@@ -100,43 +158,55 @@ h1 em{font-style:italic;color:var(--blue)}
 .quote p.big span{color:var(--blue-soft)}
 .quote p.small{margin-top:16px;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--night-soft);position:relative;z-index:1}
 
-.values{background:var(--paper-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(44px,6vw,64px) 0}
+/* ---------- values (тёмный) ---------- */
+.values{background:var(--night-lite);color:var(--light)}
 .values .row{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:18px}
 .values .v{
   font-family:'Old Standard TT',serif;font-style:italic;font-size:1.2rem;
-  border:1px solid var(--line);border-radius:30px;padding:6px 18px;background:var(--paper);
+  border:1px solid var(--line-night);border-radius:30px;padding:6px 18px;
+  background:var(--night);color:var(--light);
 }
-.values h2{font-family:'Old Standard TT',serif;font-weight:400;font-size:clamp(1.5rem,3vw,2rem)}
-.values p{color:var(--ink-soft);max-width:38em;margin-top:12px}
+.values p{color:var(--night-soft);max-width:38em;margin-top:14px}
 
-.cta{padding:clamp(52px,8vw,84px) 0}
-.cta h2{font-family:'Old Standard TT',serif;font-weight:400;font-size:clamp(1.6rem,3.2vw,2.3rem);margin-bottom:14px;max-width:20em}
-.cta p{color:var(--ink-soft);max-width:34em;margin-bottom:26px}
+/* ---------- cta ---------- */
+.cta{background:var(--paper-alt);border-top:1px solid var(--line);flex:1;display:flex;align-items:center}
+.cta p{color:var(--ink-soft);max-width:34em;margin-bottom:24px}
 .btn{
   display:inline-block;padding:15px 28px;border-radius:var(--radius);
   font-size:.92rem;font-weight:500;letter-spacing:.04em;
   border:1px solid var(--ink);color:var(--ink);transition:all .25s;
 }
 .btn:hover{background:var(--blue);border-color:var(--blue);color:#fff}
-.links{margin-top:26px;font-size:.9rem;color:var(--ink-soft)}
-.links a{margin-right:18px}
 
-footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:.85rem;color:var(--ink-soft)}
+footer{border-top:1px solid var(--line);background:var(--paper-alt);padding:26px 0 32px;font-size:.85rem;color:var(--ink-soft)}
 </style>
 </head>
 <body>
 
 <header>
   <div class="nav">
-    <span class="brand">resonare · обо мне</span>
-    <a class="back" href="index.html">← на главную</a>
+    <a class="brand" href="index.html"><img src="favicon_1.png" alt=""><span>resonare</span></a>
+    <button class="burger" aria-label="Меню" aria-expanded="false" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="menu" id="menu">
+      <a href="index.html#priem">С чем приходят</a>
+      <a href="index.html#podhod">Подход</a>
+      <a href="index.html#kabinet">Формат</a>
+      <a href="index.html#cena">Цены</a>
+      <a href="index.html#contact">Связаться</a>
+      <span class="menu-sep" aria-hidden="true"></span>
+      <a class="page-link here" href="about.html" aria-current="page">Обо мне</a>
+      <a class="page-link" href="sound.html">Звук</a>
+    </nav>
   </div>
 </header>
 
 <main>
 
-<div class="hero wrap">
-  <div class="hero-grid">
+<!-- ЭКРАН 1 -->
+<section class="hero snap">
+  <div class="wrap hero-grid">
     <div>
       <p class="eyebrow">Анна Павленко · экзистенциальный психолог</p>
       <h1>Привет. <em>Я Анна</em></h1>
@@ -148,58 +218,66 @@ footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:.85rem;col
       <img src="anna.jpg" alt="Анна Павленко">
     </div>
   </div>
-</div>
-
-<section class="story wrap">
-  <p class="sec-label">Сначала была музыка</p>
-  <h2>Один аккорд иногда достаёт воспоминание быстрее, чем час разговора</h2>
-  <p>Музыку я люблю столько, сколько помню себя, и всегда с неугасающим интересом следила за тем, что она делает с человеком. Как трек собирает разобранного. Как, казалось бы, "случайная" мелодия из прошлого распаковывает то, что годами лежало запечатанным, – вместе с запахами, температурой воздуха и тем, кем ты тогда была. Тело помнит музыкой то, что голова давно отредактировала.</p>
-  <p>Позже я увидела то же в других искусствах. Человеку бывает проще сказать правду линией, глиной, фотографией или движением, чем словами: <b>слова умеют защищаться, у краски защит нет</b>. Так появилось моё первое профессиональное образование, арт-терапия, а следом отдельная специализация по музыке, голосу и телесным методам в ней.</p>
 </section>
 
-<div class="divider" aria-hidden="true">
-  <svg viewBox="0 0 340 26" fill="none" preserveAspectRatio="none">
-    <path d="M0 13 Q 21 0, 42 13 T 84 13 T 126 13 T 168 13 T 210 13 T 252 13 T 294 13 T 336 13" stroke-width="1.2"/>
-  </svg>
-</div>
-
-<section class="story wrap">
-  <p class="sec-label">Философия ждала рядом</p>
-  <h2>Возвращение туда, где уже было моё</h2>
-  <p>Экзистенциальной философией я увлеклась ещё в университете, задолго до психологического образования. Кьеркегор, Камю, Бубер оказались не учебной программой, а людьми, которые говорили со мной о моей жизни: о свободе, за которую платишь, о выборе, от которого не спрятаться, о встрече, в которой становишься собой.</p>
-  <p>Поэтому когда спустя годы я пришла в экзистенциальную терапию, это было не открытием нового, а возвращением домой. Сейчас этот подход основа всей моей работы.</p>
-</section>
-
-<section class="quote">
-  <div class="wrap">
-    <p class="big">В разгар зимы я наконец узнал, что во мне живёт <span>непобедимое лето</span>.</p>
-    <p class="small">Альбер Камю · «Возвращение в Типаса»</p>
+<!-- ЭКРАН 2 -->
+<section class="story s-alt snap">
+  <div class="wrap reveal">
+    <p class="sec-label">Сначала была музыка</p>
+    <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
+    <h2>Один аккорд иногда достаёт воспоминание быстрее, чем час разговора</h2>
+    <p>Музыку я люблю столько, сколько помню себя, и всегда с неугасающим интересом следила за тем, что она делает с человеком. Как трек собирает разобранного. Как, казалось бы, "случайная" мелодия из прошлого распаковывает то, что годами лежало запечатанным, – вместе с запахами, температурой воздуха и тем, кем ты тогда была. Тело помнит музыкой то, что голова давно отредактировала.</p>
+    <p>Позже я увидела то же в других искусствах. Человеку бывает проще сказать правду линией, глиной, фотографией или движением, чем словами: <b>слова умеют защищаться, у краски защит нет</b>. Так появилось моё первое профессиональное образование, арт-терапия, а следом отдельная специализация по музыке, голосу и телесным методам в ней.</p>
   </div>
 </section>
 
-<section class="story wrap">
-  <p class="sec-label">Тело всегда было в деле</p>
-  <h2>Психика, тело и искусство: не соседние комнаты, а одна</h2>
-  <p>Несколько лет я профессионально работала с телом: массаж, тренировки для здоровой спины, помощь в восстановлении после травм. А на досуге читала нейробиологию, из чистого любопытства к тому, как связаны психика, гормоны, звук и настроение. Любопытство оказалось дальновидным: из него сложился мост, на котором теперь стоит моя практика.</p>
-  <p>В психологию меня привёл и собственный опыт. В юности были сложные периоды: семья, самоопределение, непростые отношения с едой и телом. Я знаю изнутри, как это, когда привычные опоры не держат. Моя личная терапия длилась около десяти лет, и она же научила меня главному: <b>рядом с честным другим выдерживается почти всё</b>.</p>
+<!-- ЭКРАН 3 -->
+<section class="story snap">
+  <div class="wrap reveal">
+    <p class="sec-label">Философия ждала рядом</p>
+    <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
+    <h2>Возвращение туда, где уже было моё</h2>
+    <p>Экзистенциальной философией я увлеклась ещё в университете, задолго до психологического образования. Кьеркегор, Камю, Бубер оказались не учебной программой, а людьми, которые говорили со мной о моей жизни: о свободе, за которую платишь, о выборе, от которого не спрятаться, о встрече, в которой становишься собой.</p>
+    <p>Поэтому когда спустя годы я пришла в экзистенциальную терапию, это было не открытием нового, а возвращением домой. Сейчас этот подход основа всей моей работы.</p>
+  </div>
 </section>
 
-<div class="divider" aria-hidden="true">
-  <svg viewBox="0 0 340 26" fill="none" preserveAspectRatio="none">
-    <path d="M0 13 Q 21 0, 42 13 T 84 13 T 126 13 T 168 13 T 210 13 T 252 13 T 294 13 T 336 13" stroke-width="1.2"/>
-  </svg>
-</div>
-
-<section class="story wrap">
-  <p class="sec-label">Сегодня</p>
-  <h2>Набор не случайный</h2>
-  <p>После арт-терапии я училась семейной терапии и сексологии, затем экзистенциальному подходу, который стал основой. Логика простая: почти любой запрос рано или поздно упирается в три темы, <b>близость, тело и смысл</b>, и я хотела уметь работать с каждой из них всерьёз, а не по касательной.</p>
-  <p>Сегодня я веду частную практику, состою в международных ассоциациях психологов, регулярно прохожу групповые интервизии, супервизии и, конечно, продолжаю учиться. В центре всегда остаётся живой диалог и уважение к вашему уникальному опыту.</p>
-</section>
-
-<section class="values">
+<!-- ЭКРАН 4 -->
+<section class="quote snap on-dark">
   <div class="wrap">
-    <h2>На чём я стою</h2>
+    <p class="big">Всякая подлинная жизнь есть <span>встреча</span>.</p>
+    <p class="small">Мартин Бубер · «Я и Ты»</p>
+  </div>
+</section>
+
+<!-- ЭКРАН 5 -->
+<section class="story s-alt snap">
+  <div class="wrap reveal">
+    <p class="sec-label">Тело всегда было в деле</p>
+    <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
+    <h2>Психика, тело и искусство: не соседние комнаты, а одна</h2>
+    <p>Несколько лет я профессионально работала с телом: массаж, тренировки для здоровой спины, помощь в восстановлении после травм. А на досуге читала нейробиологию, из чистого любопытства к тому, как связаны психика, гормоны, звук и настроение. Любопытство оказалось дальновидным: из него сложился мост, на котором теперь стоит моя практика.</p>
+    <p>В психологию меня привёл и собственный опыт. В юности были сложные периоды: семья, самоопределение, непростые отношения с едой и телом. Я знаю изнутри, как это, когда привычные опоры не держат. Моя личная терапия длилась около десяти лет, и она же научила меня главному: <b>рядом с честным другим выдерживается почти всё</b>.</p>
+  </div>
+</section>
+
+<!-- ЭКРАН 6 -->
+<section class="story snap">
+  <div class="wrap reveal">
+    <p class="sec-label">Сегодня</p>
+    <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
+    <h2>Набор не случайный</h2>
+    <p>После арт-терапии я училась семейной терапии и сексологии, затем экзистенциальному подходу, который стал основой. Логика простая: почти любой запрос рано или поздно упирается в три темы, <b>близость, тело и смысл</b>, и я хотела уметь работать с каждой из них всерьёз, а не по касательной.</p>
+    <p>Сегодня я веду частную практику, состою в международных ассоциациях психологов, регулярно прохожу групповые интервизии, супервизии и, конечно, продолжаю учиться. В центре всегда остаётся живой диалог и уважение к вашему уникальному опыту.</p>
+  </div>
+</section>
+
+<!-- ЭКРАН 7 -->
+<section class="values snap on-dark">
+  <div class="wrap reveal">
+    <p class="sec-label">На чём я стою</p>
+    <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
+    <h2>Критерии, по которым я проверяю собственную работу</h2>
     <div class="row">
       <span class="v">искренность</span>
       <span class="v">ответственность</span>
@@ -208,25 +286,56 @@ footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:.85rem;col
       <span class="v">аутентичность</span>
       <span class="v">глубина</span>
     </div>
-    <p>Это критерии, по которым я проверяю собственную работу. Если в кабинете нет честности и глубины, всё остальное теряет смысл.</p>
+    <p>Если в кабинете нет честности и глубины, всё остальное теряет смысл.</p>
   </div>
 </section>
 
-<section class="cta wrap">
-  <h2>Если откликается, давайте познакомимся</h2>
-  <p>Первый шаг простой: бесплатный видеозвонок на 15-20 минут. Уточним запрос, посмотрим друг на друга и решим, идём ли дальше.</p>
-  <a class="btn" href="index.html#contact">Записаться на знакомство</a>
-  <p class="links">
-    <a href="https://www.b17.ru/ann_p/" target="_blank" rel="noopener">Анкета и дипломы на b17</a>
-    <a href="https://community.existentialanalysis.org.uk/user/resonare" target="_blank" rel="noopener">Анкета на сайте SEA</a>
-  </p>
-</section>
+<!-- ЭКРАН 8: cta + футер -->
+<div class="snap-unit">
+  <section class="cta">
+    <div class="wrap reveal">
+      <p class="sec-label">Знакомство</p>
+      <svg class="sec-wave" aria-hidden="true"><use href="#wave"/></svg>
+      <h2>Если откликается, давайте познакомимся</h2>
+      <p>Первый шаг простой: бесплатный видеозвонок на 15-20 минут. Уточним запрос, посмотрим друг на друга и решим, идём ли дальше.</p>
+      <a class="btn" href="index.html#contact">Записаться на знакомство</a>
+    </div>
+  </section>
+  <footer>
+    <div class="wrap">resonare · Анна Павленко · экзистенциальный психолог · Тбилиси / онлайн</div>
+  </footer>
+</div>
 
 </main>
 
-<footer>
-  <div class="wrap">resonare · Анна Павленко · экзистенциальный психолог · Тбилиси / онлайн</div>
-</footer>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <symbol id="wave" viewBox="0 0 88 12">
+    <path d="M0 6 Q 5.5 0, 11 6 T 22 6 T 33 6 T 44 6 T 55 6 T 66 6 T 77 6 T 88 6" fill="none" stroke-width="1.2"/>
+  </symbol>
+</svg>
+
+<script>
+function toggleMenu(btn){
+  const menu=document.getElementById('menu');
+  const open=menu.classList.toggle('open');
+  document.body.classList.toggle('menu-open',open);
+  btn.setAttribute('aria-expanded',open);
+}
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('menu').classList.remove('open');
+  document.body.classList.remove('menu-open');
+  document.querySelector('.burger')?.setAttribute('aria-expanded','false');
+}));
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const items=document.querySelectorAll('.reveal');
+  if(reduce||!('IntersectionObserver' in window)){items.forEach(el=>el.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{rootMargin:'0px 0px -10% 0px',threshold:.06});
+  items.forEach(el=>io.observe(el));
+})();
+</script>
 
 </body>
 </html>

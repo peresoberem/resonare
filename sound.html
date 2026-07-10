@@ -49,9 +49,34 @@ header{
   border-bottom:1px solid var(--line);
 }
 .nav{display:flex;align-items:center;justify-content:space-between;height:58px;max-width:1020px;margin:0 auto;padding:0 clamp(20px,4vw,32px)}
-.brand{font-family:'Old Standard TT',serif;font-size:1.25rem;font-weight:700;color:var(--light)}
-.back{font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;font-weight:500;color:var(--night-soft)}
-.back:hover{color:var(--blue-soft)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--light);flex-shrink:0}
+.brand img{width:28px;height:28px;border-radius:50%}
+.brand span{font-family:'Old Standard TT',serif;font-size:1.25rem;font-weight:700}
+nav.menu{display:flex;align-items:center;gap:clamp(12px,2vw,22px);font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;font-weight:500}
+nav.menu a{color:var(--night-soft)}
+nav.menu a:hover{color:var(--light)}
+nav.menu a.page-link{color:var(--blue-soft);font-weight:600}
+nav.menu a.page-link:hover{color:var(--light)}
+nav.menu a.page-link.here{color:var(--light);pointer-events:none}
+nav.menu .menu-sep{width:1px;height:16px;background:var(--line);flex-shrink:0}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.burger span{display:block;width:22px;height:2px;background:var(--light);transition:transform .3s,opacity .3s}
+@media(max-width:860px){
+  nav.menu{
+    display:none;
+    position:absolute;top:58px;left:0;right:0;
+    flex-direction:column;gap:0;align-items:stretch;
+    background:var(--night);
+    border-bottom:1px solid var(--line);
+  }
+  nav.menu.open{display:flex}
+  nav.menu a{padding:14px clamp(20px,4vw,32px);border-top:1px solid var(--line)}
+  nav.menu .menu-sep{display:none}
+  .burger{display:flex}
+  body.menu-open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  body.menu-open .burger span:nth-child(2){opacity:0}
+  body.menu-open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
 
 .intro{padding:clamp(30px,4.5vw,48px) 0 14px}
 h1{font-family:'Old Standard TT',serif;font-weight:400;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.08;margin-bottom:14px}
@@ -176,8 +201,20 @@ footer{border-top:1px solid var(--line);margin-top:28px;padding:28px 0 20px;font
 
 <header>
   <div class="nav">
-    <span class="brand">resonare · звук</span>
-    <a class="back" href="index.html">← на главную</a>
+    <a class="brand" href="index.html"><img src="favicon_1.png" alt=""><span>resonare</span></a>
+    <button class="burger" aria-label="Меню" aria-expanded="false" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="menu" id="menu">
+      <a href="index.html#priem">С чем приходят</a>
+      <a href="index.html#podhod">Подход</a>
+      <a href="index.html#kabinet">Формат</a>
+      <a href="index.html#cena">Цены</a>
+      <a href="index.html#contact">Связаться</a>
+      <span class="menu-sep" aria-hidden="true"></span>
+      <a class="page-link" href="about.html">Обо мне</a>
+      <a class="page-link here" href="sound.html" aria-current="page">Звук</a>
+    </nav>
   </div>
 </header>
 
@@ -228,6 +265,19 @@ footer{border-top:1px solid var(--line);margin-top:28px;padding:28px 0 20px;font
 </div>
 
 <script>
+/* ---- меню ---- */
+function toggleMenu(btn){
+  const menu=document.getElementById('menu');
+  const open=menu.classList.toggle('open');
+  document.body.classList.toggle('menu-open',open);
+  btn.setAttribute('aria-expanded',open);
+}
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('menu').classList.remove('open');
+  document.body.classList.remove('menu-open');
+  document.querySelector('.burger')?.setAttribute('aria-expanded','false');
+}));
+
 /* ================= КАТАЛОГ ================= */
 const CATALOG = {
 practices: [
@@ -239,6 +289,8 @@ practices: [
   how:`<p><b>Как.</b> Вдох носом. На выдохе тяните «м-м-м» с закрытым ртом, тихо и без усилия, любой высоты. Слушайте, как ваш тон встречается с дроном и обертонами, они будут приходить и уходить сами.</p><p><b>Сколько.</b> 8–10 выдохов. Возможные эффекты: тепло в груди, зевота (отличный знак), или просто смешно, что тоже считается.</p>`},
  {id:'pauses', t:'Паузы', em:'тишина работает', why:'Тишина после звука успокаивает сильнее самого звука: в паузе тело догоняет услышанное.',
   how:`<p><b>Как.</b> Фразу слушайте как чужой разговор в кафе, без задачи. Когда наступает тишина, ничего не делайте: просто заметьте, что происходит с телом, когда звук ушёл. Паузы будут расти, это задумано.</p><p><b>Что можно вынести.</b> От скуки до неожиданной ясности. Всё считается.</p>`},
+ {id:'fry', t:'Штробас', em:'дно голоса', why:'Самый низкий, скрипучий регистр голоса. Отпускает горло и связки — особенно после долгих напряжённых разговоров и невысказанного.',
+  how:`<p><b>Как.</b> Расслабьте челюсть и язык, вдохните и на очень ленивом выдохе позвольте голосу опуститься на самое дно — туда, где он рассыпается в редкое потрескивание «а-а-а», как скрип двери или голос только что проснувшегося человека. Без усилия и почти без громкости: если приходится стараться, вы слишком высоко. Слушайте, как ваш скрип встречается с треском в звуке и редкой мелодией над ним.</p><p><b>Сколько.</b> 5–8 выдохов. Возможные эффекты: мягче горло, ниже плечи, распускается «ком в горле», отдыхает уставший голос.</p><p><b>Честно.</b> Приём из вокальной педагогики: штробас — самый расслабленный режим связок, а работает он ещё и через медленный слабый выдох, самую изученную часть звуковой саморегуляции. Исследований именно про успокоение мало. Важно: никакого напряжения и никакого штробаса на больном горле — это упражнение про отпускание, а не про звук любой ценой.</p>`},
 ],
 states: [
  {id:'anxiety', t:'Тревога', em:'заземление', why:'Низкий тёплый гул и почти нет движения. Опора, а не развлечение.',
@@ -261,8 +313,8 @@ ambient: [
   how:`<p><b>Для чего.</b> В кровати, глаза закрыты. Поставьте таймер на 10–20 минут в панели снизу, и звук погаснет сам.</p>`},
  {id:'focus', t:'Ясность', em:'фон для работы', why:'Тёплый шум, мягкий свингующий пульс, редкие аккорды. Фон, за который цепляется внимание.',
   how:`<p><b>Для чего.</b> Под работу и чтение. Громкость ниже голоса мыслей: этот трек должен ощущаться, а не слушаться.</p>`},
- {id:'wobbly', t:'Перекличка', em:'два голоса', why:'Низкий горловой и высокий, почти человеческий, сменяют друг друга длинными фразами. Родилась случайно и отказалась быть удалённой.',
-  how:`<p><b>Для чего.</b> Просто слушать. Начиналась как упражнение в гудении, но оказалась самостоятельным существом: два голоса перекликаются, а вы рядом.</p>`},
+ {id:'wobbly', t:'Изнанка', em:'теневая сторона', why:'Низкий горловой и высокий, почти человеческий, перекликаются в темноте. Мрачновато и трипово — место, где тени можно потанцевать.',
+  how:`<p><b>Для чего.</b> Не успокаивать, а сопровождать спуск. Иногда полезно не отворачиваться от тяжёлого и мутного, а побыть с ним под подходящий звук: повыгуливать своих демонов на поводке. Родилась случайно и отказалась быть удалённой.</p><p>Если станет слишком — тишина в одном клике, и это тоже нормальный финал.</p>`},
 ]};
 
 /* ================= ДВИЖОК ================= */
@@ -696,7 +748,57 @@ function startWobbly(){
   Tone.Transport.bpm.value=56;Tone.Transport.start();
 }
 
-const ENGINES={breath:startBreath,breath478:startBreath478,hum:startHum,pauses:startPauses,
+function startFry(){
+  const rev=space(.9,.5).connect(master.gain);
+  // тёплая основа
+  const drone=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-16,envelope:{attack:4,decay:1,sustain:1,release:6}})).connect(rev);
+  drone.triggerAttack('A2');
+  const drone2=reg(new Tone.Synth({oscillator:{type:'sine'},volume:-22,envelope:{attack:5,decay:1,sustain:1,release:6}})).connect(rev);
+  drone2.triggerAttack('E3');
+  // ШТРОБАС: пила на 27–44 Гц = редкие «глоттальные» щелчки, горловая форманта.
+  // Никаких LFO: частота, форманта и амплитуда гуляют случайными рампами.
+  const fryBP=reg(new Tone.Filter({type:'bandpass',frequency:420,Q:2.2}));
+  const fryLP=reg(new Tone.Filter(1300,'lowpass'));
+  const rough=reg(new Tone.Gain(1));
+  const fryGain=reg(new Tone.Gain(0));
+  const fry=reg(new Tone.Oscillator({type:'sawtooth',frequency:34,volume:-7}));
+  fry.connect(fryBP);fryBP.connect(fryLP);fryLP.connect(rough);rough.connect(fryGain);fryGain.connect(rev);
+  fry.start();
+  (function wander(){ // высота потрескивания блуждает
+    const d=1.2+Math.random()*2.6;
+    fry.frequency.rampTo(27+Math.random()*17,d);
+    fryBP.frequency.rampTo(340+Math.random()*260,d);
+    Tone.Transport.scheduleOnce(wander,'+'+d.toFixed(2));
+  })();
+  (function tremble(){ // шероховатость громкости
+    const d=.25+Math.random()*.6;
+    rough.gain.rampTo(.72+Math.random()*.28,d);
+    Tone.Transport.scheduleOnce(tremble,'+'+d.toFixed(2));
+  })();
+  (function phrase(){ // фразы-выдохи: 5–8 c скрипа, 2.5–4.5 c тишины — как живой человек
+    const on=5+Math.random()*3, off=2.5+Math.random()*2, t=Tone.now();
+    fryGain.gain.cancelScheduledValues(t);
+    fryGain.gain.setValueAtTime(fryGain.gain.value,t);
+    fryGain.gain.linearRampToValueAtTime(.85,t+.6);
+    fryGain.gain.setValueAtTime(.85,t+on-.9);
+    fryGain.gain.linearRampToValueAtTime(0,t+on);
+    Tone.Transport.scheduleOnce(phrase,'+'+(on+off).toFixed(2));
+  })();
+  // редкая мелодия сверху: минорная пентатоника, мягко и нечасто
+  const bellF=reg(new Tone.Filter(2200,'lowpass')).connect(rev);
+  const bell=reg(new Tone.PolySynth(Tone.Synth,{maxPolyphony:4,volume:-15,
+    oscillator:{type:'fatsine',count:2,spread:8},
+    envelope:{attack:.9,decay:1.4,sustain:.25,release:4.5}})).connect(bellF);
+  const scale=['A3','C4','D4','E4','G4','A4','E4','C4'];
+  (function sing(){
+    bell.triggerAttackRelease(pick(scale),2.4+Math.random()*1.8);
+    if(maybe(.3))Tone.Transport.scheduleOnce(()=>bell.triggerAttackRelease(pick(scale),2.2),'+'+(1.4+Math.random()).toFixed(2));
+    Tone.Transport.scheduleOnce(sing,'+'+(4.5+Math.random()*4.5).toFixed(2));
+  })();
+  Tone.Transport.bpm.value=56;Tone.Transport.start();
+}
+
+const ENGINES={breath:startBreath,breath478:startBreath478,hum:startHum,pauses:startPauses,fry:startFry,
   anxiety:startAnxiety,sadness:startSadness,emptiness:startEmptiness,anger:startAnger,arousal:startArousal,dissoc:startDissoc,
   warmth:startWarmth,insomnia:startInsomnia,focus:startFocus,wobbly:startWobbly};
 const LABELS={};
